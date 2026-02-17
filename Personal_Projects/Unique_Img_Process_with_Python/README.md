@@ -4,9 +4,7 @@
 
 This is a Python-based image organization tool designed to simplify personal photo management.
 
-It groups visually similar or duplicate images by inserting numbered prefixes at the beginning of filenames, making it 
-
-easier to identify and manage related images.
+It groups visually similar or duplicate images by inserting numbered prefixes at the beginning of filenames, making it easier to identify and manage related images.
 
 The system is optimized for scalability and can efficiently process large image collections.
 
