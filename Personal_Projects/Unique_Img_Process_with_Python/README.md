@@ -1,86 +1,86 @@
 📸 Helper to Organize Images
-
 📌 Overview
-
-This program is a Python-based application designed to simplify personal photo
-management. It groups similar/same images by inserting a series of numbers at 
-the beginning of their names, so it helps me to manage duplicate images.
-
+This is a Python-based image organization tool designed to simplify personal photo management.
+It groups visually similar or duplicate images by inserting numbered prefixes at the beginning of filenames, making it easier to identify and manage related images.
+The system is optimized for scalability and can efficiently process large image collections.
 
 🎯 Motivation
-
-Managing photos from different apps and sources often leads to scattered
-duplicates, making backups inefficient and time-consuming. This project was
- created to streamline photo management by grouping image files.
-
+Managing photos from multiple devices and applications often results in scattered duplicates and visually similar images (e.g., resized, compressed, or brightness-adjusted versions).
+The original implementation relied on pairwise feature matching, which did not scale well for large image collections.
+This project was redesigned to:
+    - Improve performance and scalability
+    - Reduce unnecessary image comparisons
+    - Handle large image sets efficiently
+    - Group visually similar images more accurately
 
 ⚙️ How It Works
+Instead of performing O(n²) pairwise ORB comparisons, the optimized system uses:
+1. Perceptual Hashing (pHash)
+    - Each image is converted into a perceptual hash representation.
+2. Bucketing (LSH-like banding)
+    - Hashes are split into bands to generate candidate pairs and reduce unnecessary comparisons.
+3. Hamming Distance Comparison
+    - Only candidate images are compared using hash distance thresholds.
+4. Union-Find (Disjoint Set)
+    - Efficiently merges similar images into groups.
+5. File Renaming
+    - Each group receives a unique ID and images are renamed using zero-padded prefixes:
+        [001]imageA.jpg
+        [001]imageB.jpg
+        [002]imageC.jpg
 
-Conduct the ORB Algorithm to find similar or the same images. 
-Organizes results: It will insert numbers at the beginning of image names. Similar or 
-the same images have the same number.
-
+Images that are resized or brightness-adjusted can still be grouped depending on threshold tuning.
 
 🔧 Current Status
-
-Complete, but I'll update if I find some functions to add.
-
+Complete and optimized for performance.
+Future improvements may include:
+    - GIF multi-frame hashing support
+    - Optional folder-based grouping
+    - GUI progress indicator
+    - Advanced similarity threshold tuning
 
 🗂 Files
+image_process_main.py
+    - Main execution file.
+    - Opens a folder selection dialog
+    - Collects image filenames
+    - Starts the image grouping and renaming pipeline
 
-image_process_main.py: Main execution file.
+img_processing.py
+    - Coordinates the entire workflow.
+    - Method: image_process()
+        Calls group_similar_images() from img_comp.py to generate similarity groups.
+        Assigns group IDs to all images (including standalone images).
+        Ensures files skipped during hashing are treated as single-member groups.
+        Sorts results and calls name_change() to rename files.
 
-img_processing.py: This method gathers image files and prepares them for 
-                   the entire processes, such as the dictionary to store 
-                   image names and their group numbers. This method calls 
-                   the comparing method in the img_comp module and the name
-                   change method in img_name_change module.
-    - Method: 
-        image_process: 
-            1. Creates a dictionary. This dictionary has all image names as 
-            key and 0 as value initially. Then, it calls the image_comparing
-            method in the img_comp module, entering each image name as a 
-            image_comparing's argument. After it receives a dictionary as
-            a result, this method changes the values to increment numbers 
-            in the dictionary if the keys of the dictionary are found in the 
-            dictionary that is the result of image_comparing. (value 0 
-            means "this image is not checked yet, or not a similar image of
-            any image, so don't skip this image." and other numbers mean 
-            "This image is either already checked or a similar image of 
-            another image, so skip this one.")        
-            2. Insert numberings at the beginning of images. Similar images
-            have the same number. 
-           
 img_comp.py
-    - This file receives a file name and compares it to other images.
-    - This returns a list that has image names.
-    - Method: 
-        image_comparing: Compare the input image to other images using ORB 
-                         algorithm. If the same or similar images are found, 
-                         store the found images' names as keys and 'marked'
-                         as values in a dictionary, and return the dictionary.
-                         The first file in the dictionary is always the input 
-                         image. 
-        img_hash_comp: Compare the image to other images using image hashes.
-                       This method will figure out if images in the comparison
-                       process have the same image hashes. If image hashes are
-                       the same, they are considered as same images.
+    - Core similarity engine (performance-optimized).
+    - Method: group_similar_images()
+        Computes perceptual hashes (pHash) once per image.
+        Uses band-based bucketing to reduce candidate comparisons.
+        Compares candidates using Hamming distance.
+        Uses Union-Find (DSU) to merge similar images into groups.
+        Returns grouped filename lists.
+    - This replaces the original ORB-based pairwise comparison for improved scalability.
 
 img_name_change.py
-    - This file receives a sorted dictionary, which is the result of img_comp.
-    - Method: 
-        name_change: Change image names by inserting numbers that are values 
-                     in the input dictionary to their names.
+    - Method: name_change()
+        Accepts a sorted list of (filename, group_id) tuples.
+        Applies zero-padded group numbering as a prefix.
+        Uses a two-pass renaming strategy to prevent filename conflicts.
 
-img_directory.py 
-    - This file receives a directory from users.
-    - This moves the working directory received.
-    - This finds if or not the directory exists
-    - This finds if or not images exist in the input directory
-    - Method: 
-        move_dir_chk_img: Moves to the working directory and checks if images
-        exist in the directory.
+img_directory.py
+    - Method: move_dir_chk_img()
+        Validates the input directory.
+        Changes the working directory.
+        Checks for image file existence.
+        Returns the list of image filenames.
 
+🚀 Performance Improvement
+The original design relied on repeated pairwise image comparisons (near O(n²) complexity).
+The current version reduces unnecessary comparisons through hash indexing and grouping optimization, significantly improving scalability for large datasets.
 
-🌐 GitHub Repository:
-    https://github.com/ByungkyuKang/Personal_Projects/Unique_Img_Process_with_Python
+🌐 GitHub Repository
+
+https://github.com/ByungkyuKang/Personal_Projects/Unique_Img_Process_with_Python
