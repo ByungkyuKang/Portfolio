@@ -1,61 +1,141 @@
-import cv2
-import imagehash as ihash
-from PIL import Image as img
+from __future__ import annotations
+from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
+from PIL import Image
+import imagehash
 
-class img_comp_processes():
-    """ This class will run two methos continuously. 
-        1. cv2_img_comp
-        2. img_has_comp """
-    
-    def __init__(self, img_name, img_list):
-        self.img_name = img_name
-        self.img_list = img_list
+# -----------------------------
+# Union-Find (Disjoint Set)
+# -----------------------------
+class DSU:
+    def __init__(self, n: int):
+        self.parent = list(range(n))
+        self.rank = [0] * n
+
+    def find(self, x: int) -> int:
+        while self.parent[x] != x:
+            self.parent[x] = self.parent[self.parent[x]]
+            x = self.parent[x]
+        return x
+
+    def union(self, a: int, b: int) -> None:
+        ra, rb = self.find(a), self.find(b)
+        if ra == rb:
+            return
+        if self.rank[ra] < self.rank[rb]:
+            self.parent[ra] = rb
+        elif self.rank[ra] > self.rank[rb]:
+            self.parent[rb] = ra
+        else:
+            self.parent[rb] = ra
+            self.rank[ra] += 1
 
 
-    def cv2_img_comp(self):
-        """ This method recevies a image name and image list, compares it to other
-            , and returns a list which has names of similar or same images """
+def _compute_phash(filename: str, hash_size: int) -> tuple[str, imagehash.ImageHash] | None:
+    """
+    Compute pHash once per image.
+    NOTE: image files are in current working directory (img_directory does chdir()).
+    """
+    try:
+        with Image.open(filename) as im:
+            im = im.convert("RGB")
+            h = imagehash.phash(im, hash_size=hash_size)
+        return filename, h
+    except Exception:
+        # unreadable/corrupt image -> skip
+        return None
 
-        might_be_similar_imgs = []
-        might_be_diff_imgs = []
-        
-        for img in self.img_list:
-            if self.img_name != img:
-                curr_img = cv2.imread(self.img_name, cv2.IMREAD_GRAYSCALE)
-                img_from_list = cv2.imread(img, cv2.IMREAD_GRAYSCALE)
-                
-                orb = cv2.ORB_create()
 
-                kpoint_curr, curr_desc = orb.detectAndCompute(curr_img, None)
-                kpoint_list_img, list_img_desc = orb.detectAndCompute(img_from_list, None)
+def _make_band_keys(h: imagehash.ImageHash, bands: int) -> list[str]:
+    """
+    LSH-like keys: split hex string of hash into bands.
+    More bands => higher recall (more candidates), slightly slower.
+    """
+    hexstr = str(h)  # stable representation
+    chunk_len = max(1, len(hexstr) // bands)
+    keys = []
+    for i in range(bands):
+        start = i * chunk_len
+        end = len(hexstr) if i == bands - 1 else (i + 1) * chunk_len
+        keys.append(f"{i}:{hexstr[start:end]}")
+    return keys
 
-                bfm = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
 
-                matches = bfm.match(curr_desc, list_img_desc)
-                matches = sorted(matches, key=lambda x: x.distance)
+def group_similar_images(
+    img_list: list[str],
+    *,
+    # for "similar images" (resize/brightness) use larger hash and a looser threshold
+    hash_size: int = 16,       # 16 => 256-bit hash
+    dist_threshold: int = 12,  # looser to catch resized/brightness-changed images
+    bands: int = 6,            # more bands => more candidate recall
+    max_bucket_size: int = 300,
+    workers: int = 8,
+) -> list[list[str]]:
+    """
+    Returns list of groups, each group is list of filenames.
+    Fast approach:
+      1) compute phash once per image
+      2) bucket by band keys
+      3) compare only within bucket candidates using Hamming distance
+      4) union-find to form groups
+    """
+    if not img_list:
+        return []
 
-                num_matches = len(matches)
-                
-                if num_matches > 150:
-                    might_be_similar_imgs.append(img)
-                else:
-                    might_be_diff_imgs.append(img)
+    # 1) precompute hashes (parallel)
+    results: list[tuple[str, imagehash.ImageHash]] = []
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        for out in ex.map(lambda f: _compute_phash(f, hash_size), img_list):
+            if out is not None:
+                results.append(out)
 
-        hash_comp_result = self.img_hash_comp(self.img_name, might_be_diff_imgs)
-        might_be_similar_imgs = might_be_similar_imgs + hash_comp_result
+    if not results:
+        return []
 
-        return list(set(might_be_similar_imgs))
-    
+    files = [f for f, _ in results]
+    hashes = [h for _, h in results]
+    n = len(files)
 
-    def img_hash_comp(self, img_name, img_list):
-        curr_image = img.open(self.img_name)
-        curr_image_hash = ihash.phash(curr_image)
-        
-        might_be_similar_imgs = []
-        for image in self.img_list:
-            list_image = img.open(image)
-            list_image_hash = ihash.phash(list_image)
-            if curr_image_hash == list_image_hash:
-                might_be_similar_imgs.append(image)
-                
-        return might_be_similar_imgs 
+    # 2) bucketing
+    buckets: dict[str, list[int]] = defaultdict(list)
+    for i, h in enumerate(hashes):
+        for key in _make_band_keys(h, bands=bands):
+            buckets[key].append(i)
+
+    # 3) compare only candidates
+    dsu = DSU(n)
+    seen_pairs = set()
+
+    for key, idxs in buckets.items():
+        if len(idxs) > max_bucket_size:
+            # huge bucket -> skip to avoid explosion (usually low-value)
+            continue
+
+        idxs = sorted(idxs)
+        for a_pos in range(len(idxs)):
+            a = idxs[a_pos]
+            for b_pos in range(a_pos + 1, len(idxs)):
+                b = idxs[b_pos]
+                pair = (a, b)
+                if pair in seen_pairs:
+                    continue
+                seen_pairs.add(pair)
+
+                # imagehash supports subtraction as Hamming distance
+                if (hashes[a] - hashes[b]) <= dist_threshold:
+                    dsu.union(a, b)
+
+    # 4) collect groups
+    grouped: dict[int, list[str]] = defaultdict(list)
+    for i, f in enumerate(files):
+        root = dsu.find(i)
+        grouped[root].append(f)
+
+    groups = list(grouped.values())
+    # sort for stable output: bigger groups first, then name
+    groups.sort(key=lambda g: (-len(g), g[0].lower()))
+    # sort inside each group for stable renaming
+    for g in groups:
+        g.sort(key=lambda x: x.lower())
+
+    return groups

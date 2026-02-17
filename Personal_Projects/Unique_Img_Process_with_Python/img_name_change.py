@@ -1,23 +1,30 @@
-import pandas as pd
 import os
 
 def name_change(sorted_list):
-    """ This method will change image names
-        adding numbers at the beggining """
-    
-    sorted_df = pd.DataFrame(sorted_list)
-    
-    # Find the largest number to find its digit
-    max_num = sorted_df.loc[:, 1].max()
+    """
+    sorted_list: list of (filename, group_number)
+    Renames files by prefixing group tag like [001]filename.ext
 
-    # Find the digit of the largest number
-    max_digit = len(str(max_num))
-    
-    # Format the numberings
-    sorted_df[1] = sorted_df[1].apply(lambda x: f"[{x:0{max_digit}d}]")
+    Uses 2-pass rename to avoid name collisions.
+    """
+    if not sorted_list:
+        return
 
-    inc_indx = 0
-    while inc_indx < len(sorted_df):
-        temp_name = str(sorted_df.loc[inc_indx, 1]) + sorted_df.loc[inc_indx, 0]
-        os.rename(sorted_df.loc[inc_indx, 0], temp_name)
-        inc_indx += 1 
+    # find width
+    max_num = max(num for _, num in sorted_list)
+    width = len(str(max_num))
+
+    pid = os.getpid()
+
+    # 1) temp rename
+    temp_entries = []
+    for fname, grp in sorted_list:
+        tmp = f"__TMP__{pid}__{fname}"
+        os.rename(fname, tmp)
+        temp_entries.append((tmp, fname, grp))
+
+    # 2) final rename
+    for tmp, orig, grp in temp_entries:
+        tag = f"[{grp:0{width}d}]"
+        final = f"{tag}{orig}"
+        os.rename(tmp, final)

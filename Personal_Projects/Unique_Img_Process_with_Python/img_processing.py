@@ -1,30 +1,44 @@
 import img_comp as imgc
 import img_name_change as inc
 
-# Set values to 0
-def image_process( img_list ):
-    """ This method gathers image files, and prepare for the entire processes,
-        such as the dictionary to store image names and their group numbers.
-        This method calls the comparing method in img_comp,
-        the name change method in img_name_change. """
+def image_process(img_list):
+    """
+    New fast pipeline:
+      1) group by pHash (includes similar images)
+      2) assign group numbers
+      3) rename with prefix
+    """
+    # (2) Recommended parameters for grouping visually similar images
+    # - dist_threshold: Tune between 10–14 (higher values increase recall 
+    #   but may group less similar images)
+    # - bands: Around 6 helps reduce missed matches while keeping performance
+    #   reasonable
+    groups = imgc.group_similar_images(
+        img_list,
+        hash_size=16,
+        dist_threshold=12,
+        bands=6,
+        max_bucket_size=300,
+        workers=8,
+    )
+
+    # Assign group IDs and ensure unmatched files are handled as individual
+    # groups. In case a file was excluded due to a hash computation error,
+    # it is explicitly added as a standalone group.
+    grouped_set = set()
+    for g in groups:
+        grouped_set.update(g)
+    missing = [f for f in img_list if f not in grouped_set]
+    for f in missing:
+        groups.append([f])
+
+    # group id mapping
     img_name_dict = {}
-    for img_name in img_list:
-        img_name_dict[img_name] = 0
+    group_id = 1
+    for g in groups:
+        for fname in g:
+            img_name_dict[fname] = group_id
+        group_id += 1
 
-    itr_cnt = 1
-
-    # Run comparing processes - cv2 and hash
-    for img_name in img_name_dict:
-        if img_name_dict[img_name] == 0:
-            comp_process_obj = imgc.img_comp_processes(img_name, img_list)
-            comp_process = comp_process_obj.cv2_img_comp()
-            
-            for img_dict in img_name_dict:
-                for img_comp in comp_process:
-                    if img_dict == img_comp:
-                        img_name_dict[img_dict] = itr_cnt
-            itr_cnt += 1
-
-    # Change image names and group them by the numbers added to the names
-    sorted_dict_by_number = sorted(img_name_dict.items(), key=lambda item: item[1])
-    inc.name_change(sorted_dict_by_number) 
+    sorted_dict_by_number = sorted(img_name_dict.items(), key=lambda item: (item[1], item[0].lower()))
+    inc.name_change(sorted_dict_by_number)
