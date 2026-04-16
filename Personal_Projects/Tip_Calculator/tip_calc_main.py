@@ -41,7 +41,9 @@ for i, person_hour in enumerate(total_hours):
         total_hours_sum = sum(total_hours)
         # 0 division is not allowed, and use safe_total_tips
         if total_hours_sum > 0:
-            tip_to_take = round(safe_total_tips * (person_hour / total_hours_sum))
+            first_round = round(safe_total_tips * (person_hour / total_hours_sum), 2)
+            second_round = round(first_round, 1)
+            tip_to_take = round(second_round)
         else:
             tip_to_take = 0.0
 
