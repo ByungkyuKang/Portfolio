@@ -4,7 +4,6 @@ import streamlit as st
 st.title('Tip Calculator')
 
 st.divider()
-#st.write('- It will round')
 
 # Enter total amount of tips
 st.write("Total Tips ($)")
@@ -35,18 +34,15 @@ for order in range(num_of_people):
         hour = st.number_input(f"Enter hours for {order+1} here.", label_visibility="collapsed", min_value=1.00, step=0.01, format="%.2f")
         total_hours.append(hour)
 
-# for order in range(num_of_people):
 for i, person_hour in enumerate(total_hours):
     with cont_col3:
-        # 1. 팁 계산 (0으로 나누기 방지)
+        # Calculating tips - 0 division is not allowed
         if sum(total_hours) > 0:
             tip_to_take = round(total_tips * (person_hour / sum(total_hours)))
         else:
             tip_to_take = 0.0
 
-        # 2. HTML로 입력창과 똑같은 디자인의 박스 생성
-        # var(--text-color)를 쓰면 브라우저 테마 색상을 그대로 가져옵니다.
-        # rgba(128, 128, 128, 0.1)는 살짝 회색빛이 도는 투명 배경입니다.
+        # Appying style
         st.markdown(f"""
             <div style="
                 background-color: rgba(128, 128, 128, 0.1); 
@@ -67,7 +63,8 @@ for i, person_hour in enumerate(total_hours):
 
 st.divider()
 
-# st.columns(1)
+# Hour rate
+# When 0 tips - "N/A"
 st.write("Hour rate")
 if sum(total_hours) != 0:
     tip_per_hour = round(total_tips/sum(total_hours), 2)
