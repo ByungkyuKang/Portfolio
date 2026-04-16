@@ -34,15 +34,18 @@ for order in range(num_of_people):
         hour = st.number_input(f"Enter hours for {order+1} here.", label_visibility="collapsed", min_value=1.00, step=0.01, format="%.2f")
         total_hours.append(hour)
 
+safe_total_tips = total_tips if total_tips is not None else 0.0
+
 for i, person_hour in enumerate(total_hours):
     with cont_col3:
-        # Calculating tips - 0 division is not allowed
-        if sum(total_hours) > 0:
-            tip_to_take = round(total_tips * (person_hour / sum(total_hours)))
+        total_hours_sum = sum(total_hours)
+        # 0 division is not allowed, and use safe_total_tips
+        if total_hours_sum > 0:
+            tip_to_take = round(safe_total_tips * (person_hour / total_hours_sum))
         else:
             tip_to_take = 0.0
 
-        # Appying style
+        # Applying style
         st.markdown(f"""
             <div style="
                 background-color: rgba(128, 128, 128, 0.1); 
@@ -57,17 +60,17 @@ for i, person_hour in enumerate(total_hours):
                 line-height: 1.5;
                 margin-bottom: 16px;
                 ">
-                {tip_to_take}
+                {tip_to_take:.0f}
             </div>
         """, unsafe_allow_html=True)
 
 st.divider()
 
 # Hour rate
-# When 0 tips - "N/A"
 st.write("Hour rate")
-if sum(total_hours) != 0:
-    tip_per_hour = round(total_tips/sum(total_hours), 2)
+total_hours_sum = sum(total_hours)
+if total_hours_sum > 0:
+    tip_per_hour = round(safe_total_tips / total_hours_sum, 2)
     st.number_input("Hour rate", min_value=0.0, disabled=True, value=float(tip_per_hour), format="%.2f", label_visibility="collapsed")
 else:
     st.text_input("Hour rate", disabled=True, value="N/A", label_visibility="collapsed")
