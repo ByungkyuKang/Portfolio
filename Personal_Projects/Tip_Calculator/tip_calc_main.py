@@ -1,6 +1,8 @@
 import flet as ft
+import flet_fastapi
 import math
 import random
+import os
 
 def main(page: ft.Page):
     page.title = "Tip Calculator"
@@ -196,14 +198,10 @@ def main(page: ft.Page):
         hour_rate_row
     )
 
-ft.app(target=main) 
+
+app = flet_fastapi.app(main)
 
 if __name__ == "__main__":
-    # view 파라미터를 빼고 export_as_web_app 처럼 작동하게 설정합니다.
-    ft.app(
-        target=main, 
-        host="0.0.0.0", 
-        port=8080,
-        # 배포 시에는 아래 옵션이 더 안정적일 수 있습니다.
-        web_renderer=ft.WebRenderer.HTML 
-    )
+    import uvicorn
+    port = int(os.getenv("PORT", 8080))
+    uvicorn.run(app, host="0.0.0.0", port=port)
