@@ -198,11 +198,7 @@ def main(page: ft.Page):
         hour_rate_row
     )
 
-
-assets_path = os.path.abspath("assets")
-
-app = flet_fastapi.app(main, assets_dir=assets_path)
-
+app = flet_fastapi.app(main)
 
 if __name__ == "__main__":
     import uvicorn
