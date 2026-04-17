@@ -198,9 +198,12 @@ def main(page: ft.Page):
         hour_rate_row
     )
 
-app = flet_fastapi.app(main)
+app = flet_fastapi.app(
+    main,
+    web_renderer=ft.WebRenderer.HTML
+)
 
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", 8080))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run("tip_calc_main:app", host="0.0.0.0", port=port, reload=False)
