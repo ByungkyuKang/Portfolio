@@ -1,4 +1,4 @@
-flet
-uvicorn[standard]
-websockets
-wsproto
+flet==0.84.0
+uvicorn[standard]==0.44.0
+websockets==16.0
+wsproto==1.3.2
