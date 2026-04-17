@@ -198,8 +198,7 @@ def main(page: ft.Page):
         hour_rate_row
     )
 
-
-app = flet_fastapi.app(main)
+app = flet_fastapi.app(main, export_auth_callback=True)
 
 if __name__ == "__main__":
     import uvicorn
