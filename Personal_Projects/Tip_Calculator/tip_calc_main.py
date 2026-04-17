@@ -13,7 +13,7 @@ def main(page: ft.Page):
 
     tip_input_field = ft.TextField(
         hint_text="0.00",
-        expand=2,
+        expand=4,
         border_radius=8,
         on_change=lambda _: calculate_tips(),
         on_blur=lambda e: format_total_tip(e),
@@ -21,7 +21,7 @@ def main(page: ft.Page):
 
     people_input_field = ft.TextField(
         value="1",
-        expand=2,
+        expand=4,
         border_radius=8,
         on_submit=lambda e: handle_people_submit(e),
         on_blur=lambda e: handle_people_submit(e),
@@ -29,7 +29,7 @@ def main(page: ft.Page):
 
     hour_rate_value = ft.Text(
         "0.00",
-        expand=1,
+        expand=3,
         weight=ft.FontWeight.BOLD,
         size=18,
         text_align=ft.TextAlign.RIGHT,
@@ -37,7 +37,7 @@ def main(page: ft.Page):
 
     hour_rate_row = ft.Row(
         controls=[
-            ft.Text("Hour Rate", expand=9, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.RIGHT),
+            ft.Text("Hour Rate", expand=7, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.RIGHT),
             hour_rate_value,
         ],
         spacing=10,
@@ -192,13 +192,13 @@ def main(page: ft.Page):
         ft.Divider(),
         ft.Row(
             [
-                ft.Text("Total Tips ($):", expand=8, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.RIGHT),
+                ft.Text("Total Tips ($):", expand=6, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.RIGHT),
                 tip_input_field,
             ]
         ),
         ft.Row(
             [
-                ft.Text("Number of People:", expand=8, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.RIGHT),
+                ft.Text("Number of People:", expand=6, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.RIGHT),
                 people_input_field,
             ]
         ),
