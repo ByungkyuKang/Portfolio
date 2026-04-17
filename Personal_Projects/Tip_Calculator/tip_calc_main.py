@@ -200,7 +200,8 @@ def main(page: ft.Page):
 
 app = flet_fastapi.app(
     main,
-    web_renderer=ft.WebRenderer.HTML
+    web_renderer=ft.WebRenderer.HTML,
+    assets_dir="." 
 )
 
 if __name__ == "__main__":
