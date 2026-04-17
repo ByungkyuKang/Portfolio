@@ -1,131 +1,207 @@
 import streamlit as st
 
-# Title
-st.title('Tip Calculator')
+st.set_page_config(page_title="Tip Calculator", layout="wide")
 
+# ---------------- CSS ----------------
+st.markdown("""
+<style>
+/* 전체 여백 */
+.block-container {
+    padding-top: 1.8rem;
+    padding-bottom: 2rem;
+}
+
+/* row용 wrapper 느낌 */
+.tip-header {
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tip-box {
+    background-color: rgba(128, 128, 128, 0.10);
+    color: var(--text-color);
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(128, 128, 128, 0.20);
+    font-size: 15px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* input 폭 줄어들 수 있게 */
+div[data-testid="stTextInput"],
+div[data-testid="stNumberInput"] {
+    width: 100%;
+}
+
+/* input 내부 */
+div[data-testid="stTextInput"] input,
+div[data-testid="stNumberInput"] input {
+    min-width: 0 !important;
+}
+
+/* 핵심: Streamlit 컬럼이 모바일에서 세로로 쌓이는 거 방지 */
+div[data-testid="stHorizontalBlock"] {
+    gap: 0.4rem !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+}
+
+/* 각 컬럼이 줄어들 수 있게 */
+div[data-testid="column"] {
+    min-width: 0 !important;
+}
+
+/* 컬럼 안 내용도 줄어들 수 있게 */
+div[data-testid="column"] > div {
+    min-width: 0 !important;
+}
+
+/* 아주 좁은 화면에서 폰트/패딩 축소 */
+@media (max-width: 640px) {
+    .tip-header {
+        font-size: 0.85rem !important;
+        margin-bottom: 0.15rem;
+    }
+
+    .tip-box {
+        font-size: 13px !important;
+        height: 36px !important;
+        padding: 0 8px !important;
+    }
+
+    div[data-testid="stTextInput"] input,
+    div[data-testid="stNumberInput"] input {
+        font-size: 13px !important;
+        padding-left: 0.45rem !important;
+        padding-right: 0.45rem !important;
+    }
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ---------------- Title ----------------
+st.title("Tip Calculator")
 st.divider()
 
-# Get total tips
+# ---------------- Total Tips ----------------
 st.write("Total Tips ($)")
 total_tips = st.number_input(
-    "Total tips ($)",
-    min_value=0.0, 
-    step=.01, 
-    value=None, 
-    placeholder="0.00", 
+    "Total Tips ($)",
+    min_value=0.0,
+    step=0.01,
+    value=None,
+    placeholder="0.00",
     label_visibility="collapsed"
 )
 
-# Get total number of people
+# ---------------- Number of People ----------------
 st.write("Number of People")
 num_of_people = st.number_input(
-    "Number of People", 
-    min_value=1, 
-    step=1, 
+    "Number of People",
+    min_value=1,
+    step=1,
+    value=1,
     label_visibility="collapsed"
 )
 
 st.divider()
 
-# STEP 1: Data collection - Gethering hours
+# ---------------- STEP 1: Collect Hours ----------------
 current_hours = []
 for i in range(num_of_people):
-    # Retrieving hour values using keys
-    # Default value is 0.0 if an ID is not found
-    h = st.session_state.get(f"hour_{i}", 0.0)
-    if h != None:
-        current_hours.append(h)
-    else:
-        current_hours.append(0.00)
+    h = st.session_state.get(f"hour_{i}", None)
+    current_hours.append(h if h is not None else 0.0)
 
-# STEP 2: Caculation
+# ---------------- STEP 2: Calculation ----------------
 safe_total_tips = total_tips if total_tips is not None else 0.0
 total_hours_sum = sum(current_hours)
-assigned_tips = [0] * num_of_people
 
-# Applying the Maximum Remainder Method to ensure a fair distribution
-# of the total tips. This minimizes discrepancies and eliminates any 
-# mismatch between the total tip amount and the sum of distributed tips by
-# allocating remaining dollars in a way that reduces perceived unfairness
-if total_hours_sum > 0:    
-    raw_shares = [safe_total_tips * (h / total_hours_sum) for h \
-                  in current_hours]
-    assigned_tips = [int(s) for s in raw_shares]
-    remaining_dollars = int(round(safe_total_tips - sum(assigned_tips)))
-    
-    fractional_parts = [(i, s - int(s)) for i, s in enumerate(raw_shares)]
+# 센트 단위 계산
+total_cents = int(round(safe_total_tips * 100))
+assigned_cents = [0] * num_of_people
+
+if total_hours_sum > 0:
+    raw_cents = [total_cents * (h / total_hours_sum) for h in current_hours]
+    assigned_cents = [int(x) for x in raw_cents]
+
+    remaining_cents = total_cents - sum(assigned_cents)
+
+    fractional_parts = [(i, raw_cents[i] - assigned_cents[i]) for i in range(num_of_people)]
     fractional_parts.sort(key=lambda x: x[1], reverse=True)
-    
-    for i in range(remaining_dollars):
+
+    for i in range(remaining_cents):
         idx = fractional_parts[i][0]
-        assigned_tips[idx] += 1
+        assigned_cents[idx] += 1
 
-# STEP 3: Display - Creating the layout using calculated assigned_tips
-for order in range(num_of_people):
-    with st.container(border=True):
-        st.write(f"**Person {order+1}**")
+assigned_tips = [c / 100 for c in assigned_cents]
 
-        # Arrange Name, Hours, and Tips horizontally
-        c1, c2, c3 = st.columns([1, 1, 1])
-        with c1:
-            st.write("Name")
-            st.text_input(
-            f"Enter name for {order+1} here.", 
-            label_visibility="collapsed", 
-            placeholder="Name", 
-            key=f"name_{order}"
+# ---------------- Header Row ----------------
+h1, h2, h3 = st.columns([2.2, 1.2, 1.2], gap="small")
+with h1:
+    st.markdown('<div class="tip-header">Name</div>', unsafe_allow_html=True)
+with h2:
+    st.markdown('<div class="tip-header">Hours</div>', unsafe_allow_html=True)
+with h3:
+    st.markdown('<div class="tip-header">Tips</div>', unsafe_allow_html=True)
+
+# ---------------- Data Rows ----------------
+for i in range(num_of_people):
+    c1, c2, c3 = st.columns([2.2, 1.2, 1.2], gap="small")
+
+    with c1:
+        st.text_input(
+            f"Name {i+1}",
+            key=f"name_{i}",
+            label_visibility="collapsed",
+            placeholder="Name"
         )
-        with c2:
-            st.write("Hours")
-            st.number_input(
-                f"Enter hours for {order+1}", 
-                label_visibility="collapsed",
-                min_value=1.00,
-                step=0.01, 
-                format="%.2f",
-                value=None,
-                key=f"hour_{order}"
-            )
-        with c3:
-            st.write("Tips")
-            tip_val = assigned_tips[order]
-            # CSS Styling the tip result as a custom box
-            st.markdown(f"""
-                        <div style="
-                            background-color: rgba(128, 128, 128, 0.1);
-                            color: var(--text-color);
-                            padding: 5px 12px;
-                            border-radius: 8px;
-                            border: 1px solid rgba(128, 128, 128, 0.2);
-                            font-size: 16px;
-                            height: 40px;
-                            display: flex;
-                            align-items: center;
-                            line-height: 1.5;
-                            margin-bottom: 16px;
-                        ">
-                            $ {tip_val:,}
-                        </div>
-            """, unsafe_allow_html=True)
+
+    with c2:
+        st.number_input(
+            f"Hours {i+1}",
+            min_value=0.0,
+            step=0.01,
+            format="%.2f",
+            value=None,
+            key=f"hour_{i}",
+            label_visibility="collapsed",
+            placeholder="Hours"
+        )
+
+    with c3:
+        st.markdown(
+            f'<div class="tip-box">$ {assigned_tips[i]:,.2f}</div>',
+            unsafe_allow_html=True
+        )
 
 st.divider()
 
-# Hourly Rate
+# ---------------- Hour Rate ----------------
 st.write("Hour Rate")
+
 if total_hours_sum > 0:
-    tip_per_hour = round(safe_total_tips / total_hours_sum, 2)
+    tip_per_hour = safe_total_tips / total_hours_sum
     st.number_input(
-        "Hour rate", 
-        min_value=0.0, 
-        disabled=True, 
-        value=float(tip_per_hour), 
-        format="%.2f", 
+        "Hour Rate",
+        min_value=0.0,
+        disabled=True,
+        value=float(tip_per_hour),
+        format="%.2f",
         label_visibility="collapsed"
     )
 else:
     st.text_input(
-        "Hour rate", 
-        disabled=True, 
-        value="N/A", 
+        "Hour Rate",
+        value="N/A",
+        disabled=True,
         label_visibility="collapsed"
     )
