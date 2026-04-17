@@ -1,2 +1,4 @@
 flet
 uvicorn[standard]
+websockets
+wsproto
