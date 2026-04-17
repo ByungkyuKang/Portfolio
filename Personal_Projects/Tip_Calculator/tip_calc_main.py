@@ -8,6 +8,7 @@ def main(page: ft.Page):
     page.title = "Tip Calculator"
     page.theme_mode = ft.ThemeMode.DARK
     page.padding = 20
+    page.scroll = ft.ScrollMode.AUTO
 
     current_count = [1]
 
