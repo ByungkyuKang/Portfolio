@@ -2,130 +2,267 @@ import streamlit as st
 
 st.set_page_config(page_title="Tip Calculator", layout="wide")
 
-# ---------------- CSS ----------------
+
+# ----------------------------
+# Helpers
+# ----------------------------
+def parse_non_negative_float(value):
+    if value is None:
+        return 0.0
+
+    s = str(value).strip().replace(",", "")
+    if s == "":
+        return 0.0
+
+    try:
+        num = float(s)
+        return num if num >= 0 else 0.0
+    except ValueError:
+        return 0.0
+
+
+def is_valid_non_negative_float(value):
+    if value is None:
+        return True
+
+    s = str(value).strip().replace(",", "")
+    if s == "":
+        return True
+
+    try:
+        return float(s) >= 0
+    except ValueError:
+        return False
+
+
+# ----------------------------
+# Scoped CSS
+# only for people row section
+# ----------------------------
 st.markdown("""
 <style>
-/* 전체 여백 */
-.block-container {
-    padding-top: 1.8rem;
-    padding-bottom: 2rem;
-}
-
-/* row용 wrapper 느낌 */
-.tip-header {
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.tip-box {
-    background-color: rgba(128, 128, 128, 0.10);
-    color: var(--text-color);
-    padding: 0 10px;
-    border-radius: 8px;
-    border: 1px solid rgba(128, 128, 128, 0.20);
-    font-size: 15px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    overflow: hidden;
-    box-sizing: border-box;
-    width: 100%;
-}
-
-/* input 폭 줄어들 수 있게 */
-div[data-testid="stTextInput"],
-div[data-testid="stNumberInput"] {
-    width: 100%;
-}
-
-/* input 내부 */
-div[data-testid="stTextInput"] input,
-div[data-testid="stNumberInput"] input {
-    min-width: 0 !important;
-}
-
-/* 핵심: Streamlit 컬럼이 모바일에서 세로로 쌓이는 거 방지 */
-div[data-testid="stHorizontalBlock"] {
-    gap: 0.4rem !important;
+/* 사람 row 영역에만 적용 */
+.st-key-people_rows div[data-testid="stHorizontalBlock"] {
     flex-wrap: nowrap !important;
+    gap: 0.22rem !important;
     align-items: stretch !important;
 }
 
-/* 각 컬럼이 줄어들 수 있게 */
-div[data-testid="column"] {
+.st-key-people_rows div[data-testid="column"] {
+    min-width: 0 !important;
+    padding: 0 !important;
+}
+
+.st-key-people_rows div[data-testid="column"] > div {
     min-width: 0 !important;
 }
 
-/* 컬럼 안 내용도 줄어들 수 있게 */
-div[data-testid="column"] > div {
+.st-key-people_rows div[data-testid="stTextInput"] {
+    width: 100% !important;
+    margin-bottom: 0 !important;
+}
+
+.st-key-people_rows div[data-testid="stTextInput"] > div {
+    width: 100% !important;
     min-width: 0 !important;
 }
 
-/* 아주 좁은 화면에서 폰트/패딩 축소 */
-@media (max-width: 640px) {
-    .tip-header {
-        font-size: 0.85rem !important;
-        margin-bottom: 0.15rem;
+.st-key-people_rows div[data-baseweb="base-input"],
+.st-key-people_rows div[data-baseweb="input"] {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+.st-key-people_rows div[data-baseweb="base-input"] > div,
+.st-key-people_rows div[data-baseweb="input"] > div {
+    min-height: 40px !important;
+    height: 40px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.st-key-people_rows input {
+    min-width: 0 !important;
+    height: 40px !important;
+    font-size: 14px !important;
+    padding: 0 10px !important;
+    line-height: 1.2 !important;
+}
+
+.st-key-people_rows .people-header {
+    font-weight: 700;
+    margin-bottom: 0.28rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+}
+
+.st-key-people_rows .short-label {
+    display: none;
+}
+
+.st-key-people_rows .people-tip-box {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(128, 128, 128, 0.20);
+    background-color: rgba(128, 128, 128, 0.10);
+    color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+/* 중간 크기 */
+@media (max-width: 700px) {
+    .st-key-people_rows div[data-testid="stHorizontalBlock"] {
+        gap: 0.14rem !important;
     }
 
-    .tip-box {
+    .st-key-people_rows div[data-baseweb="base-input"] > div,
+    .st-key-people_rows div[data-baseweb="input"] > div,
+    .st-key-people_rows input,
+    .st-key-people_rows .people-tip-box {
+        height: 38px !important;
+        min-height: 38px !important;
+    }
+
+    .st-key-people_rows input,
+    .st-key-people_rows .people-tip-box {
         font-size: 13px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .st-key-people_rows .people-header {
+        font-size: 13px !important;
+    }
+}
+
+/* 작은 화면 */
+@media (max-width: 520px) {
+    .st-key-people_rows div[data-testid="stHorizontalBlock"] {
+        gap: 0.08rem !important;
+    }
+
+    .st-key-people_rows .full-label {
+        display: none !important;
+    }
+
+    .st-key-people_rows .short-label {
+        display: inline !important;
+    }
+
+    .st-key-people_rows div[data-baseweb="base-input"] > div,
+    .st-key-people_rows div[data-baseweb="input"] > div,
+    .st-key-people_rows input,
+    .st-key-people_rows .people-tip-box {
         height: 36px !important;
-        padding: 0 8px !important;
+        min-height: 36px !important;
     }
 
-    div[data-testid="stTextInput"] input,
-    div[data-testid="stNumberInput"] input {
-        font-size: 13px !important;
-        padding-left: 0.45rem !important;
-        padding-right: 0.45rem !important;
+    .st-key-people_rows input,
+    .st-key-people_rows .people-tip-box {
+        font-size: 12px !important;
+        padding-left: 7px !important;
+        padding-right: 7px !important;
+    }
+
+    .st-key-people_rows .people-header {
+        font-size: 12px !important;
+        margin-bottom: 0.18rem !important;
+    }
+}
+
+/* 아주 작은 화면 */
+@media (max-width: 400px) {
+    .st-key-people_rows div[data-testid="stHorizontalBlock"] {
+        gap: 0.04rem !important;
+    }
+
+    .st-key-people_rows div[data-baseweb="base-input"] > div,
+    .st-key-people_rows div[data-baseweb="input"] > div,
+    .st-key-people_rows input,
+    .st-key-people_rows .people-tip-box {
+        height: 34px !important;
+        min-height: 34px !important;
+    }
+
+    .st-key-people_rows input,
+    .st-key-people_rows .people-tip-box {
+        font-size: 11px !important;
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+    }
+
+    .st-key-people_rows .people-header {
+        font-size: 11px !important;
     }
 }
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------- Title ----------------
+
+# ----------------------------
+# Title
+# ----------------------------
 st.title("Tip Calculator")
 st.divider()
 
-# ---------------- Total Tips ----------------
+
+# ----------------------------
+# Top inputs
+# keep original Streamlit style
+# ----------------------------
 st.write("Total Tips ($)")
 total_tips = st.number_input(
     "Total Tips ($)",
     min_value=0.0,
     step=0.01,
-    value=None,
-    placeholder="0.00",
-    label_visibility="collapsed"
+    value=0.0,
+    format="%.2f",
+    label_visibility="collapsed",
 )
 
-# ---------------- Number of People ----------------
 st.write("Number of People")
 num_of_people = st.number_input(
     "Number of People",
     min_value=1,
     step=1,
     value=1,
-    label_visibility="collapsed"
+    label_visibility="collapsed",
 )
 
 st.divider()
 
-# ---------------- STEP 1: Collect Hours ----------------
-current_hours = []
-for i in range(num_of_people):
-    h = st.session_state.get(f"hour_{i}", None)
-    current_hours.append(h if h is not None else 0.0)
 
-# ---------------- STEP 2: Calculation ----------------
+# ----------------------------
+# STEP 1: Gather hours
+# ----------------------------
+current_hours = []
+invalid_rows = []
+
+for i in range(num_of_people):
+    raw_hour = st.session_state.get(f"hour_{i}", "")
+    if not is_valid_non_negative_float(raw_hour):
+        invalid_rows.append(i + 1)
+
+    current_hours.append(parse_non_negative_float(raw_hour))
+
+
+# ----------------------------
+# STEP 2: Calculate
+# ----------------------------
 safe_total_tips = total_tips if total_tips is not None else 0.0
 total_hours_sum = sum(current_hours)
 
-# 센트 단위 계산
 total_cents = int(round(safe_total_tips * 100))
 assigned_cents = [0] * num_of_people
 
@@ -135,7 +272,10 @@ if total_hours_sum > 0:
 
     remaining_cents = total_cents - sum(assigned_cents)
 
-    fractional_parts = [(i, raw_cents[i] - assigned_cents[i]) for i in range(num_of_people)]
+    fractional_parts = [
+        (idx, raw_cents[idx] - assigned_cents[idx])
+        for idx in range(num_of_people)
+    ]
     fractional_parts.sort(key=lambda x: x[1], reverse=True)
 
     for i in range(remaining_cents):
@@ -144,50 +284,72 @@ if total_hours_sum > 0:
 
 assigned_tips = [c / 100 for c in assigned_cents]
 
-# ---------------- Header Row ----------------
-h1, h2, h3 = st.columns([2.2, 1.2, 1.2], gap="small")
-with h1:
-    st.markdown('<div class="tip-header">Name</div>', unsafe_allow_html=True)
-with h2:
-    st.markdown('<div class="tip-header">Hours</div>', unsafe_allow_html=True)
-with h3:
-    st.markdown('<div class="tip-header">Tips</div>', unsafe_allow_html=True)
 
-# ---------------- Data Rows ----------------
-for i in range(num_of_people):
-    c1, c2, c3 = st.columns([2.2, 1.2, 1.2], gap="small")
+# ----------------------------
+# People rows section
+# only this area is tightly styled
+# ----------------------------
+people_section = st.container(key="people_rows")
 
-    with c1:
-        st.text_input(
-            f"Name {i+1}",
-            key=f"name_{i}",
-            label_visibility="collapsed",
-            placeholder="Name"
-        )
+with people_section:
+    h1, h2, h3 = st.columns([1.12, 0.72, 0.64], gap="small")
 
-    with c2:
-        st.number_input(
-            f"Hours {i+1}",
-            min_value=0.0,
-            step=0.01,
-            format="%.2f",
-            value=None,
-            key=f"hour_{i}",
-            label_visibility="collapsed",
-            placeholder="Hours"
-        )
-
-    with c3:
+    with h1:
         st.markdown(
-            f'<div class="tip-box">$ {assigned_tips[i]:,.2f}</div>',
-            unsafe_allow_html=True
+            '<div class="people-header"><span class="full-label">Name</span><span class="short-label">N</span></div>',
+            unsafe_allow_html=True,
         )
+
+    with h2:
+        st.markdown(
+            '<div class="people-header"><span class="full-label">Hours</span><span class="short-label">H</span></div>',
+            unsafe_allow_html=True,
+        )
+
+    with h3:
+        st.markdown(
+            '<div class="people-header"><span class="full-label">Tips</span><span class="short-label">$</span></div>',
+            unsafe_allow_html=True,
+        )
+
+    for i in range(num_of_people):
+        c1, c2, c3 = st.columns([1.12, 0.72, 0.64], gap="small")
+
+        with c1:
+            st.text_input(
+                f"Name {i+1}",
+                key=f"name_{i}",
+                placeholder="Name",
+                label_visibility="collapsed",
+            )
+
+        with c2:
+            st.text_input(
+                f"Hours {i+1}",
+                key=f"hour_{i}",
+                placeholder="0.00",
+                label_visibility="collapsed",
+            )
+
+        with c3:
+            st.markdown(
+                f'<div class="people-tip-box">${assigned_tips[i]:,.2f}</div>',
+                unsafe_allow_html=True,
+            )
+
+    if invalid_rows:
+        st.caption(
+            f"Rows {', '.join(map(str, invalid_rows))} have invalid Hours values, so they are treated as 0."
+        )
+
 
 st.divider()
 
-# ---------------- Hour Rate ----------------
-st.write("Hour Rate")
 
+# ----------------------------
+# Hour Rate
+# ----------------------------
+st.write("Hour Rate")
 if total_hours_sum > 0:
     tip_per_hour = safe_total_tips / total_hours_sum
     st.number_input(
@@ -196,12 +358,12 @@ if total_hours_sum > 0:
         disabled=True,
         value=float(tip_per_hour),
         format="%.2f",
-        label_visibility="collapsed"
+        label_visibility="collapsed",
     )
 else:
     st.text_input(
         "Hour Rate",
-        value="N/A",
         disabled=True,
-        label_visibility="collapsed"
+        value="N/A",
+        label_visibility="collapsed",
     )
