@@ -198,15 +198,9 @@ def main(page: ft.Page):
         hour_rate_row
     )
 
-
-curr_dir = os.path.dirname(os.path.realpath(__file__))
-
 app = flet_fastapi.app(
     main,
     web_renderer=ft.WebRenderer.HTML,
-    # assets 폴더가 있다면 해당 경로를 절대 경로로 지정, 
-    # 없다면 None으로 두거나 아래처럼 절대 경로화합니다.
-    assets_dir=os.path.join(curr_dir, "assets") 
 )
 
 if __name__ == "__main__":
