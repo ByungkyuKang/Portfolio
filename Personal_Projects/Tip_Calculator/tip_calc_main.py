@@ -264,15 +264,15 @@ def main(page: ft.Page):
 ##############################################
 ##### This part is needed when deploying #####
 ##############################################
-# app = ft.run(main, export_asgi_app=True)
-#
-# if __name__ == "__main__":
-#     import uvicorn
-#     port = int(os.getenv("PORT", "8080"))
-#     uvicorn.run(app, host="0.0.0.0", port=port)
+app = ft.run(main, export_asgi_app=True)
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.getenv("PORT", "8080"))
+    uvicorn.run(app, host="0.0.0.0", port=port)
 
 ##############################################
 #####    This part is only for testing    ####
 ##############################################
-if __name__ == "__main__":
-    ft.run(main)
+# if __name__ == "__main__":
+#     ft.run(main)
