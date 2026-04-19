@@ -2,6 +2,7 @@ import flet as ft
 import math
 import random
 import os
+import json
 
 
 def main(page: ft.Page):
@@ -54,6 +55,54 @@ def main(page: ft.Page):
     )
 
     people_list = ft.Column(spacing=10)
+
+    # Creating Save
+    async def save_data(e=None):
+        data_list_save = {
+            "total_people": people_input_field.value,
+            "people_list": []
+        }
+
+        for row in people_list.controls:
+            data_list_save["people_list"].append({
+                "name": row.controls[0].value or ""
+                })
+        
+        await page.shared_preferences.set("people_state", json.dumps(data_list_save))
+
+    # Creating Load
+    async def load_data(e=None):
+        data_list_load = await page.shared_preferences.get("people_state")
+        if not data_list_load:
+            return
+        
+        loaded_data = json.loads(data_list_load)
+        
+        # loading the total number of people
+        total_people = int(loaded_data.get("total_people", 1))
+        names = loaded_data.get("people_list", [])
+
+        people_input_field.value = str(total_people)
+
+        people_list.controls.clear()
+        for _ in range(total_people):
+            people_list.controls.append(create_person_row())
+        
+        for i, person in enumerate(names):
+            if i < len(people_list.controls):
+                people_list.controls[i].controls[0].value = person.get("name", "")
+        
+        current_count[0] = total_people
+        calculate_tips()
+        page.update()
+
+    save_load_btn = ft.Row(
+        controls=[
+            ft.ElevatedButton("Load", on_click=load_data),
+            ft.ElevatedButton("Save", on_click=save_data)
+        ],
+        alignment=ft.MainAxisAlignment.END
+    )
 
     def format_total_tip(e):
         try:
@@ -203,17 +252,27 @@ def main(page: ft.Page):
                 people_input_field,
             ]
         ),
+        save_load_btn,
         ft.Divider(),
         header,
         people_list,
         ft.Divider(),
         hour_rate_row,
     )
+    
 
+##############################################
+##### This part is needed when deploying #####
+##############################################
+# app = ft.run(main, export_asgi_app=True)
+#
+# if __name__ == "__main__":
+#     import uvicorn
+#     port = int(os.getenv("PORT", "8080"))
+#     uvicorn.run(app, host="0.0.0.0", port=port)
 
-app = ft.run(main, export_asgi_app=True)
-
+##############################################
+#####    This part is only for testing    ####
+##############################################
 if __name__ == "__main__":
-    import uvicorn
-    port = int(os.getenv("PORT", "8080"))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    ft.run(main)
