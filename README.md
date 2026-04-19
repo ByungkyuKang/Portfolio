@@ -5,7 +5,7 @@ A collection of my machine learning, Python, and personal development projects, 
 ---
 
 ## 📁 Repository Structure
-
+<pre>
 Portfolio/
 ├── Certifications&Badges/
 │   ├── AWS/
@@ -46,7 +46,7 @@ Portfolio/
     └── Tip_Calculator/
         ├── Dockerfile
         ├── requirements.txt
-        └── tip_calc_main.py
+        └── tip_calc_main.py</pre>
 
 ---
 
