@@ -258,6 +258,7 @@ def main(page: ft.Page):
         people_list,
         ft.Divider(),
         hour_rate_row,
+        save_load_btn
     )
     
 
