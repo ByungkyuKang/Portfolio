@@ -95,9 +95,23 @@ def main(page: ft.Page):
         current_count[0] = total_people
         calculate_tips()
         page.update()
+    
+    def reset_screen(e=None):
+        current_count[0] = 1
+        people_input_field.value = "1"
+
+        tip_input_field.value = ""
+        hour_rate_value.value = "0.00"
+
+        people_list.controls.clear()
+        people_list.controls.append(create_person_row())
+
+        calculate_tips()
+        page.update()
 
     save_load_btn = ft.Row(
         controls=[
+            ft.ElevatedButton("Reset", on_click=reset_screen),
             ft.ElevatedButton("Load", on_click=load_data),
             ft.ElevatedButton("Save", on_click=save_data)
         ],
