@@ -114,7 +114,7 @@ Tech Stack: Python, Pillow, OS library, Tkinter
 
 ### 🌐 Information Scraper (In Progress)
 
-Location: `Personal_Projects/Infomation_Scraper/main.py`
+Location: `Personal_Projects/Information_Scraper/main.py`
 
 A simple web scraping tool intended to collect and structure useful information from selected websites.
 
