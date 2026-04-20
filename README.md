@@ -41,7 +41,7 @@ Portfolio/
     │   ├── image_directory.py
     │   ├── image_name_change.py
     │   └── img_processing.py
-    ├── Infomation_Scraper/
+    ├── Information_Scraper/
     │   └── main.py
     └── Tip_Calculator/
         ├── Dockerfile
@@ -142,6 +142,7 @@ Key features:
 - Distributes tips using a fair allocation approach
 - Supports saving and loading previously entered people names and counts
 - Can be deployed as a lightweight web app using Docker and Render
+- https://starbucks-tip-out.onrender.com
 
 Tech Stack: Python, Flet, JSON, Docker, Uvicorn
 
