@@ -67,7 +67,7 @@ After analysis, the application displays an interactive panel:
 
 ### 📂 Group Visualization
 - Duplicate images are grouped together
-- Unique images are displayed separately
+- Unique images are hidden by default (can be toggled)
 - Images are sorted by resolution (highest → lowest)
 
 ### 🖱️ Interaction
@@ -75,6 +75,9 @@ After analysis, the application displays an interactive panel:
 - **Double click** → Open full-size preview  
 
 ### 🧰 Actions
+- **Show / Hide Unique**  
+  Toggle visibility of unique images
+
 - **Mark as Unique**  
   Remove selected images from duplicate groups
 
@@ -87,6 +90,7 @@ After analysis, the application displays an interactive panel:
 ### 📄 Pagination (Performance Optimization)
 - Displays images in pages to prevent memory overflow
 - Avoids `Fail to allocate bitmap` errors in Tkinter
+- Ensures smooth performance even with thousands of images
 
 ---
 
@@ -97,6 +101,8 @@ After analysis, the application displays an interactive panel:
 - Use hash-based filtering before expensive operations
 - Perform heavy computations only when necessary
 - Limit UI rendering to reduce memory usage
+- Hide unique images by default to reduce UI complexity
+- Use pagination to prevent excessive memory usage
 
 ---
 
@@ -104,19 +110,22 @@ After analysis, the application displays an interactive panel:
 
 ### Before
 - Pairwise comparisons (near O(n²))
-- Slow with large datasets
+- All images rendered at once
 - High memory usage
+- UI lag with large datasets
 
 ### After
 - Hash-based candidate reduction
 - Selective ORB computation
 - Multiprocessing
-- UI pagination
+- Pagination-based UI rendering
+- Lazy loading of images
 
 **Result:**
 - Significantly faster processing
 - Scalable to thousands of images
 - Stable memory usage
+- Smooth UI interaction
 
 ---
 
@@ -138,6 +147,7 @@ After analysis, the application displays an interactive panel:
   - Result panel UI
   - User interactions (select, delete, cleanup)
   - Pagination system
+  - Unique image toggle
 
 ---
 
