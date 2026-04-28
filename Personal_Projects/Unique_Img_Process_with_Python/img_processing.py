@@ -11,10 +11,10 @@ BOX_HEIGHT = 90
 THUMB_SIZE = (80, 70)
 PREVIEW_MAX_SIZE = (1000, 800)
 
-SHOW_SINGLETONS = True
-ITEM_OUTER_WIDTH = 106
+# Unique images are hidden by default.
+SHOW_SINGLETONS = False
 
-# The number of images per page
+ITEM_OUTER_WIDTH = 106
 IMAGES_PER_PAGE = 300
 
 
@@ -52,7 +52,6 @@ def make_thumb_with_border(image_path):
             outline="black",
             width=1
         )
-
         return bg
 
     except Exception:
@@ -71,8 +70,8 @@ def ask_scan_mode(root):
     answer = messagebox.askyesnocancel(
         "Select Scan Mode",
         "Would you like to perform a precise scan?\n\n"
-        "Yes = Precise scan (slow but more accurate)\n"
-        "No = Fast scan (faster)\n"
+        "Yes = Precise Scan (slower, more accurate)\n"
+        "No = Fast Scan (faster)\n"
         "Cancel = Cancel",
         parent=root
     )
@@ -247,6 +246,9 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
     current_duplicate_groups = [list(g) for g in duplicate_groups]
     current_singleton_groups = [list(g) for g in singleton_groups]
 
+    # Controls whether unique images are shown in the UI.
+    show_unique_state = {"value": SHOW_SINGLETONS}
+
     page_state = {"page": 0}
     last_items_per_row = {"value": None}
     resize_job = {"id": None}
@@ -304,7 +306,7 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
         for group in current_duplicate_groups:
             total += len(group)
 
-        if SHOW_SINGLETONS:
+        if show_unique_state["value"]:
             for group in current_singleton_groups:
                 total += len(group)
 
@@ -315,17 +317,6 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
         return max(1, (total + IMAGES_PER_PAGE - 1) // IMAGES_PER_PAGE)
 
     def get_group_entries_for_current_page():
-        """
-        [
-            {
-                "section": "Duplicate" or "Unique",
-                "group_no": 1,
-                "paths": [...],
-                "total_count": Total number of items in the group,
-                "start_index": Start index within the current page slice
-            }
-        ]
-        """
         start = page_state["page"] * IMAGES_PER_PAGE
         end = start + IMAGES_PER_PAGE
 
@@ -340,7 +331,7 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
                 group_start_global = global_index
                 group_end_global = global_index + group_len
 
-                # Skip if the current page range does not overlap with this group
+                # Skip if the current page range does not overlap with this group.
                 if group_end_global <= start:
                     global_index += group_len
                     continue
@@ -358,15 +349,15 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
                         "section": section_name,
                         "group_no": group_no,
                         "paths": sliced_paths,
-                        "total_count": group_len,
-                        "start_index": local_start,
+                        "total_count": group_len,   # Total number of items in the group
+                        "start_index": local_start, # Start index of the current slice within the group
                     })
 
                 global_index += group_len
 
         consume_groups(current_duplicate_groups, "Duplicate")
 
-        if SHOW_SINGLETONS:
+        if show_unique_state["value"]:
             consume_groups(current_singleton_groups, "Unique")
 
         return entries
@@ -376,7 +367,6 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
         current_page = page_state["page"] + 1
 
         page_label.config(text=f"Page {current_page} / {total_pages}")
-
         prev_btn.config(state="normal" if page_state["page"] > 0 else "disabled")
         next_btn.config(state="normal" if page_state["page"] < total_pages - 1 else "disabled")
 
@@ -532,13 +522,15 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
         total_images = count_total_images()
         total_pages = get_total_pages()
 
+        unique_status = "Shown" if show_unique_state["value"] else "Hidden"
+
         header = tk.Label(
             content_frame,
             text=(
                 f"Mode: {mode_label}    "
                 f"Duplicate groups: {len(current_duplicate_groups)}    "
-                f"Unique groups: {len(current_singleton_groups)}    "
-                f"Images: {total_images}    "
+                f"Unique groups: {len(current_singleton_groups)} ({unique_status})    "
+                f"Images displayed: {total_images}    "
                 f"Showing up to {IMAGES_PER_PAGE} images/page"
             ),
             font=("Arial", 12, "bold"),
@@ -599,7 +591,7 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
         if not moved_paths:
             messagebox.showinfo(
                 "Mark as Unique",
-                "The selected image is not in any duplicate group."
+                "None of the selected images are in a duplicate group."
             )
             return
 
@@ -707,6 +699,20 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
             page_state["page"] += 1
             rebuild_ui(force=True)
 
+    def toggle_unique_images():
+        """
+        Toggle whether unique images are displayed in the result panel.
+        """
+        show_unique_state["value"] = not show_unique_state["value"]
+        page_state["page"] = 0
+
+        if show_unique_state["value"]:
+            unique_btn.config(text="Hide Unique")
+        else:
+            unique_btn.config(text="Show Unique")
+
+        rebuild_ui(force=True)
+
     bottom_bar = tk.Frame(window)
     bottom_bar.pack(fill="x", side="bottom", padx=10, pady=8)
 
@@ -723,7 +729,7 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
     prev_btn = tk.Button(
         page_control_frame,
         text="Previous",
-        width=12,
+        width=10,
         command=go_prev_page
     )
     prev_btn.pack(side="left", padx=(0, 6))
@@ -738,7 +744,7 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
     next_btn = tk.Button(
         page_control_frame,
         text="Next",
-        width=12,
+        width=10,
         command=go_next_page
     )
     next_btn.pack(side="left")
@@ -746,10 +752,18 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
     button_frame = tk.Frame(bottom_bar)
     button_frame.pack(side="right")
 
+    unique_btn = tk.Button(
+        button_frame,
+        text="Show Unique",
+        width=12,
+        command=toggle_unique_images
+    )
+    unique_btn.pack(side="left", padx=(0, 6))
+
     exclude_btn = tk.Button(
         button_frame,
         text="Mark as Unique",
-        width=12,
+        width=14,
         command=move_selected_to_unique
     )
     exclude_btn.pack(side="left", padx=(0, 6))
@@ -757,7 +771,7 @@ def show_results_window(root, duplicate_groups, singleton_groups, meta, mode_lab
     delete_btn = tk.Button(
         button_frame,
         text="Delete Selected",
-        width=12,
+        width=14,
         command=on_delete_selected
     )
     delete_btn.pack(side="left", padx=(0, 6))
