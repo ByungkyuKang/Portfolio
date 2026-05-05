@@ -83,14 +83,6 @@ It resets the number of people, clears entered names and tip values, and returns
 
 ---
 
-### 6. Reset Functionality
-The **Reset** button restores the calculator to its default state.  
-It resets the number of people, clears entered names and tip values, and returns the app to a clean starting screen.
-
-![Reset Functionality](assets/Demo_Screenshot/05.Demo4-Reset.png)
-
----
-
 ## ✨ Key Features
 
 - Precise Tip Distribution  
