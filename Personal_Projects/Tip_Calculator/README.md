@@ -8,6 +8,9 @@ A specialized web application designed for Starbucks baristas to fairly and accu
 
 [Launch Starbucks Tip-Out App 🔗](https://starbucks-tip-out.onrender.com)
 
+> Note: GitHub README links open in the same tab by default.  
+> Use Ctrl+Click, Cmd+Click, or middle-click to open the demo in a new tab.
+
 ---
 
 ## 📌 Background
@@ -34,17 +37,17 @@ In addition to tip calculation, the app also includes practical convenience feat
 
 ### 1. Main Interface
 The default starting screen of the app.  
-Users can enter the total tip amount, set the number of people, and use the Reset, Load, and Save buttons before entering people details.
+Users can enter the total tip amount, set the number of people, and use the Reset, Load, and Save buttons before entering names and hours.
 
-![Main Interface](assets/Demo_Screenshot/01.Main.png)
+<img src="assets/Demo_Screenshot/01.Main.png" alt="Main Interface" width="50%">
 
 ---
 
 ### 2. Load Saved Names and Group Size
-The **Load** button restores previously saved people names and the saved group size.  
+The **Load** button restores previously saved names and the saved group size.  
 Only the **number of people** and **names** are loaded. Hours are not restored because they usually change for each new tip-out calculation.
 
-![Load Saved Names and Group Size](assets/Demo_Screenshot/06.Demo5-Save_Load.png)
+<img src="assets/Demo_Screenshot/06.Demo5-Save_Load.png" alt="Load Saved Names and Group Size" width="50%">
 
 ---
 
@@ -52,7 +55,7 @@ Only the **number of people** and **names** are loaded. Hours are not restored b
 After entering the total tip amount and the number of people, the app automatically creates the required number of rows.  
 Each person’s share is calculated based on the hours entered, and the hourly tip rate is displayed automatically.
 
-![Basic Tip Calculation Workflow](assets/Demo_Screenshot/02.Demo1.png)
+<img src="assets/Demo_Screenshot/02.Demo1.png" alt="Basic Tip Calculation Workflow" width="50%">
 
 ---
 
@@ -60,7 +63,7 @@ Each person’s share is calculated based on the hours entered, and the hourly t
 The app recalculates tip distribution immediately when values change.  
 This includes updated total tip amounts, different group sizes, and different hour inputs for each person.
 
-![Recalculation with Updated Values](assets/Demo_Screenshot/03.Demo2.png)
+<img src="assets/Demo_Screenshot/03.Demo2.png" alt="Recalculation with Updated Values" width="50%">
 
 ---
 
@@ -68,7 +71,15 @@ This includes updated total tip amounts, different group sizes, and different ho
 When the number of people is reduced, extra rows are automatically removed.  
 This keeps the interface aligned with the current group size and updates the tip calculation accordingly.
 
-![Dynamic Row Removal](assets/Demo_Screenshot/04.Demo3.png)
+<img src="assets/Demo_Screenshot/04.Demo3.png" alt="Dynamic Row Removal" width="50%">
+
+---
+
+### 6. Reset Functionality
+The **Reset** button restores the calculator to its default state.  
+It resets the number of people, clears entered names and tip values, and returns the app to a clean starting screen.
+
+<img src="assets/Demo_Screenshot/05.Demo4-Reset.png" alt="Reset Functionality" width="50%">
 
 ---
 
