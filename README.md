@@ -18,6 +18,11 @@ Portfolio/
 │       ├── Byungkyu Kang - Pandas.png
 │       └── Byungkyu Kang - Python.png
 │
+├── AI_Data_Engineering_Journey/
+|   ├── Week_01_Basic_Settings/
+|   |   └── jupyter_basic.ipynb
+|   ├── 
+|
 ├── Machine_Learning_Projects/
 │   └── Titanic-Survival-Prediction/
 │       └── notebooks/
