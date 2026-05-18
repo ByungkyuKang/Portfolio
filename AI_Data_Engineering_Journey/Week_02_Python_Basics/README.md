@@ -22,4 +22,4 @@ The purpose of this week is not to learn programming from scratch, but to streng
 
 | File | Description |
 |---|---|
-| Day_01_Variables_Numbers_Strings_Print.ipynb | Practice notebook for Python variables, numbers, strings, and print() |
+| [Day_01_Variables_Numbers_Strings_Print.ipynb](./Day_01_Variables_Numbers_Strings_Print.ipynb) | Practice notebook for Python variables, numbers, strings, and print() |
