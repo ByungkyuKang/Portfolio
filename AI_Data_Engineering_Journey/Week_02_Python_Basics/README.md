@@ -88,14 +88,14 @@ The purpose of this week is not to learn programming from scratch, but to streng
 - Using `range()` with lists
 - Basic accumulator pattern
 - Combining `for` loops with `if` statements
-- Simple data and machine learning related loop examples
 
 ### Practice File
 
 | File | Description |
 |---|---|
-| [Day_04_For_Loops_Range.ipynb](./Day_04_For_Loops_Range.ipynb) | Practice notebook for Python for loops, range(), dictionary iteration, and simple repeated data processing |
+| [Day_04_For_Loops_Range.ipynb](./Day_04_For_Loops_Range.ipynb) | Practice notebook for Python `for` loops, `range()`, dictionary iteration, accumulator patterns, and combining loops with conditions |
 
+---
 
 ## Weekly Summary
 
@@ -118,7 +118,6 @@ So far, I practiced how to:
 - Use `for` loops to repeat tasks
 - Use `range()` to generate number sequences
 - Loop through lists, strings, dictionaries, and lists of dictionaries
-- Use loops with conditions to count, filter, and process data
-- Apply basic decision-making and repeated processing logic to simple data and machine learning scenarios
+- Use loops with conditions to count, filter, and process values
 
-These concepts are basic, but they are important foundations for working with datasets, JSON data, API responses, model results, file validation, data cleaning checks, repeated data processing, and future data engineering pipelines.
+These concepts are basic, but they are important foundations for writing clean Python code, handling repeated tasks, organizing structured information, and building more advanced programming logic in future projects.
