@@ -71,6 +71,32 @@ The purpose of this week is not to learn programming from scratch, but to streng
 |---|---|
 | [Day_03_If_Statements_Comparison_Operators.ipynb](./Day_03_If_Statements_Comparison_Operators.ipynb) | Practice notebook for Python if statements, comparison operators, logical operators, and simple decision-making logic |
 
+---
+
+## Day 04 — For Loops and range()
+
+### Topics Covered
+
+- Basic `for` loops
+- Looping through lists
+- Looping through strings
+- Looping through dictionaries
+- Dictionary `items()`
+- The `range()` function
+- `range(start, stop)`
+- `range(start, stop, step)`
+- Using `range()` with lists
+- Basic accumulator pattern
+- Combining `for` loops with `if` statements
+- Simple data and machine learning related loop examples
+
+### Practice File
+
+| File | Description |
+|---|---|
+| [Day_04_For_Loops_Range.ipynb](./Day_04_For_Loops_Range.ipynb) | Practice notebook for Python for loops, range(), dictionary iteration, and simple repeated data processing |
+
+
 ## Weekly Summary
 
 This week reviews the core Python concepts that are necessary for future AI, data analysis, machine learning, and data engineering practice.
@@ -89,5 +115,10 @@ So far, I practiced how to:
 - Compare values using comparison operators such as `==`, `!=`, `>`, `<`, `>=`, and `<=`
 - Use `if`, `elif`, and `else` statements to control program flow
 - Combine multiple conditions using logical operators such as `and`, `or`, and `not`
+- Use `for` loops to repeat tasks
+- Use `range()` to generate number sequences
+- Loop through lists, strings, dictionaries, and lists of dictionaries
+- Use loops with conditions to count, filter, and process data
+- Apply basic decision-making and repeated processing logic to simple data and machine learning scenarios
 
-These concepts are basic, but they are important foundations for working with datasets, JSON data, API responses, model results, file validation, data cleaning checks, and future data engineering pipelines.
+These concepts are basic, but they are important foundations for working with datasets, JSON data, API responses, model results, file validation, data cleaning checks, repeated data processing, and future data engineering pipelines.
