@@ -51,6 +51,26 @@ The purpose of this week is not to learn programming from scratch, but to streng
 
 ---
 
+## Day 03 — If Statements and Comparison Operators
+
+### Topics Covered
+
+- Comparison operators
+- Boolean values
+- Difference between `=` and `==`
+- Basic `if` statements
+- `if-else` statements
+- `if-elif-else` statements
+- Logical operators: `and`, `or`, and `not`
+- Simple decision-making logic
+- Data and machine learning related condition checks
+
+### Practice File
+
+| File | Description |
+|---|---|
+| [Day_03_If_Statements_Comparison_Operators.ipynb](./Day_03_If_Statements_Comparison_Operators.ipynb) | Practice notebook for Python if statements, comparison operators, logical operators, and simple decision-making logic |
+
 ## Weekly Summary
 
 This week reviews the core Python concepts that are necessary for future AI, data analysis, machine learning, and data engineering practice.
@@ -66,5 +86,8 @@ So far, I practiced how to:
 - Store structured data using dictionaries
 - Access dictionary keys, values, and key-value pairs
 - Combine lists and dictionaries to represent simple structured data
+- Compare values using comparison operators such as `==`, `!=`, `>`, `<`, `>=`, and `<=`
+- Use `if`, `elif`, and `else` statements to control program flow
+- Combine multiple conditions using logical operators such as `and`, `or`, and `not`
 
-These concepts are basic, but they are important foundations for working with datasets, JSON data, API responses, model results, and future data engineering pipelines.
+These concepts are basic, but they are important foundations for working with datasets, JSON data, API responses, model results, file validation, data cleaning checks, and future data engineering pipelines.
