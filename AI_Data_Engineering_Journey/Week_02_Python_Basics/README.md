@@ -97,6 +97,29 @@ The purpose of this week is not to learn programming from scratch, but to streng
 
 ---
 
+---
+
+## Day 05 — Number Sum and Even/Odd Programs
+
+### Topics Covered
+
+- Creating simple Python programs
+- Calculating the sum of numbers in a list
+- Using variables and lists
+- Using `for` loops for repeated calculation
+- Using the built-in `sum()` function
+- Using the modulo operator `%`
+- Checking even and odd numbers
+- Combining `for` loops with `if-else` statements
+
+### Practice File
+
+| File | Description |
+|---|---|
+| [Day_05_Number_Sum_Even_Odd_Programs.ipynb](./Day_05_Number_Sum_Even_Odd_Programs.ipynb) | Practice notebook for creating simple number sum and even/odd checker programs using lists, loops, conditions, and basic Python operators |
+
+---
+
 ## Weekly Summary
 
 This week reviews the core Python concepts that are necessary for future AI, data analysis, machine learning, and data engineering practice.
@@ -119,5 +142,8 @@ So far, I practiced how to:
 - Use `range()` to generate number sequences
 - Loop through lists, strings, dictionaries, and lists of dictionaries
 - Use loops with conditions to count, filter, and process values
+- Build simple Python programs by combining variables, lists, loops, and conditions
+- Calculate the sum of numbers using both a manual loop and the built-in `sum()` function
+- Check whether numbers are even or odd using the modulo operator `%`
 
 These concepts are basic, but they are important foundations for writing clean Python code, handling repeated tasks, organizing structured information, and building more advanced programming logic in future projects.

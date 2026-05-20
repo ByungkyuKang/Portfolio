@@ -21,7 +21,12 @@ Portfolio/
 ├── AI_Data_Engineering_Journey/
 |   ├── Week_01_Basic_Settings/
 |   |   └── jupyter_basic.ipynb
-|   ├── 
+|   ├── Week_02_Python_Basics
+|   |   ├── Day_01_Variables_Numbers_Strings_Print.ipynb
+|   |   ├── Day_02_Lists_Dictionaries_Indexing.ipynb
+|   |   ├── Day_03_If_Statements_Comparison_Operators.ipynb
+|   |   ├── Day_04_For_Loops_Range.ipynb
+|   |   └── Day_05_Number_Sum_Even_Odd_Programs.ipynb
 |
 ├── Machine_Learning_Projects/
 │   └── Titanic-Survival-Prediction/
