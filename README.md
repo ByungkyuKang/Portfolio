@@ -27,6 +27,8 @@ Portfolio/
 |   |   ├── Day_03_If_Statements_Comparison_Operators.ipynb
 |   |   ├── Day_04_For_Loops_Range.ipynb
 |   |   └── Day_05_Number_Sum_Even_Odd_Programs.ipynb
+|   ├── Week_03_PythoWeek_03_Functions_and_Files
+|   |   ├── Day_01_Functions_Input_Output.ipynb
 |
 ├── Machine_Learning_Projects/
 │   └── Titanic-Survival-Prediction/
