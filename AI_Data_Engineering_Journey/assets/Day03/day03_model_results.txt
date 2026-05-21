@@ -1,0 +1,4 @@
+Model Results
+Logistic Regression: 82.34%
+Decision Tree: 75.42%
+Random Forest: 86.15%

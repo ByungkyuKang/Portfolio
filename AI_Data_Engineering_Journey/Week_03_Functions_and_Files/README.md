@@ -55,6 +55,53 @@ Functions are important because they help reduce repeated code, improve readabil
 
 ---
 
+## Day 03 — File Write with open() and write()
+
+### Topics Covered
+
+- Opening files with `open()`
+- Writing text files with `write()`
+- Using `with open()` for safe file handling
+- Writing simple messages to text files
+- Writing multiple lines with newline characters `\n`
+- Using write mode `"w"`
+- Using append mode `"a"`
+- Using read mode `"r"` to check saved file content
+- Creating folders with `os.makedirs()`
+- Using `exist_ok=True` to avoid folder creation errors
+- Writing variables, lists, calculation results, and formatted messages to text files
+- Combining functions with file writing
+- Saving simple model result messages to a text file
+
+### Practice File
+
+| File | Description |
+|---|---|
+| [Day_03_File_Write_Open.ipynb](./Day_03_File_Write_Open.ipynb) | Practice notebook for saving Python output into text files using `open()`, `write()`, and `with open()` |
+
+### Generated Files
+
+| Folder | Description |
+|---|---|
+| [assets/Day03/](../assets/Day03/) | Contains text files generated from Day 03 file writing practice |
+
+### Generated Text Files
+
+| File | Description |
+|---|---|
+| `Day_03_first_output.txt` | Basic file writing and append mode practice |
+| `day03_output_message.txt` | Simple message writing practice |
+| `day03_multiple_lines.txt` | Multiple-line writing practice |
+| `day03_profile.txt` | Variable value writing practice |
+| `day03_skills.txt` | List item writing practice |
+| `day03_number_summary.txt` | Number summary writing practice |
+| `day03_even_odd_results.txt` | Even/odd result writing practice |
+| `day03_learning_log.txt` | Append mode learning log practice |
+| `day03_summary_message.txt` | Function-generated summary message practice |
+| `day03_model_results.txt` | Model result message writing practice |
+
+---
+
 ## Weekly Summary
 
 This week focuses on Python functions and file handling.
@@ -77,7 +124,16 @@ So far, I practiced how to:
 - Create multiple functions for separate responsibilities
 - Call one function from another function
 - Combine small functions to build a simple function-based program
+- Open text files using `open()`
+- Write text files using `write()`
+- Use `with open()` to safely handle files
+- Use write mode `"w"` to create or overwrite text files
+- Use append mode `"a"` to add content to existing files
+- Use read mode `"r"` to check saved file content
+- Create folders using `os.makedirs()`
+- Save variables, lists, calculation results, function output, and formatted messages into `.txt` files
+- Organize generated text files inside the `assets/Day03` folder
 
 These concepts are important foundations for writing clean, reusable, and organized Python code.
 
-In future lessons, these function skills will be combined with file handling to save program output into text files.
+They also help Python programs save results, logs, summaries, reports, and processed output into files for later use.

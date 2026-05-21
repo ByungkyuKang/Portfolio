@@ -30,6 +30,7 @@ Portfolio/
 |   ├── Week_03_PythoWeek_03_Functions_and_Files
 |   |   ├── Day_01_Functions_Input_Output.ipynb
 |   |   ├── Day_02_Return_and_Multiple_Functions
+|   |   ├── Day_03_File_Write_Open
 |
 ├── Machine_Learning_Projects/
 │   └── Titanic-Survival-Prediction/

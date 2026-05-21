@@ -1,0 +1,3 @@
+Day: Day 03
+Topic: File Write with open() and write()
+Status: Completed

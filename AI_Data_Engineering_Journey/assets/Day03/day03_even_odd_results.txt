@@ -1,0 +1,6 @@
+3 is odd.
+8 is even.
+15 is odd.
+22 is even.
+31 is odd.
+40 is even.
