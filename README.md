@@ -33,6 +33,8 @@ Portfolio/
 |   |   ├── Day_02_Return_and_Multiple_Functions
 |   |   ├── Day_03_File_Write_Open
 |   |   ├── Day_04_File_Read_Open
+|   |   └── Weekend_Memo_Save_Program
+|   ├──
 |
 ├── Machine_Learning_Projects/
 │   └── Titanic-Survival-Prediction/
