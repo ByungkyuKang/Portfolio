@@ -19,6 +19,7 @@ Portfolio/
 │       └── Byungkyu Kang - Python.png
 │
 ├── AI_Data_Engineering_Journey/
+|   ├── assets
 |   ├── Week_01_Basic_Settings/
 |   |   └── jupyter_basic.ipynb
 |   ├── Week_02_Python_Basics
@@ -31,6 +32,7 @@ Portfolio/
 |   |   ├── Day_01_Functions_Input_Output.ipynb
 |   |   ├── Day_02_Return_and_Multiple_Functions
 |   |   ├── Day_03_File_Write_Open
+|   |   ├── Day_04_File_Read_Open
 |
 ├── Machine_Learning_Projects/
 │   └── Titanic-Survival-Prediction/

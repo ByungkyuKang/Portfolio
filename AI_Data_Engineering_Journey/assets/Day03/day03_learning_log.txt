@@ -1,3 +1,6 @@
 Day 03 started.
 Practiced open() and write().
 Day 03 completed.
+Day 03 started.
+Practiced open() and write().
+Day 03 completed.

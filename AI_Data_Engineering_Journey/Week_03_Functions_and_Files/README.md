@@ -83,7 +83,7 @@ Functions are important because they help reduce repeated code, improve readabil
 
 | Folder | Description |
 |---|---|
-| [assets/Day03/](../assets/Day03/) | Contains text files generated from Day 03 file writing practice |
+| [../assets/Day03/](../assets/Day03/) | Contains text files generated from Day 03 file writing practice |
 
 ### Generated Text Files
 
@@ -99,6 +99,37 @@ Functions are important because they help reduce repeated code, improve readabil
 | `day03_learning_log.txt` | Append mode learning log practice |
 | `day03_summary_message.txt` | Function-generated summary message practice |
 | `day03_model_results.txt` | Model result message writing practice |
+
+---
+
+## Day 04 — File Read with open()
+
+### Topics Covered
+
+- Opening files in read mode `"r"`
+- Reading text files with `read()`
+- Reading one line at a time with `readline()`
+- Reading all lines into a list with `readlines()`
+- Reading files line by line with a `for` loop
+- Using `with open()` for safe file handling
+- Using `encoding="utf-8"`
+- Checking file paths with `os.getcwd()` and `os.listdir()`
+- Checking whether a file exists with `os.path.exists()`
+- Cleaning lines with `strip()`
+- Counting lines in a file
+- Converting text values into numbers after reading
+
+### Practice File
+
+| File | Description |
+|---|---|
+| [Day_04_File_Read_Open.ipynb](./Day_04_File_Read_Open.ipynb) | Practice notebook for reading text files using `open()`, `read()`, `readline()`, `readlines()`, and line-by-line file processing |
+
+### Related Files
+
+| Folder | Description |
+|---|---|
+| [../assets/Day03/](../assets/Day03/) | Contains text files generated from Day 03 file writing practice and used for Day 04 file reading practice |
 
 ---
 
@@ -129,11 +160,15 @@ So far, I practiced how to:
 - Use `with open()` to safely handle files
 - Use write mode `"w"` to create or overwrite text files
 - Use append mode `"a"` to add content to existing files
-- Use read mode `"r"` to check saved file content
-- Create folders using `os.makedirs()`
-- Save variables, lists, calculation results, function output, and formatted messages into `.txt` files
-- Organize generated text files inside the `assets/Day03` folder
+- Use read mode `"r"` to read saved text files
+- Read entire files using `read()`
+- Read one line at a time using `readline()`
+- Read all lines into a list using `readlines()`
+- Read files line by line using a `for` loop
+- Check file paths and file existence before reading
+- Clean file content using `strip()`
+- Convert text values into numeric values after reading files
 
 These concepts are important foundations for writing clean, reusable, and organized Python code.
 
-They also help Python programs save results, logs, summaries, reports, and processed output into files for later use.
+They also help Python programs save results, logs, summaries, reports, and processed output into files and read them back for further processing.
