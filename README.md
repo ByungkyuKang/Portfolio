@@ -38,6 +38,7 @@ Portfolio/
 |   |   └── Mini_Project_01_Multiplication_Table_TXT_Saver
 |   ├── Week_05_Pandas_Basics
 |   |   ├── Day_01_Pandas_Installation_DataFrame_Creation
+|   |   ├── Day_02_Read_CSV_Files
 |   |   ├── 
 |
 ├── Machine_Learning_Projects/
