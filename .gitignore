@@ -4,3 +4,6 @@ venv/
 ENV/
 .ipynb_checkpoints/
 **/.ipynb_checkpoints/
+Personal_Projects/Tip_Calculator/build/
+__pycache__/
+*.pyc
