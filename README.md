@@ -34,7 +34,11 @@ Portfolio/
 |   |   ├── Day_03_File_Write_Open
 |   |   ├── Day_04_File_Read_Open
 |   |   └── Weekend_Memo_Save_Program
-|   ├──
+|   ├── Week_04_Mini_Project_Multiplication_Table_Saver
+|   |   └── Mini_Project_01_Multiplication_Table_TXT_Saver
+|   ├── Week_05_Pandas_Basics
+|   |   ├── Day_01_Pandas_Installation_DataFrame_Creation
+|   |   ├── 
 |
 ├── Machine_Learning_Projects/
 │   └── Titanic-Survival-Prediction/
