@@ -20,6 +20,17 @@ Portfolio/
 │
 ├── AI_Data_Engineering_Journey/
 |   ├── assets
+|   |   ├── Week03
+|   |   |   ├── Day03
+|   |   |   ├── Day04
+|   |   |   └── Weekend
+|   |   ├── Week04
+|   |   |   └── mini_project
+|   |   ├── Week05
+|   |   |   ├── Day02
+|   |   |   |   ├── Input
+|   |   |   |   └── Onput
+|   |   |   ├── Day03
 |   ├── Week_01_Basic_Settings/
 |   |   └── jupyter_basic.ipynb
 |   ├── Week_02_Python_Basics
