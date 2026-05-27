@@ -31,7 +31,10 @@ Portfolio/
 |   |   |   |   ├── Input
 |   |   |   |   └── Onput
 |   |   |   ├── Day03
+|   |   |   |   └── Input
+|   |   |   ├── Day04
 |   |   |   |   ├── Input
+|   |   |   |   └── Onput
 |   ├── Week_01_Basic_Settings/
 |   |   └── jupyter_basic.ipynb
 |   ├── Week_02_Python_Basics
@@ -52,6 +55,7 @@ Portfolio/
 |   |   ├── Day_01_Pandas_Installation_DataFrame_Creation.ipynb
 |   |   ├── Day_02_Read_CSV_Files.ipynb
 |   |   ├── Day_03_Select_Columns.ipynb
+|   |   ├── Day_04_Row_Filtering.ipynb
 |
 ├── Machine_Learning_Projects/
 │   └── Titanic-Survival-Prediction/

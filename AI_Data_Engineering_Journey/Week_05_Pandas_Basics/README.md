@@ -110,6 +110,37 @@ The practice includes:
 
 ---
 
+## Day 04 — Row Filtering in pandas
+
+### Topics Covered
+
+- Creating a sample CSV file for row filtering practice
+- Reading CSV files into pandas DataFrames
+- Filtering rows with numeric conditions
+- Filtering rows with string conditions
+- Filtering rows with boolean columns
+- Creating boolean conditions from DataFrame columns
+- Filtering rows with multiple conditions using `&`
+- Filtering rows with OR conditions using `|`
+- Filtering rows with `isin()`
+- Filtering rows with `between()`
+- Filtering rows and selecting columns together using `.loc[]`
+- Understanding common filtering mistakes such as using `and` / `or` instead of `&` / `|`
+
+### Practice File
+
+| File | Description |
+|---|---|
+| [Day_04_Row_Filtering.ipynb](./Day_04_Row_Filtering.ipynb) | Practice notebook for filtering rows in pandas DataFrames using conditions, multiple conditions, `isin()`, `between()`, and `.loc[]` |
+
+### Related Input Files
+
+| File | Description |
+|---|---|
+| [students.csv](../assets/Week05/Day04/Input/students.csv) | Student dataset created and used for row filtering practice |
+
+---
+
 ## Weekly Summary
 
 This week focuses on learning pandas basics for data analysis, machine learning, and data engineering.
@@ -137,5 +168,10 @@ So far, I practiced how to:
 - Store selected columns in variables
 - Calculate simple statistics from selected numeric columns
 - Understand that incorrect column names can cause a `KeyError`
+- Filter rows using numeric, string, and boolean conditions
+- Combine multiple filtering conditions using `&` and `|`
+- Use `isin()` to filter rows by multiple possible values
+- Use `between()` to filter rows within a numeric range
+- Use `.loc[]` to filter rows and select columns at the same time
 
 These concepts are important foundations for working with structured data in future data analysis, machine learning, and data engineering projects.
