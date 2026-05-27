@@ -31,6 +31,7 @@ Portfolio/
 |   |   |   |   ├── Input
 |   |   |   |   └── Onput
 |   |   |   ├── Day03
+|   |   |   |   ├── Input
 |   ├── Week_01_Basic_Settings/
 |   |   └── jupyter_basic.ipynb
 |   ├── Week_02_Python_Basics
@@ -41,16 +42,16 @@ Portfolio/
 |   |   └── Day_05_Number_Sum_Even_Odd_Programs.ipynb
 |   ├── Week_03_PythoWeek_03_Functions_and_Files
 |   |   ├── Day_01_Functions_Input_Output.ipynb
-|   |   ├── Day_02_Return_and_Multiple_Functions
-|   |   ├── Day_03_File_Write_Open
-|   |   ├── Day_04_File_Read_Open
-|   |   └── Weekend_Memo_Save_Program
+|   |   ├── Day_02_Return_and_Multiple_Functions.ipynb
+|   |   ├── Day_03_File_Write_Open.ipynb
+|   |   ├── Day_04_File_Read_Open.ipynb
+|   |   └── Weekend_Memo_Save_Program.ipynb
 |   ├── Week_04_Mini_Project_Multiplication_Table_Saver
-|   |   └── Mini_Project_01_Multiplication_Table_TXT_Saver
+|   |   └── Mini_Project_01_Multiplication_Table_TXT_Saver.ipynb
 |   ├── Week_05_Pandas_Basics
-|   |   ├── Day_01_Pandas_Installation_DataFrame_Creation
-|   |   ├── Day_02_Read_CSV_Files
-|   |   ├── 
+|   |   ├── Day_01_Pandas_Installation_DataFrame_Creation.ipynb
+|   |   ├── Day_02_Read_CSV_Files.ipynb
+|   |   ├── Day_03_Select_Columns.ipynb
 |
 ├── Machine_Learning_Projects/
 │   └── Titanic-Survival-Prediction/

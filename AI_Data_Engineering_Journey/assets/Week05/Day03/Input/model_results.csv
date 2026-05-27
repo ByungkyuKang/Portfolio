@@ -1,0 +1,4 @@
+,Model,Accuracy,Status
+0,Logistic Regression,0.8234,Good
+1,Decision Tree,0.7542,Needs Improvement
+2,Random Forest,0.8615,Good
