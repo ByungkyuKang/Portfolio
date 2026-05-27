@@ -139,6 +139,12 @@ The practice includes:
 |---|---|
 | [students.csv](../assets/Week05/Day04/Input/students.csv) | Student dataset created and used for row filtering practice |
 
+### Related Output Files
+
+| File | Description |
+|---|---|
+| [students.csv](../assets/Week05/Day04/Output/students.csv) | Student dataset created and used for row filtering practice |
+
 ---
 
 ## Weekly Summary
