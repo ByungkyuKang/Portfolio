@@ -35,6 +35,9 @@ Portfolio/
 |   |   |   ├── Day04
 |   |   |   |   ├── Input
 |   |   |   |   └── Onput
+|   |   |   ├── Weekend
+|   |   |   |   ├── Input
+|   |   |   |   └── Onput
 |   ├── Week_01_Basic_Settings/
 |   |   └── jupyter_basic.ipynb
 |   ├── Week_02_Python_Basics
@@ -56,6 +59,8 @@ Portfolio/
 |   |   ├── Day_02_Read_CSV_Files.ipynb
 |   |   ├── Day_03_Select_Columns.ipynb
 |   |   ├── Day_04_Row_Filtering.ipynb
+|   |   └── Weekend_Simple_CSV_Analysis.ipynb
+|   ├── 
 |
 ├── Machine_Learning_Projects/
 │   └── Titanic-Survival-Prediction/

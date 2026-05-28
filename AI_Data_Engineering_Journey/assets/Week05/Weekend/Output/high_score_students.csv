@@ -1,0 +1,5 @@
+Name,Age,Score,Department,Passed
+Alice,25,88,Data,True
+Bob,30,92,Engineering,True
+David,28,85,Cloud,True
+Frank,40,95,Security,True

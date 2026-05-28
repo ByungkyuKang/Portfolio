@@ -147,6 +147,54 @@ The practice includes:
 
 ---
 
+## Weekend — Simple CSV Analysis
+
+### Topics Covered
+
+- Creating a simple CSV analysis workflow
+- Creating sample student data with pandas
+- Saving a DataFrame as a CSV file using `to_csv()`
+- Reading a CSV file using `pd.read_csv()`
+- Inspecting a DataFrame with `head()`, `shape`, `columns`, and `dtypes`
+- Selecting important columns from a DataFrame
+- Filtering rows based on conditions
+- Calculating simple statistics from numeric and boolean columns
+- Saving an analysis summary as a `.txt` file
+- Saving filtered DataFrames as `.csv` files
+- Organizing input and output files inside the `assets/Week05/Weekend` folder
+
+### Practice File
+
+| File | Description |
+|---|---|
+| [Weekend_Simple_CSV_Analysis.ipynb](./Weekend_Simple_CSV_Analysis.ipynb) | Weekend practice notebook for performing a simple CSV analysis using pandas and saving the results |
+
+### Input File
+
+| File | Description |
+|---|---|
+| [students.csv](../assets/Week05/Weekend/Input/students.csv) | Sample student dataset used for simple CSV analysis practice |
+
+### Output Files
+
+| File | Description |
+|---|---|
+| [analysis_summary.txt](../assets/Week05/Weekend/Output/analysis_summary.txt) | Text file containing the summary results of the CSV analysis |
+| [high_score_students.csv](../assets/Week05/Weekend/Output/high_score_students.csv) | CSV file containing students with high scores |
+| [passed_students.csv](../assets/Week05/Weekend/Output/passed_students.csv) | CSV file containing students who passed |
+
+### Practice Summary
+
+In this weekend practice, I created a small end-to-end CSV analysis workflow using pandas.
+
+I created a sample student dataset, saved it as a CSV file, loaded it back into a DataFrame, inspected the data structure, selected important columns, filtered rows based on conditions, and calculated simple summary statistics.
+
+I also saved the analysis results into a `.txt` file and saved filtered DataFrames into separate `.csv` files.
+
+This practice helped me combine the pandas basics from Week 05 into a simple data analysis workflow.
+
+---
+
 ## Weekly Summary
 
 This week focuses on learning pandas basics for data analysis, machine learning, and data engineering.
@@ -179,5 +227,9 @@ So far, I practiced how to:
 - Use `isin()` to filter rows by multiple possible values
 - Use `between()` to filter rows within a numeric range
 - Use `.loc[]` to filter rows and select columns at the same time
+- Build a simple CSV analysis workflow
+- Save analysis results as `.txt` and `.csv` files
 
 These concepts are important foundations for working with structured data in future data analysis, machine learning, and data engineering projects.
+
+This week helped me understand how to create, read, inspect, select, filter, analyze, and save tabular data using pandas.

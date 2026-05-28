@@ -1,0 +1,8 @@
+Simple CSV Analysis Summary
+===========================
+Total students: 6
+Average score: 84.33
+Max score: 95
+Min score: 67
+Passed count: 4
+Passed rate: 66.67%
