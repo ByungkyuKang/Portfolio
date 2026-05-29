@@ -1,0 +1,9 @@
+Name,Department,Experience,Score,Status,Remote,Company,Score_Percentage,Experience_Months,High_Performer,Score_Level,Bonus_Eligible,Employee_Label
+Alice,Engineering,5,88,Active,True,ABC Tech,0.88,60,True,Good,True,Alice - Engineering
+Bob,Data,3,92,Active,True,ABC Tech,0.92,36,True,Excellent,True,Bob - Data
+Charlie,Engineering,7,79,Inactive,False,ABC Tech,0.79,84,False,Average,False,Charlie - Engineering
+David,Cloud,4,85,Active,True,ABC Tech,0.85,48,True,Good,True,David - Cloud
+Eva,Data,2,67,Inactive,False,ABC Tech,0.67,24,False,Needs Improvement,False,Eva - Data
+Frank,Security,8,95,Active,False,ABC Tech,0.95,96,True,Excellent,True,Frank - Security
+Grace,Cloud,6,90,Active,True,ABC Tech,0.9,72,True,Excellent,True,Grace - Cloud
+Henry,Engineering,1,72,Inactive,True,ABC Tech,0.72,12,False,Average,False,Henry - Engineering

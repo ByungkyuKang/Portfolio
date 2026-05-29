@@ -1,0 +1,9 @@
+Name,Department,Experience,Score,Status,Remote
+Alice,Engineering,5,88,Active,True
+Bob,Data,3,92,Active,True
+Charlie,Engineering,7,79,Inactive,False
+David,Cloud,4,85,Active,True
+Eva,Data,2,67,Inactive,False
+Frank,Security,8,95,Active,False
+Grace,Cloud,6,90,Active,True
+Henry,Engineering,1,72,Inactive,True

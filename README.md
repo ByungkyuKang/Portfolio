@@ -17,50 +17,6 @@ Portfolio/
 │       ├── Byungkyu Kang - Intro to Programming.png
 │       ├── Byungkyu Kang - Pandas.png
 │       └── Byungkyu Kang - Python.png
-│
-├── AI_Data_Engineering_Journey/
-|   ├── assets
-|   |   ├── Week03
-|   |   |   ├── Day03
-|   |   |   ├── Day04
-|   |   |   └── Weekend
-|   |   ├── Week04
-|   |   |   └── mini_project
-|   |   ├── Week05
-|   |   |   ├── Day02
-|   |   |   |   ├── Input
-|   |   |   |   └── Onput
-|   |   |   ├── Day03
-|   |   |   |   └── Input
-|   |   |   ├── Day04
-|   |   |   |   ├── Input
-|   |   |   |   └── Onput
-|   |   |   ├── Weekend
-|   |   |   |   ├── Input
-|   |   |   |   └── Onput
-|   ├── Week_01_Basic_Settings/
-|   |   └── jupyter_basic.ipynb
-|   ├── Week_02_Python_Basics
-|   |   ├── Day_01_Variables_Numbers_Strings_Print.ipynb
-|   |   ├── Day_02_Lists_Dictionaries_Indexing.ipynb
-|   |   ├── Day_03_If_Statements_Comparison_Operators.ipynb
-|   |   ├── Day_04_For_Loops_Range.ipynb
-|   |   └── Day_05_Number_Sum_Even_Odd_Programs.ipynb
-|   ├── Week_03_PythoWeek_03_Functions_and_Files
-|   |   ├── Day_01_Functions_Input_Output.ipynb
-|   |   ├── Day_02_Return_and_Multiple_Functions.ipynb
-|   |   ├── Day_03_File_Write_Open.ipynb
-|   |   ├── Day_04_File_Read_Open.ipynb
-|   |   └── Weekend_Memo_Save_Program.ipynb
-|   ├── Week_04_Mini_Project_Multiplication_Table_Saver
-|   |   └── Mini_Project_01_Multiplication_Table_TXT_Saver.ipynb
-|   ├── Week_05_Pandas_Basics
-|   |   ├── Day_01_Pandas_Installation_DataFrame_Creation.ipynb
-|   |   ├── Day_02_Read_CSV_Files.ipynb
-|   |   ├── Day_03_Select_Columns.ipynb
-|   |   ├── Day_04_Row_Filtering.ipynb
-|   |   └── Weekend_Simple_CSV_Analysis.ipynb
-|   ├── 
 |
 ├── Machine_Learning_Projects/
 │   └── Titanic-Survival-Prediction/
@@ -77,20 +33,76 @@ Portfolio/
 │               ├── Day 7: Baseline Models - Logistic Regression and Decision Tree
 │               └── Day 8: Cross-validation and Evaluation Metrics
 │
-└── Personal_Projects/
-    ├── Unique_Img_Process_with_Python/
-    │   ├── README.md
-    │   ├── image_process_main.py
-    │   ├── image_comp.py
-    │   ├── image_directory.py
-    │   ├── image_name_change.py
-    │   └── img_processing.py
-    ├── Information_Scraper/
-    │   └── main.py
-    └── Tip_Calculator/
-        ├── Dockerfile
-        ├── requirements.txt
-        └── tip_calc_main.py</pre>
+├── Personal_Projects/
+│   ├── Unique_Img_Process_with_Python/
+│   │   ├── README.md
+│   │   ├── image_process_main.py
+│   │   ├── image_comp.py
+│   │   ├── image_directory.py
+│   │   ├── image_name_change.py
+│   │   └── img_processing.py
+│   ├── Information_Scraper/
+│   │   └── main.py
+│   └── Tip_Calculator/
+│       ├── Dockerfile
+│       ├── requirements.txt
+│       └── tip_calc_main.py
+│
+└── AI_Data_Engineering_Journey/
+    ├── assets
+    |   ├── Week03
+    |   |   ├── Day03
+    |   |   ├── Day04
+    |   |   └── Weekend
+    |   ├── Week04
+    |   |   └── mini_project
+    |   ├── Week05
+    |   |   ├── Day02
+    |   |   |   ├── Input
+    |   |   |   └── Onput
+    |   |   ├── Day03
+    |   |   |   └── Input
+    |   |   ├── Day04
+    |   |   |   ├── Input
+    |   |   |   └── Onput
+    |   |   └── Weekend
+    |   |       ├── Input
+    |   |       └── Onput
+    |   ├── Week06
+    |   |   ├── Day01
+    |   |   |   ├── Input
+    |   |   |   └── Onput
+    |   |   ├── Day02
+    |   |   |   └── Input
+    |   |   ├── Day03
+    |   |   |   ├── Input
+    |   |   |   └── Onput
+    ├── Week_01_Basic_Settings/
+    |   └── jupyter_basic.ipynb
+    ├── Week_02_Python_Basics
+    |   ├── Day_01_Variables_Numbers_Strings_Print.ipynb
+    |   ├── Day_02_Lists_Dictionaries_Indexing.ipynb
+    |   ├── Day_03_If_Statements_Comparison_Operators.ipynb
+    |   ├── Day_04_For_Loops_Range.ipynb
+    |   └── Day_05_Number_Sum_Even_Odd_Programs.ipynb
+    ├── Week_03_PythoWeek_03_Functions_and_Files
+    |   ├── Day_01_Functions_Input_Output.ipynb
+    |   ├── Day_02_Return_and_Multiple_Functions.ipynb
+    |   ├── Day_03_File_Write_Open.ipynb
+    |   ├── Day_04_File_Read_Open.ipynb
+    |   └── Weekend_Memo_Save_Program.ipynb
+    ├── Week_04_Mini_Project_Multiplication_Table_Saver
+    |   └── Mini_Project_01_Multiplication_Table_TXT_Saver.ipynb
+    ├── Week_05_Pandas_Basics
+    |   ├── Day_01_Pandas_Installation_DataFrame_Creation.ipynb
+    |   ├── Day_02_Read_CSV_Files.ipynb
+    |   ├── Day_03_Select_Columns.ipynb
+    |   ├── Day_04_Row_Filtering.ipynb
+    |   └── Weekend_Simple_CSV_Analysis.ipynb
+    ├── Week_06_Data_Cleaning_and_Sorting
+    |   ├── Day_01_Sort_Values.ipynb
+    |   ├── Day_02_Conditional_Filtering.ipynb
+    |   ├── Day_03_Add_New_Columns.ipynb</pre>
 
 ---
 

@@ -85,6 +85,65 @@ The goal is to organize DataFrames more effectively by sorting values, filtering
 
 ---
 
+---
+
+## Day 03 — Add New Columns in pandas
+
+### Topics Covered
+
+- Understanding how to add new columns to a pandas DataFrame
+- Creating a sample employee performance dataset
+- Adding a column with a fixed value
+- Creating calculated columns from existing numeric columns
+- Creating a percentage-based column from a score column
+- Converting years of experience into months
+- Creating boolean columns based on conditions
+- Filtering rows using a newly created boolean column
+- Creating conditional columns using `.loc[]`
+- Creating score level categories based on numeric conditions
+- Combining multiple conditions with `&`
+- Creating a bonus eligibility column
+- Creating text-based label columns by combining existing string columns
+- Using `.copy()` before adding columns to filtered DataFrames
+- Saving DataFrames with newly added columns as CSV files
+
+### Practice File
+
+| File | Description |
+|---|---|
+| [Day_03_Add_New_Columns.ipynb](./Day_03_Add_New_Columns.ipynb) | Practice notebook for adding fixed, calculated, boolean, conditional, and text-based columns to pandas DataFrames |
+
+### Input File
+
+| File | Description |
+|---|---|
+| [employee_performance.csv](../assets/Week06/Day03/Input/employee_performance.csv) | Sample employee performance dataset used for adding new columns practice |
+
+### Output Files
+
+| File | Description |
+|---|---|
+| [employee_with_new_columns.csv](../assets/Week06/Day03/Output/employee_with_new_columns.csv) | CSV file containing the full employee dataset with newly added columns |
+| [high_score_bonus_employees.csv](../assets/Week06/Day03/Output/high_score_bonus_employees.csv) | CSV file containing employees who are eligible for a bonus based on score and active status |
+
+### Practice Summary
+
+In this notebook, I practiced adding new columns to a pandas DataFrame.
+
+The practice includes:
+
+- Adding a fixed value column
+- Creating calculated columns
+- Creating a boolean column
+- Creating a conditional score level column
+- Creating a bonus eligibility column using multiple conditions
+- Creating a text label column
+- Adding a new column after filtering with `.copy()`
+
+This practice helped me understand how pandas can be used to transform and enrich tabular data.
+
+---
+
 ## Weekly Summary
 
 This week focuses on basic data cleaning, filtering, and sorting using pandas.
@@ -107,5 +166,13 @@ So far, I practiced how to:
 - Use `between()` to filter rows within a numeric range
 - Use `.loc[]` to filter rows and select columns at the same time
 - Save filtered results as CSV files
+- Add new columns with fixed values
+- Create calculated columns from existing numeric columns
+- Create boolean columns based on conditions
+- Create conditional columns using `.loc[]`
+- Create category-style columns such as score levels
+- Create text-based label columns by combining existing columns
+- Use `.copy()` before adding columns to filtered DataFrames
+- Save DataFrames with newly added columns as CSV files
 
-These concepts are important foundations for organizing, filtering, and preparing structured data for analysis, reporting, and machine learning workflows.
+These concepts are important foundations for organizing, filtering, transforming, and preparing structured data for analysis, reporting, and machine learning workflows.
