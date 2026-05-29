@@ -44,6 +44,47 @@ The goal is to organize DataFrames more effectively by sorting values, filtering
 
 ---
 
+## Day 02 — Conditional Filtering in pandas
+
+### Topics Covered
+
+- Understanding conditional filtering in pandas
+- Creating a sample employee performance dataset
+- Saving a DataFrame as a CSV file using `to_csv()`
+- Reading a CSV file using `pd.read_csv()`
+- Creating boolean conditions from DataFrame columns
+- Storing filtering conditions in variables
+- Filtering rows with numeric conditions
+- Filtering rows with string conditions
+- Filtering rows with boolean columns
+- Filtering rows with multiple conditions using `&`
+- Filtering rows with OR conditions using `|`
+- Filtering rows with `isin()`
+- Filtering rows with `between()`
+- Filtering rows and selecting columns together using `.loc[]`
+- Saving filtered DataFrames as CSV files
+
+### Practice File
+
+| File | Description |
+|---|---|
+| [Day_02_Conditional_Filtering.ipynb](./Day_02_Conditional_Filtering.ipynb) | Practice notebook for filtering pandas DataFrames using conditions, boolean columns, multiple conditions, `isin()`, `between()`, and `.loc[]` |
+
+### Input File
+
+| File | Description |
+|---|---|
+| [employee_performance.csv](../assets/Week06/Day02/Input/employee_performance.csv) | Sample employee performance dataset used for conditional filtering practice |
+
+### Output Files
+
+| File | Description |
+|---|---|
+| [high_performers.csv](../assets/Week06/Day02/Output/high_performers.csv) | CSV file containing employees with high performance scores |
+| [engineering_high_scores.csv](../assets/Week06/Day02/Output/engineering_high_scores.csv) | CSV file containing Engineering employees with high scores |
+
+---
+
 ## Weekly Summary
 
 This week focuses on basic data cleaning, filtering, and sorting using pandas.
@@ -57,5 +98,14 @@ So far, I practiced how to:
 - Sort by multiple columns
 - Reset the index after sorting
 - Save sorted results as CSV files
+- Create boolean conditions from DataFrame columns
+- Store filtering conditions in variables
+- Filter rows using numeric, string, and boolean conditions
+- Combine multiple filtering conditions using `&`
+- Use OR filtering conditions using `|`
+- Use `isin()` to filter rows by multiple possible values
+- Use `between()` to filter rows within a numeric range
+- Use `.loc[]` to filter rows and select columns at the same time
+- Save filtered results as CSV files
 
-These concepts are important foundations for organizing and preparing structured data for analysis, reporting, and machine learning workflows.
+These concepts are important foundations for organizing, filtering, and preparing structured data for analysis, reporting, and machine learning workflows.
