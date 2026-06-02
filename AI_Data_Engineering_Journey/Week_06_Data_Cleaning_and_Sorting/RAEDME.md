@@ -144,6 +144,69 @@ This practice helped me understand how pandas can be used to transform and enric
 
 ---
 
+## Day 04 — GroupBy in pandas
+
+### Topics Covered
+
+- Understanding what `groupby()` does
+- Creating a sample employee performance dataset
+- Saving a DataFrame as a CSV file using `to_csv()`
+- Reading a CSV file using `pd.read_csv()`
+- Grouping data by one column
+- Calculating average values by group with `mean()`
+- Converting groupby results into a DataFrame with `reset_index()`
+- Counting rows by group with `size()`
+- Calculating maximum and minimum values by group
+- Using `agg()` with a list to calculate multiple statistics
+- Using `agg()` with a dictionary to summarize multiple columns
+- Using named aggregation for cleaner summary column names
+- Sorting grouped results with `sort_values()`
+- Grouping data by multiple columns
+- Grouping data by a boolean column
+- Saving grouped summary results as CSV files
+- Saving a simple groupby summary as a `.txt` file
+
+### Practice File
+
+| File | Description |
+|---|---|
+| [Day_04_GroupBy.ipynb](./Day_04_GroupBy.ipynb) | Practice notebook for grouping pandas DataFrames and calculating grouped summary statistics |
+
+### Input File
+
+| File | Description |
+|---|---|
+| [employee_performance.csv](../assets/Week06/Day04/Input/employee_performance.csv) | Sample employee performance dataset used for groupby practice |
+
+### Output Files
+
+| File | Description |
+|---|---|
+| [department_score_summary.csv](../assets/Week06/Day04/Output/department_score_summary.csv) | CSV file containing grouped score summary statistics by department |
+| [groupby_summary.txt](../assets/Week06/Day04/Output/groupby_summary.txt) | Text file containing a simple groupby summary |
+| [department_score_summary_practice.csv](../assets/Week06/Day04/Output/department_score_summary_practice.csv) | Practice CSV file containing sorted department score summary results |
+| [department_status_summary_practice.csv](../assets/Week06/Day04/Output/department_status_summary_practice.csv) | Practice CSV file containing employee counts grouped by department and status |
+
+### Practice Summary
+
+In this notebook, I practiced using `groupby()` to summarize structured data.
+
+The practice includes:
+
+- Calculating average scores by department
+- Counting employees by department
+- Calculating maximum and minimum scores by department
+- Using `agg()` for multiple summary statistics
+- Using named aggregation for cleaner output columns
+- Sorting grouped summary results
+- Grouping data by multiple columns
+- Grouping data by a boolean column
+- Saving groupby results as CSV and text files
+
+This practice helped me understand how pandas can summarize and analyze grouped data efficiently.
+
+---
+
 ## Weekly Summary
 
 This week focuses on basic data cleaning, filtering, and sorting using pandas.
@@ -174,5 +237,14 @@ So far, I practiced how to:
 - Create text-based label columns by combining existing columns
 - Use `.copy()` before adding columns to filtered DataFrames
 - Save DataFrames with newly added columns as CSV files
+- Group data using `groupby()`
+- Calculate grouped summary statistics such as mean, max, min, and count
+- Count rows by group using `size()`
+- Use `agg()` to calculate multiple grouped statistics
+- Use named aggregation to create cleaner summary column names
+- Group data by multiple columns
+- Group data by boolean columns
+- Sort grouped summary results
+- Save grouped summary results as CSV and text files
 
-These concepts are important foundations for organizing, filtering, transforming, and preparing structured data for analysis, reporting, and machine learning workflows.
+These concepts are important foundations for organizing, filtering, transforming, summarizing, and preparing structured data for analysis, reporting, and machine learning workflows.

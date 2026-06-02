@@ -77,6 +77,9 @@ Portfolio/
     |   |   ├── Day03
     |   |   |   ├── Input
     |   |   |   └── Onput
+    |   |   ├── Day04
+    |   |   |   ├── Input
+    |   |   |   └── Onput
     ├── Week_01_Basic_Settings/
     |   └── jupyter_basic.ipynb
     ├── Week_02_Python_Basics
@@ -102,7 +105,8 @@ Portfolio/
     ├── Week_06_Data_Cleaning_and_Sorting
     |   ├── Day_01_Sort_Values.ipynb
     |   ├── Day_02_Conditional_Filtering.ipynb
-    |   ├── Day_03_Add_New_Columns.ipynb</pre>
+    |   ├── Day_03_Add_New_Columns.ipynb
+    |   ├── Day_04_GroupBy.ipynb</pre>
 
 ---
 

@@ -1,0 +1,7 @@
+Department,Status,Employee_Count
+Cloud,Active,2
+Data,Active,1
+Data,Inactive,1
+Engineering,Active,1
+Engineering,Inactive,2
+Security,Active,1

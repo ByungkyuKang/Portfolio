@@ -1,0 +1,8 @@
+GroupBy Summary
+================
+Total employees: 8
+Number of departments: 4
+Overall average score: 83.50
+
+Top department by average score:
+Security: 95.00
