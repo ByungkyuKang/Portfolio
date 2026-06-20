@@ -59,27 +59,31 @@ Portfolio/
     |   ├── Week05
     |   |   ├── Day02
     |   |   |   ├── Input
-    |   |   |   └── Onput
+    |   |   |   └── Output
     |   |   ├── Day03
     |   |   |   └── Input
     |   |   ├── Day04
     |   |   |   ├── Input
-    |   |   |   └── Onput
+    |   |   |   └── Output
     |   |   └── Weekend
     |   |       ├── Input
-    |   |       └── Onput
+    |   |       └── Output
     |   ├── Week06
     |   |   ├── Day01
     |   |   |   ├── Input
-    |   |   |   └── Onput
+    |   |   |   └── Output
     |   |   ├── Day02
     |   |   |   └── Input
     |   |   ├── Day03
     |   |   |   ├── Input
-    |   |   |   └── Onput
-    |   |   ├── Day04
+    |   |   |   └── Output
+    |   |   └── Day04
+    |   |       ├── Input
+    |   |       └── Output
+    |   ├── Week07
+    |   |   ├── Day01
     |   |   |   ├── Input
-    |   |   |   └── Onput
+    |   |   |   └── Output
     ├── Week_01_Basic_Settings/
     |   └── jupyter_basic.ipynb
     ├── Week_02_Python_Basics
@@ -106,7 +110,9 @@ Portfolio/
     |   ├── Day_01_Sort_Values.ipynb
     |   ├── Day_02_Conditional_Filtering.ipynb
     |   ├── Day_03_Add_New_Columns.ipynb
-    |   ├── Day_04_GroupBy.ipynb</pre>
+    |   └── Day_04_GroupBy.ipynb
+    ├── Week_07_Missing_Value_Handling
+    |   ├── Day_01_Sort_Values.ipynb</pre>
 
 ---
 
