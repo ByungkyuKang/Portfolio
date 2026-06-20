@@ -1,0 +1,6 @@
+Employee_ID,Name,Department,Experience,Score,Status,Remote
+103,Charlie,,7.0,,Inactive,False
+104,David,Cloud,,85.0,Active,True
+105,Eva,Data,2.0,67.0,,
+107,Grace,,6.0,90.0,Active,True
+108,Henry,Engineering,1.0,,Inactive,True

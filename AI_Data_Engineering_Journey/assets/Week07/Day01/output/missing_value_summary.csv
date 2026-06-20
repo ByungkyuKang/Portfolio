@@ -1,0 +1,8 @@
+Column,Missing_Count,Missing_Percentage
+Employee_ID,0,0.0
+Name,0,0.0
+Department,2,25.0
+Experience,1,12.5
+Score,2,25.0
+Status,1,12.5
+Remote,1,12.5
