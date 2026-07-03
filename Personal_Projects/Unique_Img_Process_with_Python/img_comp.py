@@ -7,10 +7,6 @@ from multiprocessing import Pool, cpu_count
 
 
 def _file_md5(path, chunk_size=1024 * 1024):
-    """
-    파일 자체의 바이트 내용 md5 해시 계산
-    완전히 동일한 파일을 빠르게 찾기 위해 사용
-    """
     try:
         md5 = hashlib.md5()
 
@@ -27,20 +23,6 @@ def _file_md5(path, chunk_size=1024 * 1024):
 
 
 def _safe_image_info(path):
-    """
-    이미지 1장의 가벼운 메타 정보만 미리 계산
-
-    저장 정보:
-    - filename
-    - path
-    - size
-    - file_size
-    - phash
-    - md5
-
-    ORB descriptor는 여기서 계산하지 않는다.
-    필요할 때만 나중에 lazy하게 계산한다.
-    """
     try:
         file_size = os.path.getsize(path)
 
@@ -66,15 +48,6 @@ def _safe_image_info(path):
 
 
 def _compare_chunk(args):
-    """
-    multiprocessing worker 함수
-
-    비교 순서:
-    1. md5가 같으면 바로 같은 그룹
-    2. 해상도 / 파일 크기 차이가 너무 크면 스킵
-    3. pHash 거리 검사
-    4. 필요 시 ORB를 lazy 계산해서 최종 확인
-    """
     (
         index,
         valid_paths,
@@ -89,13 +62,9 @@ def _compare_chunk(args):
     info1 = meta[path1]
     hash1 = info1["phash"]
 
-    # 이 worker 안에서만 쓰는 ORB 캐시
     orb_cache = {}
 
     def get_orb_desc(path):
-        """
-        ORB descriptor를 필요할 때만 계산하고 캐시에 저장
-        """
         if path in orb_cache:
             return orb_cache[path]
 
@@ -119,12 +88,10 @@ def _compare_chunk(args):
         info2 = meta[path2]
         hash2 = info2["phash"]
 
-        # 1. 완전 동일 파일
         if info1["md5"] is not None and info1["md5"] == info2["md5"]:
             unions.append((path1, path2))
             continue
 
-        # 2. 너무 차이 나는 해상도면 제외
         w1, h1 = info1["size"]
         w2, h2 = info2["size"]
 
@@ -134,14 +101,12 @@ def _compare_chunk(args):
         if max(pixels1, pixels2) > min(pixels1, pixels2) * 4:
             continue
 
-        # 파일 크기도 너무 차이나면 제외
         fs1 = info1["file_size"]
         fs2 = info2["file_size"]
 
         if max(fs1, fs2) > min(fs1, fs2) * 6:
             continue
 
-        # 3. pHash distance
         distance = hash1 - hash2
 
         if distance == 0:
@@ -151,13 +116,11 @@ def _compare_chunk(args):
         if distance > hash_distance_threshold:
             continue
 
-        # 4. ORB 사용 여부에 따라 최종 판정
         if use_orb_for_near_hash:
             desc1 = get_orb_desc(path1)
             desc2 = get_orb_desc(path2)
 
             if desc1 is None or desc2 is None:
-                # ORB 불가 시 아주 가까운 hash만 허용
                 if distance <= max(1, hash_distance_threshold // 2):
                     unions.append((path1, path2))
                 continue
@@ -179,11 +142,6 @@ def _compare_chunk(args):
 
 
 class UnionFind:
-    """
-    Disjoint Set / Union-Find 자료구조
-    같은 그룹으로 묶여야 하는 이미지들을 효율적으로 관리
-    """
-
     def __init__(self, items):
         self.parent = {item: item for item in items}
         self.rank = {item: 0 for item in items}
@@ -211,17 +169,6 @@ class UnionFind:
 
 
 class ImageComparator:
-    """
-    Core class for finding duplicate image groups
-
-    Workflow:
-    1. Preload lightweight image data
-    2. Detect exact duplicates using MD5
-    3. Filter candidates using pHash
-    4. Use ORB for detailed comparison when needed
-    5. Use multiprocessing for parallel processing
-    """
-
     def __init__(
         self,
         img_list,
@@ -236,9 +183,6 @@ class ImageComparator:
         self.meta = {}
 
     def preload(self, progress_callback=None):
-        """
-        Load all image metadata only once.
-        """
         total = len(self.img_list)
 
         for idx, path in enumerate(self.img_list, start=1):
@@ -251,17 +195,6 @@ class ImageComparator:
                 progress_callback("Loading images...", idx, total)
 
     def group_duplicates(self, progress_callback=None):
-        """
-        This class compares images and groups similar ones together.
-
-        Returns:
-            tuple:
-                (
-                    duplicate_groups,
-                    singleton_groups,
-                    self.meta
-                )
-        """
         self.preload(progress_callback=progress_callback)
 
         valid_paths = list(self.meta.keys())
