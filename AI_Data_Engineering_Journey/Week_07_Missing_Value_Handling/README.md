@@ -78,6 +78,76 @@ This practice helped me understand how to inspect missing data before deciding w
 
 ---
 
+## Day 02 — Filling Missing Values with fillna()
+
+### Topics Covered
+
+- Understanding how to fill missing values in pandas
+- Understanding `fillna()`
+- Creating a sample employee dataset with missing values
+- Saving a DataFrame as a CSV file using `to_csv()`
+- Reading a CSV file using `pd.read_csv()`
+- Checking missing values before filling them
+- Filling missing categorical values with fixed values
+- Filling missing numeric values with the mean
+- Filling missing numeric values with the median
+- Filling missing categorical values with the mode
+- Understanding why `mode()[0]` is used
+- Filling missing boolean values with `False`
+- Handling boolean columns safely with nullable boolean dtype
+- Filling different columns with different values using a dictionary
+- Checking missing values again after using `fillna()`
+- Counting total missing values after filling
+- Creating a before-and-after missing value summary DataFrame
+- Understanding that `fillna()` does not permanently modify the original DataFrame unless the result is assigned back
+- Understanding why using one fill value for all columns can be dangerous
+- Applying `fillna()` concepts to a separate customer orders practice dataset
+- Creating a new column after filling missing values
+- Saving filled datasets and fillna summary results as CSV files
+
+### Practice File
+
+| File | Description |
+|---|---|
+| [Day_02_Fill_Missing_Values_Fillna.ipynb](./Day_02_Fill_Missing_Values_Fillna.ipynb) | Practice notebook for filling missing values in pandas using `fillna()` |
+
+### Input File
+
+| File | Description |
+|---|---|
+| [employee_data_with_missing_values.csv](../assets/Week07/Day02/Input/employee_data_with_missing_values.csv) | Sample employee dataset containing missing values for fillna practice |
+
+### Output Files
+
+| File | Description |
+|---|---|
+| [employee_data_filled.csv](../assets/Week07/Day02/Output/employee_data_filled.csv) | CSV file containing the employee dataset after missing values were filled |
+| [fillna_summary.csv](../assets/Week07/Day02/Output/fillna_summary.csv) | CSV file comparing missing value counts before and after using `fillna()` |
+| [customer_orders_filled.csv](../assets/Week07/Day02/Output/customer_orders_filled.csv) | Practice CSV file containing the cleaned customer orders dataset |
+| [customer_orders_fillna_summary.csv](../assets/Week07/Day02/Output/customer_orders_fillna_summary.csv) | Practice CSV file comparing missing value counts before and after filling the customer orders dataset |
+
+### Practice Summary
+
+In this notebook, I practiced filling missing values in pandas using `fillna()`.
+
+The practice includes:
+
+- Filling missing categorical values with fixed values such as `"Unknown"`
+- Filling numeric columns with calculated values such as mean and median
+- Filling categorical columns with the most frequent value using `mode()[0]`
+- Filling boolean columns with `False`
+- Handling boolean columns safely by converting them to nullable boolean dtype before filling
+- Filling multiple columns at once using a dictionary
+- Checking missing values before and after filling
+- Creating a before-and-after fillna summary DataFrame
+- Applying the same missing value filling concepts to a separate customer orders dataset
+- Creating a new column after filling missing values
+- Saving cleaned datasets and summary results as CSV files
+
+This practice helped me understand how to choose different missing value filling strategies depending on the meaning and data type of each column.
+
+---
+
 ## Weekly Summary
 
 This week focuses on missing value handling in pandas.
@@ -102,5 +172,21 @@ So far, I practiced how to:
 - Save missing value analysis results as CSV files
 - Understand why `== None` should not be used to check `NaN`
 - Understand that empty strings are not always treated as missing values
+- Fill missing values using `fillna()`
+- Fill missing categorical values with fixed values
+- Fill missing numeric values with the mean
+- Fill missing numeric values with the median
+- Fill missing categorical values with the mode using `mode()[0]`
+- Fill missing boolean values with `False`
+- Handle boolean columns safely with nullable boolean dtype
+- Fill different columns with different values using a dictionary
+- Check missing values again after using `fillna()`
+- Count total missing values after filling
+- Create a before-and-after missing value summary DataFrame
+- Understand that `fillna()` does not permanently modify the original DataFrame unless the result is assigned back
+- Understand why using one fill value for all columns can be dangerous
+- Apply `fillna()` concepts to a separate customer orders practice dataset
+- Create a new column after filling missing values
+- Save filled datasets and fillna summary results as CSV files
 
-These concepts are important foundations for data cleaning, data quality checks, analysis preparation, and machine learning workflows.
+These concepts are important foundations for data cleaning, data quality checks, analysis preparation, reporting, and machine learning workflows.

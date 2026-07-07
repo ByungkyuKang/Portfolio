@@ -84,6 +84,9 @@ Portfolio/
     |   |   ├── Day01
     |   |   |   ├── Input
     |   |   |   └── Output
+    |   |   ├── Day02
+    |   |   |   ├── Input
+    |   |   |   └── Output
     ├── Week_01_Basic_Settings/
     |   └── jupyter_basic.ipynb
     ├── Week_02_Python_Basics
@@ -112,7 +115,8 @@ Portfolio/
     |   ├── Day_03_Add_New_Columns.ipynb
     |   └── Day_04_GroupBy.ipynb
     ├── Week_07_Missing_Value_Handling
-    |   ├── Day_01_Sort_Values.ipynb</pre>
+    |   ├── Day_01_Sort_Values.ipynb
+    |   ├── Day_02_Fill_Missing_Values_Fillna.ipynb</pre>
 
 ---
 
