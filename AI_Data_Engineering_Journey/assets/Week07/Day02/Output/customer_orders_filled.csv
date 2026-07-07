@@ -1,0 +1,9 @@
+,Order_ID,Customer,Region,Order_Amount,Discount,Payment_Method,Delivered,Final_Amount
+0,1001,Alice,East,250.0,10.0,Credit Card,True,240.0
+1,1002,Bob,West,320.0,5.0,Credit Card,True,315.0
+2,1003,Charlie,Unknown,180.0,0.0,PayPal,False,180.0
+3,1004,David,South,320.0,15.0,Credit Card,False,305.0
+4,1005,Eva,East,320.0,0.0,Cash,True,320.0
+5,1006,Frank,Unknown,500.0,0.0,Credit Card,False,500.0
+6,1007,Grace,West,410.0,20.0,Credit Card,True,390.0
+7,1008,Henry,South,320.0,10.0,PayPal,False,310.0
