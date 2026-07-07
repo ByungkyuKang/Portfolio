@@ -49,74 +49,14 @@ Portfolio/
 │       └── tip_calc_main.py
 │
 └── AI_Data_Engineering_Journey/
-    ├── assets
-    |   ├── Week03
-    |   |   ├── Day03
-    |   |   ├── Day04
-    |   |   └── Weekend
-    |   ├── Week04
-    |   |   └── mini_project
-    |   ├── Week05
-    |   |   ├── Day02
-    |   |   |   ├── Input
-    |   |   |   └── Output
-    |   |   ├── Day03
-    |   |   |   └── Input
-    |   |   ├── Day04
-    |   |   |   ├── Input
-    |   |   |   └── Output
-    |   |   └── Weekend
-    |   |       ├── Input
-    |   |       └── Output
-    |   ├── Week06
-    |   |   ├── Day01
-    |   |   |   ├── Input
-    |   |   |   └── Output
-    |   |   ├── Day02
-    |   |   |   └── Input
-    |   |   ├── Day03
-    |   |   |   ├── Input
-    |   |   |   └── Output
-    |   |   └── Day04
-    |   |       ├── Input
-    |   |       └── Output
-    |   ├── Week07
-    |   |   ├── Day01
-    |   |   |   ├── Input
-    |   |   |   └── Output
-    |   |   ├── Day02
-    |   |   |   ├── Input
-    |   |   |   └── Output
-    ├── Week_01_Basic_Settings/
-    |   └── jupyter_basic.ipynb
-    ├── Week_02_Python_Basics
-    |   ├── Day_01_Variables_Numbers_Strings_Print.ipynb
-    |   ├── Day_02_Lists_Dictionaries_Indexing.ipynb
-    |   ├── Day_03_If_Statements_Comparison_Operators.ipynb
-    |   ├── Day_04_For_Loops_Range.ipynb
-    |   └── Day_05_Number_Sum_Even_Odd_Programs.ipynb
-    ├── Week_03_PythoWeek_03_Functions_and_Files
-    |   ├── Day_01_Functions_Input_Output.ipynb
-    |   ├── Day_02_Return_and_Multiple_Functions.ipynb
-    |   ├── Day_03_File_Write_Open.ipynb
-    |   ├── Day_04_File_Read_Open.ipynb
-    |   └── Weekend_Memo_Save_Program.ipynb
-    ├── Week_04_Mini_Project_Multiplication_Table_Saver
-    |   └── Mini_Project_01_Multiplication_Table_TXT_Saver.ipynb
-    ├── Week_05_Pandas_Basics
-    |   ├── Day_01_Pandas_Installation_DataFrame_Creation.ipynb
-    |   ├── Day_02_Read_CSV_Files.ipynb
-    |   ├── Day_03_Select_Columns.ipynb
-    |   ├── Day_04_Row_Filtering.ipynb
-    |   └── Weekend_Simple_CSV_Analysis.ipynb
-    ├── Week_06_Data_Cleaning_and_Sorting
-    |   ├── Day_01_Sort_Values.ipynb
-    |   ├── Day_02_Conditional_Filtering.ipynb
-    |   ├── Day_03_Add_New_Columns.ipynb
-    |   └── Day_04_GroupBy.ipynb
-    ├── Week_07_Missing_Value_Handling
-    |   ├── Day_01_Sort_Values.ipynb
-    |   ├── Day_02_Fill_Missing_Values_Fillna.ipynb</pre>
+    ├── Week_02_Python_Basics/
+    ├── Week_03_Functions_and_Files/
+    ├── Week_04_Mini_Project_01/
+    ├── Week_05_Pandas_Basics/
+    ├── Week_06_Data_Cleaning_and_Sorting/
+    ├── Week_07_Missing_Value_Handling/
+    └── assets/
+        └── Supporting input and output files</pre>
 
 ---
 
