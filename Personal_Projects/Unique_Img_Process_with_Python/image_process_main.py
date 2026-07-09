@@ -2,7 +2,7 @@ import img_processing as imgp
 import img_directory as ds
 import tkinter as tk
 from tkinter import filedialog, messagebox
-
+from multiprocessing import freeze_support
 
 def main():
     """
@@ -44,4 +44,5 @@ def main():
 
 
 if __name__ == "__main__":
+    freeze_support()
     main()
