@@ -7,3 +7,9 @@ ENV/
 Personal_Projects/Tip_Calculator/build/
 __pycache__/
 *.pyc
+*.spec
+build/
+dist/
+
+# Large raw data files
+Data_Analysis_Projects/data/*.sav

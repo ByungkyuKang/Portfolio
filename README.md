@@ -1,6 +1,6 @@
 # 🧠 Portfolio
 
-A collection of my machine learning, Python, data engineering, cloud, and personal development projects.
+A collection of my machine learning, data analysis, Python, data engineering, cloud, and personal development projects.
 
 This portfolio documents my continuous learning journey from Python fundamentals to pandas-based data analysis, machine learning preparation, cloud fundamentals, and practical software development projects.
 
@@ -15,6 +15,11 @@ Portfolio/
 │   ├── Databricks/
 │   └── Kaggle/
 │
+├── Data_Analysis_Projects/
+│   ├── data/
+│   │   └── Supporting datasets for data analysis projects
+│   └── 01. korean_sociodemographic_analysis.ipynb
+│
 ├── Machine_Learning_Projects/
 │   └── Titanic-Survival-Prediction/
 │
@@ -23,7 +28,7 @@ Portfolio/
 │   ├── Information_Scraper/
 │   └── Tip_Calculator/
 │
-└── AI_Data_Engineering_Journey/
+└── Data_AI_Learning_Journey/
     ├── Week_02_Python_Basics/
     ├── Week_03_Functions_and_Files/
     ├── Week_04_Mini_Project_01/
@@ -34,7 +39,9 @@ Portfolio/
         └── Supporting input and output files
 </pre>
 
-> The `assets/` folder contains supporting input and output files used by the notebooks. Detailed file links are documented inside each weekly README.
+> The `assets/` folder contains supporting input and output files used by the learning notebooks. Detailed file links are documented inside each weekly README.
+
+> The `Data_Analysis_Projects/data/` folder contains datasets used for data analysis projects.
 
 ---
 
@@ -58,6 +65,49 @@ These reflect my ongoing learning journey in cloud computing, Python, data analy
 * Intro to Programming - Kaggle
 
 Note: Some items in this folder are course completions or badges rather than official certifications, but they still represent foundational skills and continuous learning progress.
+
+---
+
+## 📊 Data Analysis Projects
+
+### 🇰🇷 Korean Sociodemographic Analysis
+
+Location: `Data_Analysis_Projects/01. korean_sociodemographic_analysis.ipynb`
+
+A sociodemographic data analysis project using Korean welfare survey data.
+
+This project focuses on exploring relationships between demographic characteristics and social or economic outcomes, including income, gender, age, occupation, religion, marital status, and region.
+
+Key analysis areas:
+
+* Gender wage gap analysis
+* Relationship between age and income
+* Income differences by age group
+* Interaction between gender and age group on average income
+* Income differences by occupation
+* Occupational frequency by gender
+* Divorce rate comparison by religious status
+* Divorce rate comparison by age group and religious status
+* Age group distribution by region
+* Elderly population proportion by region
+
+Techniques used:
+
+* Data loading with pandas
+* SPSS data import using `read_spss()`
+* Data inspection with `info()` and `describe()`
+* Column renaming and preprocessing
+* Missing value handling with `dropna()`
+* Derived column creation using `assign()` and `np.where()`
+* Grouped summary analysis using `groupby()` and `agg()`
+* Merging codebook data with analysis data
+* Categorical comparison
+* Bar charts, count plots, histograms, line plots, and stacked bar charts
+* Interpretation of key findings and limitations
+
+Goal: Practice a complete exploratory data analysis workflow using real-world survey-style data, from preprocessing coded variables to creating grouped summaries and communicating insights through visualizations.
+
+Dataset: Korean Welfare Panel Study data and related codebook files.
 
 ---
 
@@ -90,9 +140,9 @@ Dataset: Kaggle Titanic - Machine Learning from Disaster
 
 ---
 
-## 📘 AI Data Engineering Journey
+## 📘 Data & AI Learning Journey
 
-Location: `AI_Data_Engineering_Journey/`
+Location: `Data_AI_Learning_Journey/`
 
 A structured learning series focused on Python, pandas, data cleaning, and data engineering fundamentals.
 
@@ -176,7 +226,7 @@ Topics covered:
 * Using mean, median, mode, and fixed values
 * Creating before-and-after missing value summaries
 
-Goal: Build strong foundations in Python, pandas, data cleaning, and practical data preparation workflows for future machine learning and data engineering projects.
+Goal: Build strong foundations in Python, pandas, data cleaning, and practical data preparation workflows for future data analysis, machine learning, and data engineering projects.
 
 ---
 
@@ -252,6 +302,7 @@ Goal: Practice building interactive Python-based web applications, handling dyna
 ## 🚀 Next Steps
 
 * Continue pandas and data cleaning practice
+* Build additional data analysis projects using real-world datasets
 * Expand machine learning projects using scikit-learn
 * Learn PyTorch fundamentals
 * Build model-serving APIs using FastAPI
@@ -266,7 +317,7 @@ Goal: Practice building interactive Python-based web applications, handling dyna
 
 I am an aspiring Machine Learning Engineer with a strong software development background.
 
-I have professional experience working with C programming, Oracle SQL, Linux/UNIX environments, and large-scale healthcare-related systems. I am currently expanding my skills in Python, pandas, machine learning, cloud computing, and practical data engineering workflows through self-driven learning and hands-on projects.
+I have professional experience working with C programming, Oracle SQL, Linux/UNIX environments, and large-scale healthcare-related systems. I am currently expanding my skills in Python, pandas, data analysis, machine learning, cloud computing, and practical data engineering workflows through self-driven learning and hands-on projects.
 
 My goal is to build a strong foundation in machine learning engineering by combining software development experience with data analysis, model development, and deployment skills.
 
@@ -292,6 +343,7 @@ My goal is to build a strong foundation in machine learning engineering by combi
 * NumPy
 * scikit-learn
 * Matplotlib
+* Seaborn
 * Jupyter Notebook
 * Tkinter
 * Flet
