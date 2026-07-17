@@ -12,4 +12,4 @@ build/
 dist/
 
 # Large raw data files
-Data_Analysis_Projects/data/*.sav
+Data_Analysis_Projects/Korean_Sociodemographic_Analysis/data/Koweps_hpwc14_2019_beta2.sav

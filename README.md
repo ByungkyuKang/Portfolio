@@ -1,8 +1,8 @@
 # 🧠 Portfolio
 
-A collection of my machine learning, data analysis, Python, data engineering, cloud, and personal development projects.
+A collection of data analysis, machine learning, Python, data engineering, cloud, and software development projects.
 
-This portfolio documents my continuous learning journey from Python fundamentals to pandas-based data analysis, machine learning preparation, cloud fundamentals, and practical software development projects.
+This portfolio documents my continuous learning and career development journey, combining my professional software engineering experience with hands-on projects in Python, SQL, data analysis, statistics, machine learning, and cloud technologies.
 
 ---
 
@@ -10,38 +10,40 @@ This portfolio documents my continuous learning journey from Python fundamentals
 
 <pre>
 Portfolio/
+│
 ├── Certifications&Badges/
 │   ├── AWS/
 │   ├── Databricks/
 │   └── Kaggle/
 │
 ├── Data_Analysis_Projects/
-│   ├── data/
-│   │   └── Supporting datasets for data analysis projects
-│   └── 01. korean_sociodemographic_analysis.ipynb
+│   ├── Korean_Sociodemographic_Analysis/
+│   └── ...
 │
 ├── Machine_Learning_Projects/
-│   └── Titanic-Survival-Prediction/
+│   ├── Titanic-Survival-Prediction/
+│   └── ...
 │
 ├── Personal_Projects/
 │   ├── Unique_Img_Process_with_Python/
 │   ├── Information_Scraper/
-│   └── Tip_Calculator/
+│   ├── Tip_Calculator/
+│   └── ...
 │
 └── Data_AI_Learning_Journey/
+    ├── assets/
     ├── Week_02_Python_Basics/
     ├── Week_03_Functions_and_Files/
     ├── Week_04_Mini_Project_01/
     ├── Week_05_Pandas_Basics/
     ├── Week_06_Data_Cleaning_and_Sorting/
     ├── Week_07_Missing_Value_Handling/
-    └── assets/
-        └── Supporting input and output files
+    └── ...        
 </pre>
 
-> The `assets/` folder contains supporting input and output files used by the learning notebooks. Detailed file links are documented inside each weekly README.
+> Each major project is organized in its own directory with notebooks, data files, supporting images, results, and project-specific documentation.
 
-> The `Data_Analysis_Projects/data/` folder contains datasets used for data analysis projects.
+> Large raw datasets are excluded when they exceed GitHub's file size limit. Download instructions are provided in the relevant project README files.
 
 ---
 
@@ -49,22 +51,22 @@ Portfolio/
 
 This folder contains official certifications, course completion certificates, accreditations, and digital badges from platforms such as AWS, Databricks, and Kaggle.
 
-These reflect my ongoing learning journey in cloud computing, Python, data analysis, and machine learning fundamentals.
+These credentials reflect my ongoing development in cloud computing, Python, data analysis, and data engineering fundamentals.
 
 ### Official Certification
 
-* AWS Certified Cloud Practitioner (CLF-C02) - AWS
-* Credly Badge: https://www.credly.com/badges/e81bc28a-f12f-4dab-9729-22f708352dba
+- AWS Certified Cloud Practitioner (CLF-C02) — AWS
+- [Credly Badge](https://www.credly.com/badges/e81bc28a-f12f-4dab-9729-22f708352dba)
 
 ### Course Completions and Accreditations
 
-* AWS Cloud Practitioner Essentials - AWS Training and Certification
-* Databricks Fundamentals Accreditation - Databricks
-* Pandas - Kaggle
-* Python - Kaggle
-* Intro to Programming - Kaggle
+- AWS Cloud Practitioner Essentials — AWS Training and Certification
+- Databricks Fundamentals Accreditation — Databricks
+- Pandas — Kaggle
+- Python — Kaggle
+- Intro to Programming — Kaggle
 
-Note: Some items in this folder are course completions or badges rather than official certifications, but they still represent foundational skills and continuous learning progress.
+> Some items in this folder are course completions or foundational badges rather than professional certifications. They are included to document continuous learning progress.
 
 ---
 
@@ -72,42 +74,33 @@ Note: Some items in this folder are course completions or badges rather than off
 
 ### 🇰🇷 Korean Sociodemographic Analysis
 
-Location: `Data_Analysis_Projects/01. korean_sociodemographic_analysis.ipynb`
+**Location:**  
+[`Data_Analysis_Projects/Korean_Sociodemographic_Analysis/`](./Data_Analysis_Projects/Korean_Sociodemographic_Analysis/)
 
-A sociodemographic data analysis project using Korean welfare survey data.
+An end-to-end data analysis project using Korean Welfare Panel Study (KOWEPS) survey data.
 
-This project focuses on exploring relationships between demographic characteristics and social or economic outcomes, including income, gender, age, occupation, religion, marital status, and region.
+The project investigates relationships among demographic and socioeconomic variables such as income, gender, age, occupation, religion, marital status, and region.
 
-Key analysis areas:
+The project follows a structured analytical workflow:
 
-* Gender wage gap analysis
-* Relationship between age and income
-* Income differences by age group
-* Interaction between gender and age group on average income
-* Income differences by occupation
-* Occupational frequency by gender
-* Divorce rate comparison by religious status
-* Divorce rate comparison by age group and religious status
-* Age group distribution by region
-* Elderly population proportion by region
+- Exploratory data analysis
+- Data cleaning and preprocessing
+- Feature creation
+- Grouped summary analysis
+- Data visualization
+- Statistical analysis
+- Predictive modeling
+- Interpretation of findings and limitations
 
-Techniques used:
+### Project Progress
 
-* Data loading with pandas
-* SPSS data import using `read_spss()`
-* Data inspection with `info()` and `describe()`
-* Column renaming and preprocessing
-* Missing value handling with `dropna()`
-* Derived column creation using `assign()` and `np.where()`
-* Grouped summary analysis using `groupby()` and `agg()`
-* Merging codebook data with analysis data
-* Categorical comparison
-* Bar charts, count plots, histograms, line plots, and stacked bar charts
-* Interpretation of key findings and limitations
+| Stage | Notebook | Status |
+|---|---|---|
+| Exploratory Data Analysis | `01_EDA.ipynb` | ✅ Completed |
+| Statistical Analysis | `02_Statistical_Analysis.ipynb` | 🚧 Planned |
+| Predictive Modeling | `03_Predictive_Model.ipynb` | 🚧 Planned |
 
-Goal: Practice a complete exploratory data analysis workflow using real-world survey-style data, from preprocessing coded variables to creating grouped summaries and communicating insights through visualizations.
-
-Dataset: Korean Welfare Panel Study data and related codebook files.
+[View the project README](./Data_Analysis_Projects/Korean_Sociodemographic_Analysis/README.md)
 
 ---
 
@@ -115,118 +108,136 @@ Dataset: Korean Welfare Panel Study data and related codebook files.
 
 ### 🧩 Titanic Survival Prediction
 
-Location: `Machine_Learning_Projects/Titanic-Survival-Prediction/`
+**Location:**  
+[`Machine_Learning_Projects/Titanic-Survival-Prediction/`](./Machine_Learning_Projects/Titanic-Survival-Prediction/)
 
-A classic entry-level machine learning project using the Titanic passenger dataset.
+A foundational machine learning project using the Titanic passenger dataset.
 
-This project focuses on building a foundational machine learning workflow, including data exploration, preprocessing, feature engineering, model training, cross-validation, and evaluation.
+This project covers an end-to-end introductory machine learning workflow, including data exploration, preprocessing, feature engineering, model training, cross-validation, and evaluation.
 
-Key learning areas:
+### Key Learning Areas
 
-* Data loading and inspection with pandas
-* Exploratory data analysis
-* Missing value handling strategy
-* Feature engineering
-* Categorical and numeric data analysis
-* Data visualization and correlation analysis
-* Baseline model training with scikit-learn
-* Logistic Regression and Decision Tree models
-* Cross-validation
-* Evaluation metrics such as accuracy, F1 score, and ROC-AUC
+- Data loading and inspection
+- Exploratory data analysis
+- Missing value handling
+- Feature engineering
+- Categorical and numerical data analysis
+- Data visualization
+- Correlation analysis
+- Logistic Regression
+- Decision Tree classification
+- Cross-validation
+- Confusion matrix analysis
+- Classification metrics
+- Overfitting identification
 
-Goal: Gain hands-on experience with the end-to-end machine learning workflow, from raw data exploration to basic model evaluation.
+### Evaluation Metrics
 
-Dataset: Kaggle Titanic - Machine Learning from Disaster
+- Accuracy
+- Precision
+- Recall
+- F1 score
+- ROC-AUC
+
+**Goal:** Build practical experience with the complete machine learning workflow, from raw data exploration to model evaluation and interpretation.
+
+**Dataset:** Kaggle Titanic — Machine Learning from Disaster
 
 ---
 
 ## 📘 Data & AI Learning Journey
 
-Location: `Data_AI_Learning_Journey/`
+**Location:**  
+[`Data_AI_Learning_Journey/`](./Data_AI_Learning_Journey/)
 
-A structured learning series focused on Python, pandas, data cleaning, and data engineering fundamentals.
+A structured learning series focused on Python, pandas, data cleaning, statistics, data analysis, and data engineering fundamentals.
 
-This section documents my step-by-step learning progress through notebooks, small exercises, and mini projects.
+This section documents step-by-step learning through notebooks, exercises, and small projects.
+
+The techniques learned here are gradually applied to the larger portfolio projects.
+
+### Learning Workflow
+
+```text
+Study a concept
+        ↓
+Practice it in a learning notebook
+        ↓
+Review and improve the notebook
+        ↓
+Apply the technique to a portfolio project
+        ↓
+Document findings and update the project README
+```
+
+The goal is to connect theoretical learning directly to practical portfolio development.
 
 ### Completed and In-Progress Topics
 
 #### Week 02 — Python Basics
 
-Topics covered:
-
-* Variables, numbers, strings, and print statements
-* Lists, dictionaries, and indexing
-* If statements and comparison operators
-* For loops and `range()`
-* Number sum and even/odd practice programs
+- Variables, numbers, and strings
+- Lists and dictionaries
+- Indexing
+- Conditional statements
+- Comparison operators
+- Loops and `range()`
+- Basic practice programs
 
 #### Week 03 — Functions and Files
 
-Topics covered:
-
-* Functions with input and output
-* `return` values
-* Multiple functions
-* File writing with `open()`
-* File reading with `read()`, `readline()`, and `readlines()`
-* Simple memo save program
+- Functions with parameters
+- Return values
+- Multiple-function program structure
+- File writing with `open()`
+- File reading with `read()`, `readline()`, and `readlines()`
+- Simple file-based programs
 
 #### Week 04 — Mini Project 01
 
-Project:
+**Project:** Multiplication Table TXT Saver
 
-* Multiplication Table TXT Saver
-
-Topics covered:
-
-* User input
-* Function-based program structure
-* Nested loops
-* File writing and reading
-* Saving generated text files
-* Creating a small complete Python program
+- User input
+- Function-based program structure
+- Nested loops
+- File writing and reading
+- Generating and saving text output
+- Creating a small complete Python application
 
 #### Week 05 — Pandas Basics
 
-Topics covered:
-
-* pandas installation and import
-* DataFrame creation
-* Reading CSV files
-* Selecting columns
-* Row filtering
-* Basic CSV analysis project
+- pandas installation and import
+- DataFrame creation
+- Reading CSV files
+- Selecting columns
+- Filtering rows
+- Basic CSV data analysis
 
 #### Week 06 — Data Cleaning and Sorting
 
-Topics covered:
-
-* Sorting DataFrames using `sort_values()`
-* Conditional filtering
-* Adding new columns
-* Creating calculated and boolean columns
-* Using `.loc[]`
-* Using `.copy()` after filtering
-* Grouping data with `groupby()`
-* Creating grouped summaries with `agg()`
-* Saving sorted, filtered, and summarized results as CSV files
+- Sorting DataFrames with `sort_values()`
+- Conditional filtering
+- Adding calculated columns
+- Creating Boolean columns
+- Using `.loc[]`
+- Using `.copy()` after filtering
+- Grouping with `groupby()`
+- Creating grouped summaries with `agg()`
+- Saving analysis results as CSV files
 
 #### Week 07 — Missing Value Handling
 
-Topics covered:
+- Understanding `NaN`
+- Detecting missing values with `isnull()`
+- Counting missing values by column and row
+- Calculating missing-value percentages
+- Filtering rows containing missing values
+- Creating missing-value summary tables
+- Filling missing values with `fillna()`
+- Using mean, median, mode, and fixed values
+- Comparing data before and after treatment
 
-* Understanding missing values and `NaN`
-* Checking missing values with `isnull()`
-* Counting missing values by column and row
-* Calculating missing value percentages
-* Finding rows with missing values
-* Creating missing value summary DataFrames
-* Filling missing values with `fillna()`
-* Filling categorical, numeric, and boolean columns
-* Using mean, median, mode, and fixed values
-* Creating before-and-after missing value summaries
-
-Goal: Build strong foundations in Python, pandas, data cleaning, and practical data preparation workflows for future data analysis, machine learning, and data engineering projects.
+**Goal:** Build strong foundations in Python, pandas, data cleaning, statistics, and practical data preparation for future data analysis, data engineering, and machine learning projects.
 
 ---
 
@@ -234,128 +245,210 @@ Goal: Build strong foundations in Python, pandas, data cleaning, and practical d
 
 ### 🖼️ Unique Image Organizer
 
-Location: `Personal_Projects/Unique_Img_Process_with_Python/`
+**Location:**  
+[`Personal_Projects/Unique_Img_Process_with_Python/`](./Personal_Projects/Unique_Img_Process_with_Python/)
 
-A Python-based utility for organizing personal image collections by grouping similar or duplicate images.
+A Python desktop utility for identifying and organizing duplicate or visually similar images.
 
-Key features:
+### Key Features
 
-* Scans directories for image files
-* Groups similar or duplicate images
-* Supports image comparison
-* Renames images consistently for easier management
-* Helps reduce manual effort when organizing large image collections
-* Provides a simple desktop-style interface
+- Scans directories for image files
+- Detects duplicate and similar images
+- Uses hash-based and feature-based image comparison
+- Groups matching images
+- Sorts images by resolution
+- Displays images through a graphical interface
+- Supports image preview
+- Allows selected-image deletion
+- Supports automatic cleanup while keeping the highest-resolution image
+- Helps organize large personal image collections
 
-Tech Stack: Python, Tkinter, Pillow, OS library
+### Tech Stack
 
-Goal: Practice building a practical Python desktop utility that solves a real personal file organization problem.
+- Python
+- OpenCV
+- Pillow
+- ImageHash
+- Tkinter
+- OS and file-system modules
+
+**Goal:** Build a practical desktop application that solves a real file-management problem while practicing modular Python development, image processing, and graphical user interface design.
 
 ---
 
 ### 🌐 Information Scraper
 
-Location: `Personal_Projects/Information_Scraper/main.py`
+**Location:**  
+[`Personal_Projects/Information_Scraper/`](./Personal_Projects/Information_Scraper/)
 
-A simple web scraping project intended to collect and structure useful information from selected websites.
+A web scraping project intended to collect, organize, and export useful information from selected websites.
 
-Current status:
+### Current Status
 
-* Foundation script initialized
-* Project structure prepared for expansion
+- Initial project structure created
+- Foundation script prepared for future development
 
-Planned focus:
+### Planned Areas
 
-* Web requests
-* HTML parsing
-* Data extraction
-* Structured output generation
+- HTTP requests
+- HTML parsing
+- Data extraction
+- Data cleaning
+- Structured output generation
+- Error handling
 
-Goal: Learn the fundamentals of web scraping, request handling, and data parsing.
+**Goal:** Learn practical web scraping, request handling, parsing, and structured data collection.
 
 ---
 
 ### 💰 Tip Calculator
 
-Location: `Personal_Projects/Tip_Calculator/`
+**Location:**  
+[`Personal_Projects/Tip_Calculator/`](./Personal_Projects/Tip_Calculator/)
 
-A tip distribution calculator built with Flet that helps divide tip amounts among multiple people based on hours worked.
+A tip distribution application that divides a total tip amount among multiple participants based on hours worked.
 
-Key features:
+### Key Features
 
-* Accepts a total tip amount
-* Allows name and hours input for each participant
-* Dynamically generates input rows
-* Calculates hourly tip rate automatically
-* Distributes tips using a fair allocation approach
-* Supports saving and loading previously entered names and counts
-* Can be deployed as a lightweight web app using Docker and Render
+- Accepts a total tip amount
+- Allows names and hours to be entered
+- Dynamically generates participant input rows
+- Calculates the hourly tip rate
+- Distributes tips based on hours worked
+- Handles rounding differences
+- Saves and reloads participant information
+- Supports deployment as a web application
+- Uses Docker for packaging and deployment
 
-Live App: https://starbucks-tip-out.onrender.com
+### Live Application
 
-Tech Stack: Python, Flet, JSON, Docker, Uvicorn
+[Open Tip Calculator](https://starbucks-tip-out.onrender.com)
 
-Goal: Practice building interactive Python-based web applications, handling dynamic UI updates, and deploying a project to the web.
+### Tech Stack
+
+- Python
+- Flet
+- FastAPI
+- JSON
+- Docker
+- Uvicorn
+- Render
+
+**Goal:** Practice interactive application development, dynamic user-interface updates, data persistence, containerization, and cloud deployment.
 
 ---
 
-## 🚀 Next Steps
+## 🚀 Current Development Goals
 
-* Continue pandas and data cleaning practice
-* Build additional data analysis projects using real-world datasets
-* Expand machine learning projects using scikit-learn
-* Learn PyTorch fundamentals
-* Build model-serving APIs using FastAPI
-* Learn Docker for packaging and deployment
-* Integrate MLflow for experiment tracking
-* Continue AWS certification study and cloud-based ML preparation
-* Build more complete portfolio projects that combine data analysis, machine learning, and deployment
+- Continue building portfolio-quality data analysis projects
+- Apply newly learned statistical methods to existing projects
+- Strengthen SQL and Python skills for data-focused roles
+- Practice statistical hypothesis testing and regression analysis
+- Build practical data pipelines
+- Expand machine learning projects using scikit-learn
+- Improve project documentation and reproducibility
+- Continue AWS certification study
+- Learn additional AWS data services
+- Build projects combining analysis, databases, automation, and cloud technologies
 
 ---
 
 ## 🧑‍💻 About Me
 
-I am an aspiring Machine Learning Engineer with a strong software development background.
+I am a software engineer transitioning toward data-focused roles, including Data Analyst and Data Engineer positions.
 
-I have professional experience working with C programming, Oracle SQL, Linux/UNIX environments, and large-scale healthcare-related systems. I am currently expanding my skills in Python, pandas, data analysis, machine learning, cloud computing, and practical data engineering workflows through self-driven learning and hands-on projects.
+I have more than nine years of professional experience developing and maintaining backend systems in healthcare-related production environments. My professional background includes C programming, Oracle SQL, embedded SQL and PL/SQL, Linux and UNIX systems, batch processing, data validation, automation, and production support.
 
-My goal is to build a strong foundation in machine learning engineering by combining software development experience with data analysis, model development, and deployment skills.
+I am expanding this experience through hands-on projects in Python, pandas, data analysis, statistics, machine learning, cloud computing, and data engineering.
+
+My goal is to combine my software development background with strong analytical, database, automation, and data-processing skills to contribute effectively to data-focused teams.
+
+---
+
+## 🏷️ Tech Stack
+
+### Programming Languages
+
+- Python
+- C
+- SQL
+- Shell scripting
+
+### Data Analysis
+
+- pandas
+- NumPy
+- Seaborn
+- Jupyter Notebook
+- Exploratory Data Analysis
+- Data cleaning and preprocessing
+- Data visualization
+
+### Databases
+
+- Oracle
+- SQL
+- PL/SQL
+- Embedded SQL / Pro*C
+- Relational database concepts
+
+### Machine Learning
+
+- scikit-learn
+- Feature engineering
+- Classification
+- Cross-validation
+- Model evaluation
+
+### Software Development
+
+- Modular programming
+- Backend development
+- Batch processing
+- Debugging
+- Production support
+- Test documentation
+- Code review workflows
+
+### Applications and Deployment
+
+- Tkinter
+- Flet
+- FastAPI
+- Docker
+- Uvicorn
+- Render
+
+### Cloud and Data Platforms
+
+- AWS cloud fundamentals
+- Databricks fundamentals
+
+### Development Tools
+
+- Git
+- GitHub
+- VS Code
+- Linux
+- UNIX
+- Jupyter Notebook
+- GitHub Copilot
+
+### Currently Expanding
+
+- Statistical analysis
+- Data engineering workflows
+- AWS data services
+- Advanced SQL
+- Predictive modeling
+- PyTorch
+- MLflow
+- MLOps fundamentals
 
 ---
 
 ## 📫 Contact
 
-* Email: [byungkyukang702@gmail.com](mailto:byungkyukang702@gmail.com)
-* LinkedIn: http://www.linkedin.com/in/byungkyukang
-* GitHub: github.com/ByungkyuKang
-
----
-
-## 🏷️ Tech Stack Overview
-
-### Current
-
-* Python
-* C
-* Oracle SQL
-* Linux / UNIX
-* pandas
-* NumPy
-* scikit-learn
-* Matplotlib
-* Seaborn
-* Jupyter Notebook
-* Tkinter
-* Flet
-* Docker
-* Uvicorn
-* Git / GitHub
-* AWS Cloud fundamentals
-
-### Planned / Expanding Into
-
-* PyTorch
-* FastAPI
-* MLflow
-* AWS machine learning and data services
-* MLOps workflows
+- **Email:** [byungkyukang702@gmail.com](mailto:byungkyukang702@gmail.com)
+- **LinkedIn:** [linkedin.com/in/byungkyukang](https://www.linkedin.com/in/byungkyukang)
+- **GitHub:** [github.com/ByungkyuKang](https://github.com/ByungkyuKang)
