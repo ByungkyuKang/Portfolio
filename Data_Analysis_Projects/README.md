@@ -7,11 +7,12 @@ Each project focuses on solving real-world data problems through exploratory dat
 ---
 
 ## 📁 Folder Structure
-
+<pre>
 Data_Analysis_Projects/
 ├── Korean_Sociodemographic_Analysis/
 ├── ...
 └── README.md
+</pre>
 
 ---
 
