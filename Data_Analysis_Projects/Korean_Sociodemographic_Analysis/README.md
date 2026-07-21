@@ -40,7 +40,7 @@ Using this dataset, this project investigates relationships among variables such
 - Marital status
 - Region
 
-The project is designed as a complete data analysis workflow rather than a single notebook. As additional statistical and machine learning techniques are learned, the project will continue to expand.
+The project follows a complete data analysis workflow, beginning with exploratory data analysis, continuing through statistical hypothesis testing, and eventually expanding into predictive modeling using machine learning.
 
 ---
 
@@ -49,14 +49,16 @@ The project is designed as a complete data analysis workflow rather than a singl
 | Step | Notebook | Description | Status |
 |---|---|---|---|
 | 01 | `01_EDA.ipynb` | Exploratory data analysis, preprocessing, visualization, and initial findings | ✅ Completed |
-| 02 | `02_Statistical_Analysis.ipynb` | Statistical analysis including hypothesis testing, correlation analysis, and ANOVA | 🚧 Planned |
+| 02 | `02_Statistical_Analysis.ipynb` | Statistical hypothesis testing using Welch's t-tests with interpretation and conclusions | 🚧 In Progress |
 | 03 | `03_Predictive_Model.ipynb` | Predictive modeling using machine learning algorithms | 🚧 Planned |
 
 ---
 
-# 📊 Current Analysis (01_EDA)
+# 📊 Current Analysis
 
-### Topics Covered
+## 01. Exploratory Data Analysis (EDA)
+
+Topics covered:
 
 - Data loading and inspection
 - SPSS data import using `read_spss()`
@@ -77,6 +79,50 @@ The project is designed as a complete data analysis workflow rather than a singl
 
 ---
 
+## 02. Statistical Analysis
+
+Current analyses include:
+
+- Welch's t-test for gender income differences
+- Welch's t-test for divorce rates by religion
+- Research question formulation
+- Statistical hypothesis testing
+- Hypothesis development
+- Result interpretation
+- Analytical conclusions
+
+---
+
+# 📈 Current Findings
+
+The project currently includes two statistical hypothesis tests using Welch's t-test.
+
+### Gender Income Gap
+
+- Compared mean income between male and female respondents
+- Tested statistical significance using Welch's t-test
+- Interpreted results based on p-values and hypothesis testing
+
+### Divorce Rates by Religion
+
+- Compared divorce rates between respondents with and without religion
+- Encoded marital status as a binary variable
+- Applied Welch's t-test to compare divorce rates
+- Interpreted findings with statistical conclusions
+
+Each statistical analysis follows a structured analytical workflow:
+
+- Research Question
+- Why Statistical Testing?
+- Why Welch's t-test?
+- Hypotheses
+- Statistical Analysis
+- Results
+- Interpretation
+- Conclusion
+
+---
+
 # 📂 Data Files
 
 | File | Included | Description |
@@ -86,7 +132,7 @@ The project is designed as a complete data analysis workflow rather than a singl
 
 The raw survey dataset (`Koweps_hpwc14_2019_beta2.sav`) is not included in this repository because it exceeds GitHub's file size limit.
 
-If you would like to reproduce the analysis, you can download the dataset from the link above and place it inside the project's `data/` folder:
+If you would like to reproduce the analysis, download the dataset from the link above and place it inside:
 
 ```text
 Korean_Sociodemographic_Analysis/
@@ -94,45 +140,30 @@ Korean_Sociodemographic_Analysis/
     └── Koweps_hpwc14_2019_beta2.sav
 ```
 
-Once the dataset is placed in the `data/` folder, the notebooks can be executed without any additional modifications.
+Once the dataset is placed in the `data/` folder, all notebooks can be executed without modification.
 
 ---
 
 # 🛠 Technologies
 
-### Programming Language
+## Programming Language
 
 - Python
 
-### Libraries
+## Libraries
+
+Current
 
 - pandas
 - NumPy
 - matplotlib
 - seaborn
-
-Future notebooks will additionally use:
-
 - SciPy
+
+Planned
+
 - statsmodels
 - scikit-learn
-
----
-
-# 📈 Project Goals
-
-This project aims to demonstrate the complete lifecycle of a real-world data analysis project.
-
-The final project will include:
-
-- Exploratory Data Analysis (EDA)
-- Statistical hypothesis testing
-- Correlation analysis
-- Regression analysis
-- Predictive modeling
-- Model evaluation
-- Result interpretation
-- Business insights
 
 ---
 
@@ -144,16 +175,19 @@ Current
 - Data cleaning
 - Data preprocessing
 - Feature engineering
-- Exploratory data analysis
+- Exploratory data analysis (EDA)
 - Data visualization
+- Statistical hypothesis testing
+- Welch's t-test
+- Statistical interpretation
 - Data interpretation
 
 Planned
 
-- Statistical inference
-- Hypothesis testing
 - Correlation analysis
-- Regression
+- ANOVA
+- Chi-square test
+- Regression analysis
 - Machine learning
 - Model evaluation
 
@@ -161,8 +195,9 @@ Planned
 
 # 📝 Future Improvements
 
-- Add statistical hypothesis testing
-- Perform correlation analysis
+- Add correlation analysis
+- Perform ANOVA
+- Apply Chi-square tests
 - Build predictive models
 - Improve visualizations
 - Compare multiple machine learning algorithms
@@ -174,5 +209,7 @@ Planned
 # 📌 Notes
 
 This project is continuously updated as new statistical and machine learning techniques are learned.
+
+At the current stage, the statistical analysis notebook focuses on learning hypothesis testing using Welch's t-test. As additional statistical methods are learned, more appropriate techniques such as Chi-square tests, correlation analysis, ANOVA, regression analysis, and predictive modeling will be incorporated into the project.
 
 The goal is to build a portfolio-quality project that demonstrates not only technical implementation but also analytical thinking, statistical reasoning, and clear communication of insights.
