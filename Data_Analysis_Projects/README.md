@@ -2,7 +2,7 @@
 
 This directory contains end-to-end data analysis projects built with Python.
 
-Each project focuses on solving real-world data problems through exploratory data analysis (EDA), statistical analysis, visualization, and predictive modeling.
+Each project demonstrates a complete analytical workflow, including data cleaning, exploratory data analysis (EDA), statistical hypothesis testing, data visualization, interpretation of findings, and predictive modeling using real-world datasets.
 
 ---
 
@@ -20,13 +20,13 @@ Data_Analysis_Projects/
 
 | No. | Project | Description |
 |---|---|---|
-| 01 | Korean Sociodemographic Analysis | End-to-end analysis of Korean welfare survey data. |
+| 01 | Korean Sociodemographic Analysis | End-to-end exploratory and statistical analysis of Korean welfare survey data using Python. |
 
 ---
 
-## Objectives
+## Skills Demonstrated
 
-These projects are designed to demonstrate practical data analysis skills, including:
+These projects demonstrate practical data analysis skills, including:
 
 - Data cleaning and preprocessing
 - Exploratory data analysis (EDA)
@@ -35,4 +35,4 @@ These projects are designed to demonstrate practical data analysis skills, inclu
 - Predictive modeling
 - Result interpretation
 
-As more projects are completed, they will be added to this directory.
+Additional projects will be added as new analyses and machine learning projects are completed.

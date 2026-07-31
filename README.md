@@ -81,23 +81,25 @@ An end-to-end data analysis project using Korean Welfare Panel Study (KOWEPS) su
 
 The project investigates relationships among demographic and socioeconomic variables such as income, gender, age, occupation, religion, marital status, and region.
 
+The project currently covers the workflow from exploratory data analysis and statistical hypothesis testing to interpretation of findings. Predictive modeling using machine learning will be added in the next phase.
+
 The project follows a structured analytical workflow:
 
-- Exploratory data analysis
 - Data cleaning and preprocessing
+- Exploratory data analysis
 - Feature creation
 - Grouped summary analysis
 - Data visualization
 - Statistical analysis
-- Predictive modeling
 - Interpretation of findings and limitations
+- Predictive modeling (planned)
 
 ### Project Progress
 
 | Stage | Notebook | Status |
 |---|---|---|
 | Exploratory Data Analysis | `01_EDA.ipynb` | ✅ Completed |
-| Statistical Analysis | `02_Statistical_Analysis.ipynb` | 🚧 Planned |
+| Statistical Analysis | `02_Statistical_Analysis.ipynb` | ✅ Completed |
 | Predictive Modeling | `03_Predictive_Model.ipynb` | 🚧 Planned |
 
 [View the project README](./Data_Analysis_Projects/Korean_Sociodemographic_Analysis/README.md)
@@ -379,6 +381,7 @@ My goal is to combine my software development background with strong analytical,
 - pandas
 - NumPy
 - Seaborn
+- SciPy
 - Jupyter Notebook
 - Exploratory Data Analysis
 - Data cleaning and preprocessing
@@ -436,7 +439,7 @@ My goal is to combine my software development background with strong analytical,
 
 ### Currently Expanding
 
-- Statistical analysis
+- Regression analysis
 - Data engineering workflows
 - AWS data services
 - Advanced SQL
