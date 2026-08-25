@@ -2,9 +2,9 @@
 
 An end-to-end data engineering and analytics project that integrates an Oracle relational database with Python and Pandas.
 
-The project simulates a retail data environment containing customers, products, orders, and order items. It demonstrates relational database design, SQL-based business analysis, and a Python data pipeline for extracting, transforming, analyzing, and visualizing data stored in Oracle.
+The project simulates a retail data environment containing customers, products, orders, and order items. It demonstrates relational database design, SQL-based business analysis, Python/Oracle database integration, transaction management, and a Python data pipeline for extracting, transforming, analyzing, and visualizing data stored in Oracle.
 
-The Oracle database and SQL analysis phase is complete. Python/Oracle integration and Pandas-based data processing will be developed in the next phase.
+The Oracle database, SQL analysis, and Python/Oracle integration phases are complete. The next phase focuses on extracting Oracle data into Pandas DataFrames for transformation and analysis.
 
 ---
 
@@ -12,6 +12,7 @@ The Oracle database and SQL analysis phase is complete. Python/Oracle integratio
 
 ```text
 Oracle_Retail_Data_Pipeline/
+├── .env.example
 ├── README.md
 │
 ├── data/
@@ -24,16 +25,22 @@ Oracle_Retail_Data_Pipeline/
 │   └── 03_analysis_queries.sql
 │
 └── src/
+    ├── db_connection.py
+    ├── transaction_demo.py
+    └── exception_handling_demo.py
 ```
 
 ### Directory Overview
 
-| Directory | Description |
+| Directory / File | Description |
 |---|---|
 | `data/` | Exported or generated data files used during the Python analysis phase |
 | `notebooks/` | Jupyter notebooks for Pandas analysis and visualization |
 | `sql/` | Oracle SQL scripts for schema creation, sample data population, and business analysis |
-| `src/` | Python source code for Oracle connectivity and data processing |
+| `src/` | Python source code for Oracle connectivity, transaction management, and data processing |
+| `.env.example` | Example configuration for Oracle database environment variables |
+
+> The actual `.env` file containing database credentials is excluded from version control.
 
 ---
 
@@ -47,6 +54,8 @@ The project uses a simulated retail database consisting of four related tables:
 - `ORDER_ITEMS` — products included in each order, quantities, and actual selling prices
 
 The relational structure allows customer purchasing behavior, product performance, revenue trends, discounts, and regional sales patterns to be analyzed.
+
+The project is being developed incrementally to demonstrate the progression from database design and SQL analysis to programmatic database access and Python-based data processing.
 
 ---
 
@@ -72,7 +81,7 @@ PRODUCTS
 
 Primary and foreign key constraints are used to maintain referential integrity between the tables.
 
-Additional constraints are used to enforce valid values such as positive quantities and non-negative prices.
+Additional constraints enforce valid values such as positive quantities and non-negative prices.
 
 ---
 
@@ -83,10 +92,10 @@ Additional constraints are used to enforce valid values such as positive quantit
 | 01 | Oracle database schema design | ✅ Completed |
 | 02 | Sample retail data population | ✅ Completed |
 | 03 | SQL business analysis | ✅ Completed |
-| 04 | Python connection to Oracle | 🚧 Planned |
-| 05 | Oracle data extraction into Pandas | 🚧 Planned |
-| 06 | Data transformation and analysis | 🚧 Planned |
-| 07 | Data visualization and reporting | 🚧 Planned |
+| 04 | Python connection to Oracle | ✅ Completed |
+| 05 | Oracle data extraction into Pandas | 🚧 In Progress |
+| 06 | Data transformation and analysis | ⏳ Planned |
+| 07 | Data visualization and reporting | ⏳ Planned |
 
 The overall pipeline is designed as:
 
@@ -97,14 +106,19 @@ Oracle Database
       ▼
 Python / python-oracledb
       │
+      ├── Database Connection
+      ├── Bind Variables
+      ├── Transaction Management
+      └── Exception Handling
+      │
       ▼
 Pandas DataFrames
       │
-      ├── Data validation
-      ├── Data transformation
-      ├── Data merging
-      ├── Business analysis
-      └── Feature creation
+      ├── Data Validation
+      ├── Data Transformation
+      ├── Data Merging
+      ├── Business Analysis
+      └── Feature Creation
       │
       ▼
 Visualization / Reporting
@@ -232,28 +246,162 @@ These questions are designed to simulate common analytical tasks performed again
 
 ---
 
-# 🐍 Python / Pandas Phase
+# 🔌 Python / Oracle Integration
 
-The next phase will connect Python directly to the Oracle database using `python-oracledb`.
+Python is connected directly to the Oracle database using `python-oracledb`.
 
-Oracle tables will be extracted into Pandas DataFrames for further processing and analysis.
+The integration phase demonstrates programmatic database access and transaction control rather than relying exclusively on SQL Developer.
+
+Implemented features include:
+
+- Oracle database connections from Python
+- Cursor creation and management
+- SQL execution through Python
+- Query result retrieval with:
+  - `fetchone()`
+  - `fetchmany()`
+  - `fetchall()`
+  - Cursor iteration
+- Bind variables for parameterized SQL
+- Python `date` values passed to Oracle `DATE` columns
+- `INSERT` and `DELETE` operations
+- Explicit transaction control with `COMMIT` and `ROLLBACK`
+- Verification of committed data after reconnecting to Oracle
+- Transaction rollback verification
+- Oracle exception handling
+- Safe cursor and connection cleanup
+- Environment-based database configuration
+
+---
+
+# 🔄 Transaction Management
+
+`transaction_demo.py` demonstrates Oracle transaction behavior from Python.
+
+The demo includes:
+
+### Rollback Test
+
+```text
+INSERT test customer
+        │
+        ▼
+Verify inserted row
+        │
+        ▼
+ROLLBACK
+        │
+        ▼
+Execute SELECT again
+        │
+        ▼
+Verify row no longer exists
+```
+
+### Commit Test
+
+```text
+INSERT test customer
+        │
+        ▼
+COMMIT
+        │
+        ▼
+Close database connection
+        │
+        ▼
+Reconnect to Oracle
+        │
+        ▼
+Verify committed row still exists
+        │
+        ▼
+Delete test data
+        │
+        ▼
+COMMIT
+```
+
+This demonstrates the difference between temporary uncommitted changes and persistent committed database changes.
+
+---
+
+# ⚠️ Exception Handling
+
+`exception_handling_demo.py` demonstrates safe handling of Oracle database errors using:
+
+```text
+try
+ │
+ ├── Connect to Oracle
+ └── Execute database operation
+        │
+        ├── Failure → except → ROLLBACK
+        │
+        └── Success → else → COMMIT
+                              │
+                              ▼
+                           finally
+                              │
+                              ├── Close cursor
+                              └── Close connection
+```
+
+The demo intentionally attempts to insert a duplicate primary key to trigger an Oracle database exception.
+
+The implementation demonstrates:
+
+- `try / except / else / finally`
+- `oracledb.Error`
+- Transaction rollback after database errors
+- Commit after successful operations
+- Safe resource cleanup
+
+---
+
+# 🔐 Database Configuration
+
+Database credentials are separated from the Python source code using environment variables.
+
+The local `.env` file contains configuration such as:
+
+```text
+ORACLE_USER=...
+ORACLE_PASSWORD=...
+ORACLE_HOST=...
+ORACLE_PORT=...
+ORACLE_SERVICE=...
+```
+
+Python loads the configuration at runtime rather than hardcoding database credentials in the source code.
+
+The actual `.env` file is excluded from Git using `.gitignore`.
+
+An `.env.example` file is included in the repository to document the required configuration without exposing credentials.
+
+---
+
+# 🐼 Pandas Data Pipeline
+
+The next phase extracts data directly from Oracle into Pandas DataFrames.
 
 Planned tasks include:
 
-- Establishing an Oracle database connection from Python
-- Executing SQL queries from Python
-- Loading Oracle query results into Pandas DataFrames
-- Inspecting data types and missing values
+- Extracting Oracle query results into DataFrames
+- Loading customers, products, orders, and order items
+- Inspecting DataFrame structure and data types
+- Checking missing values
 - Validating extracted data
-- Combining datasets using Pandas `merge()`
+- Combining relational datasets with `merge()`
 - Creating calculated revenue fields
 - Performing `groupby()` and aggregation operations
-- Reproducing selected SQL analyses with Pandas
+- Reproducing selected SQL analyses using Pandas
+- Comparing SQL and Pandas approaches
 - Performing additional business analysis
 - Creating visualizations
 - Exporting analytical results
 
-This phase will demonstrate how SQL-based relational data can be integrated into a Python data analysis workflow.
+This phase will build on the existing Python/Oracle connection layer rather than creating a separate data source.
 
 ---
 
@@ -271,9 +419,13 @@ This phase will demonstrate how SQL-based relational data can be integrated into
 
 ## Python Libraries
 
-Planned for the Python phase:
+Current:
 
 - `oracledb`
+- `python-dotenv`
+
+Planned for the data analysis phase:
+
 - `pandas`
 - `NumPy`
 - `matplotlib`
@@ -305,17 +457,32 @@ Planned for the Python phase:
 - Time-based analysis
 - Business-oriented SQL analysis
 
-### Python & Data Engineering
+### Python & Database Integration
 
-Planned:
+- Python-to-Oracle connectivity
+- Database cursors
+- SQL execution from Python
+- Result-set retrieval
+- Bind variables
+- Python/Oracle data type integration
+- Transaction management
+- `COMMIT` and `ROLLBACK`
+- Database exception handling
+- Connection lifecycle management
+- Environment-based configuration
+- Secure credential separation
 
-- Oracle/Python database connectivity
-- SQL data extraction
-- Pandas DataFrame processing
+### Data Engineering & Analytics
+
+In Progress / Planned:
+
+- Oracle-to-Pandas data extraction
+- DataFrame processing
 - Data validation
 - Data transformation
 - Dataset merging
 - Analytical pipelines
+- SQL vs. Pandas analysis
 - Data visualization
 - Result export
 
@@ -325,7 +492,8 @@ Planned:
 
 Future phases of the project will include:
 
-- Python-to-Oracle database integration
+- Oracle-to-Pandas data extraction
+- Reusable data extraction functions
 - Pandas-based data transformation
 - SQL vs. Pandas analysis comparisons
 - Automated data extraction
@@ -341,6 +509,24 @@ Future phases of the project will include:
 
 This project uses simulated retail data created specifically for learning and portfolio purposes.
 
-The project is designed to demonstrate the progression from relational database design and SQL analysis to Python-based data extraction and transformation.
+The project is designed to demonstrate an incremental data engineering workflow:
 
-The Oracle SQL phase is complete, while the Python/Pandas pipeline is currently under development.
+```text
+Database Design
+      ↓
+Data Population
+      ↓
+SQL Analysis
+      ↓
+Python / Oracle Integration
+      ↓
+Transaction & Error Handling
+      ↓
+Pandas Data Processing
+      ↓
+Analysis & Visualization
+```
+
+The Oracle SQL and Python/Oracle integration phases are complete.
+
+The project is currently progressing into the Oracle-to-Pandas data extraction and transformation phase.

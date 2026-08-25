@@ -1,14 +1,14 @@
 # 🧠 Portfolio
 
-A collection of data analysis, machine learning, Python, data engineering, cloud, and software development projects.
+A collection of data analysis, data engineering, machine learning, Python, cloud, and software development projects.
 
-This portfolio documents my continuous learning and career development journey, combining my professional software engineering experience with hands-on projects in Python, SQL, data analysis, statistics, machine learning, and cloud technologies.
+This portfolio documents my continuous learning and career development journey, combining my professional software engineering experience with hands-on projects in Python, SQL, data analysis, data engineering, statistics, machine learning, and cloud technologies.
 
 ---
 
 ## 📁 Repository Structure
 
-<pre>
+```text
 Portfolio/
 │
 ├── Certifications&Badges/
@@ -18,6 +18,10 @@ Portfolio/
 │
 ├── Data_Analysis_Projects/
 │   ├── Korean_Sociodemographic_Analysis/
+│   └── ...
+│
+├── Data_Engineering_Projects/
+│   ├── Oracle_Retail_Data_Pipeline/
 │   └── ...
 │
 ├── Machine_Learning_Projects/
@@ -38,10 +42,10 @@ Portfolio/
     ├── Week_05_Pandas_Basics/
     ├── Week_06_Data_Cleaning_and_Sorting/
     ├── Week_07_Missing_Value_Handling/
-    └── ...        
-</pre>
+    └── ...
+```
 
-> Each major project is organized in its own directory with notebooks, data files, supporting images, results, and project-specific documentation.
+> Each major project is organized in its own directory with notebooks, data files, source code, supporting images, results, and project-specific documentation.
 
 > Large raw datasets are excluded when they exceed GitHub's file size limit. Download instructions are provided in the relevant project README files.
 
@@ -103,6 +107,107 @@ The project follows a structured analytical workflow:
 | Predictive Modeling | `03_Predictive_Model.ipynb` | 🚧 Planned |
 
 [View the project README](./Data_Analysis_Projects/Korean_Sociodemographic_Analysis/README.md)
+
+---
+
+## ⚙️ Data Engineering Projects
+
+### 🛒 Oracle Retail Data Pipeline
+
+**Location:**  
+[`Data_Engineering_Projects/Oracle_Retail_Data_Pipeline/`](./Data_Engineering_Projects/Oracle_Retail_Data_Pipeline/)
+
+An end-to-end data engineering and analytics project built around a simulated Oracle retail database.
+
+The project demonstrates the progression from relational database design and SQL-based business analysis to Python-driven database integration, transaction management, and data processing.
+
+The simulated retail environment contains customers, products, orders, and order items and supports analysis of customer behavior, product performance, revenue trends, discounts, and regional sales.
+
+### Current Implementation
+
+- Oracle relational database schema design
+- Primary and foreign key relationships
+- Database constraints and referential integrity
+- Simulated retail transaction data
+- Business-oriented SQL analysis
+- Multi-table joins and aggregations
+- Common Table Expressions (CTEs)
+- Subqueries
+- Analytical/window functions
+- Python-to-Oracle connectivity using `python-oracledb`
+- Cursor-based query execution
+- `fetchone()`, `fetchmany()`, and `fetchall()`
+- Cursor iteration
+- Parameterized SQL using bind variables
+- Python `date` to Oracle `DATE` integration
+- Transaction management using `COMMIT` and `ROLLBACK`
+- Transaction verification after database reconnection
+- Oracle exception handling
+- Safe cursor and connection cleanup
+- Environment-based database configuration
+- Secure credential separation using `.env`
+
+### Pipeline
+
+```text
+Oracle Database
+      │
+      │ SQL
+      ▼
+Python / python-oracledb
+      │
+      ├── Database Connection
+      ├── Bind Variables
+      ├── Transaction Management
+      └── Exception Handling
+      │
+      ▼
+Pandas DataFrames
+      │
+      ├── Data Validation
+      ├── Data Transformation
+      ├── Data Merging
+      └── Business Analysis
+      │
+      ▼
+Visualization / Reporting
+```
+
+### Project Progress
+
+| Stage | Status |
+|---|---|
+| Oracle Database Schema Design | ✅ Completed |
+| Sample Retail Data Population | ✅ Completed |
+| SQL Business Analysis | ✅ Completed |
+| Python / Oracle Integration | ✅ Completed |
+| Oracle → Pandas Data Extraction | 🚧 In Progress |
+| Pandas Transformation & Analysis | ⏳ Planned |
+| Visualization & Reporting | ⏳ Planned |
+
+### SQL & Database Techniques
+
+- `INNER JOIN`
+- `LEFT JOIN`
+- `NOT EXISTS`
+- `GROUP BY`
+- `HAVING`
+- `CASE`
+- Subqueries
+- Common Table Expressions (`WITH`)
+- `FETCH FIRST`
+- `RANK()`
+- `ROW_NUMBER()`
+- `PARTITION BY`
+- `LAG()`
+- Date-based aggregation
+- Bind variables
+- Transaction management
+- Exception handling
+
+**Goal:** Build practical experience connecting relational database design, advanced SQL, Python database programming, data extraction, transformation, and analytics into a structured data pipeline.
+
+[View the project README](./Data_Engineering_Projects/Oracle_Retail_Data_Pipeline/README.md)
 
 ---
 
@@ -342,16 +447,17 @@ A tip distribution application that divides a total tip amount among multiple pa
 
 ## 🚀 Current Development Goals
 
-- Continue building portfolio-quality data analysis projects
-- Apply newly learned statistical methods to existing projects
-- Strengthen SQL and Python skills for data-focused roles
-- Practice statistical hypothesis testing and regression analysis
-- Build practical data pipelines
+- Continue building portfolio-quality data analysis and data engineering projects
+- Extend the Oracle Retail Data Pipeline with Pandas-based extraction and transformation
+- Reproduce and compare selected SQL analyses using Pandas
+- Strengthen advanced SQL and Python data-processing skills
+- Build practical ETL and data pipeline workflows
+- Continue PySpark and distributed data processing studies
+- Apply statistical methods to existing data analysis projects
 - Expand machine learning projects using scikit-learn
-- Improve project documentation and reproducibility
-- Continue AWS certification study
-- Learn additional AWS data services
-- Build projects combining analysis, databases, automation, and cloud technologies
+- Continue AWS certification study and learn AWS data services
+- Improve project documentation, modularization, and reproducibility
+- Build projects combining databases, Python, distributed processing, automation, and cloud technologies
 
 ---
 
@@ -361,7 +467,7 @@ I am a software engineer transitioning toward data-focused roles, including Data
 
 I have more than nine years of professional experience developing and maintaining backend systems in healthcare-related production environments. My professional background includes C programming, Oracle SQL, embedded SQL and PL/SQL, Linux and UNIX systems, batch processing, data validation, automation, and production support.
 
-I am expanding this experience through hands-on projects in Python, pandas, data analysis, statistics, machine learning, cloud computing, and data engineering.
+I am expanding this experience through hands-on projects in Python, pandas, advanced SQL, data analysis, data engineering, statistics, machine learning, cloud computing, and distributed data processing.
 
 My goal is to combine my software development background with strong analytical, database, automation, and data-processing skills to contribute effectively to data-focused teams.
 
@@ -389,11 +495,21 @@ My goal is to combine my software development background with strong analytical,
 
 ### Databases
 
-- Oracle
-- SQL
+- Oracle Database
+- Oracle SQL
 - PL/SQL
 - Embedded SQL / Pro*C
-- Relational database concepts
+- Relational database design
+- Transaction management
+
+### Python Database Integration
+
+- python-oracledb
+- python-dotenv
+- Database cursors
+- Bind variables
+- Transaction control
+- Database exception handling
 
 ### Machine Learning
 
@@ -439,10 +555,11 @@ My goal is to combine my software development background with strong analytical,
 
 ### Currently Expanding
 
-- Regression analysis
+- Oracle-to-Pandas data pipelines
+- PySpark
 - Data engineering workflows
 - AWS data services
-- Advanced SQL
+- Regression analysis
 - Predictive modeling
 - PyTorch
 - MLflow
