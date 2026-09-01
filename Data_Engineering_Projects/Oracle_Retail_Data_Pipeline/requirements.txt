@@ -1,0 +1,4 @@
+oracledb==4.0.2
+pandas==2.3.3
+python-dotenv==1.2.2
+SQLAlchemy==2.0.52

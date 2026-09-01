@@ -3,66 +3,61 @@ from datetime import date
 from db_connection import connect_db
 
 
-def main():
-    connection = None
-    cursor = None
+connection = None
+cursor = None
 
-    cus_id = 1001
-    cus_name = "Emma Johnson"
-    email = "emma.johnson@example.com"
-    state = "FL"
-    sign_up_date = date(2024, 1, 15)
+cus_id = 1001
+cus_name = "Emma Johnson"
+email = "emma.johnson@example.com"
+state = "FL"
+sign_up_date = date(2024, 1, 15)
 
-    try:
-        connection = connect_db()
-        cursor = connection.cursor()
+try:
+    connection = connect_db()
+    cursor = connection.cursor()
 
-        print("Connected to Oracle Database")
+    print("Connected to Oracle Database")
 
-        cursor.execute(
-            """
-            INSERT INTO customers (
-                customer_id,
-                customer_name,
-                email,
-                state,
-                signup_date
-            )
-            VALUES (
-                :customer_id,
-                :customer_name,
-                :email,
-                :state,
-                :signup_date
-            )
-            """,
-            customer_id=cus_id,
-            customer_name=cus_name,
-            email=email,
-            state=state,
-            signup_date=sign_up_date
+    cursor.execute(
+        """
+        INSERT INTO customers (
+            customer_id,
+            customer_name,
+            email,
+            state,
+            signup_date
         )
+        VALUES (
+            :customer_id,
+            :customer_name,
+            :email,
+            :state,
+            :signup_date
+        )
+        """,
+        customer_id=cus_id,
+        customer_name=cus_name,
+        email=email,
+        state=state,
+        signup_date=sign_up_date
+    )
 
-    except oracledb.Error as error:
-        print("Oracle Database Error:")
-        print(f"\t{error}")
+except oracledb.Error as error:
+    print("Oracle Database Error:")
+    print(f"\t{error}")
 
-        if connection:
-            connection.rollback()
-            print("Transaction rolled back.")
+    if connection:
+        connection.rollback()
+        print("Transaction rolled back.")
 
-    else:
-        connection.commit()
-        print("Transaction committed.")
+else:
+    connection.commit()
+    print("Transaction committed.")
 
-    finally:
-        if cursor:
-            cursor.close()
+finally:
+    if cursor:
+        cursor.close()
 
-        if connection:
-            connection.close()
-            print("Connection closed.")
-
-
-if __name__ == "__main__":
-    main()
+    if connection:
+        connection.close()
+        print("Connection closed.")
