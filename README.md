@@ -21,8 +21,26 @@ Portfolio/
 │   └── ...
 │
 ├── Data_Engineering_Projects/
-│   ├── Oracle_Retail_Data_Pipeline/
-│   └── ...
+│   └── Oracle_Retail_Data_Pipeline/
+│       ├── data/
+│       ├── notebooks/
+│       ├── sql/
+│       │   ├── 01_create_tables.sql
+│       │   ├── 02_populate_tables.sql
+│       │   └── 03_analysis_queries.sql
+│       │
+│       ├── src/
+│       │   ├── db_connection.py
+│       │   ├── extract_data.py
+│       │   ├── validate_data.py
+│       │   ├── transform_data.py
+│       │   ├── main.py
+│       │   ├── transaction_demo.py
+│       │   └── exception_handling_demo.py
+│       │
+│       ├── .env.example
+│       ├── requirements.txt
+│       └── README.md
 │
 ├── Machine_Learning_Projects/
 │   ├── Titanic-Survival-Prediction/
@@ -119,7 +137,7 @@ The project follows a structured analytical workflow:
 
 An end-to-end data engineering and analytics project built around a simulated Oracle retail database.
 
-The project demonstrates the progression from relational database design and SQL-based business analysis to Python-driven database integration, transaction management, and data processing.
+The project demonstrates the progression from relational database design and advanced SQL analysis to Python-driven database integration, Oracle-to-Pandas data extraction, data quality validation, and transformation into analysis-ready datasets.
 
 The simulated retail environment contains customers, products, orders, and order items and supports analysis of customer behavior, product performance, revenue trends, discounts, and regional sales.
 
@@ -146,28 +164,54 @@ The simulated retail environment contains customers, products, orders, and order
 - Safe cursor and connection cleanup
 - Environment-based database configuration
 - Secure credential separation using `.env`
+- SQLAlchemy-based Oracle connectivity for Pandas
+- Reusable Oracle-to-Pandas data extraction
+- DataFrame structure and missing-value inspection
+- Primary key duplicate validation
+- Business constraint validation
+- Foreign key integrity validation
+- Structured validation result reporting
+- Multi-table DataFrame transformation using Pandas `merge()`
+- Order-line revenue calculation
+- Order-level revenue calculation using `groupby()` and `transform()`
+- Date feature engineering for time-based analysis
+- Modular extraction, validation, transformation, and orchestration layers
 
 ### Pipeline
 
 ```text
 Oracle Database
       │
-      │ SQL
       ▼
-Python / python-oracledb
+Data Extraction
       │
-      ├── Database Connection
-      ├── Bind Variables
-      ├── Transaction Management
-      └── Exception Handling
+      ├── python-oracledb
+      ├── SQLAlchemy
+      └── Pandas
       │
       ▼
-Pandas DataFrames
+Extracted DataFrames
       │
-      ├── Data Validation
-      ├── Data Transformation
-      ├── Data Merging
-      └── Business Analysis
+      ▼
+Data Validation
+      │
+      ├── Primary Key Duplicate Checks
+      ├── Constraint Validation
+      └── Foreign Key Integrity Checks
+      │
+      ▼
+Data Transformation
+      │
+      ├── Relational Dataset Merging
+      ├── Revenue Calculations
+      ├── Order-Level Calculations
+      └── Date Feature Engineering
+      │
+      ▼
+Analysis-Ready Datasets
+      │
+      ▼
+Business Analysis
       │
       ▼
 Visualization / Reporting
@@ -181,8 +225,10 @@ Visualization / Reporting
 | Sample Retail Data Population | ✅ Completed |
 | SQL Business Analysis | ✅ Completed |
 | Python / Oracle Integration | ✅ Completed |
-| Oracle → Pandas Data Extraction | 🚧 In Progress |
-| Pandas Transformation & Analysis | ⏳ Planned |
+| Oracle → Pandas Data Extraction | ✅ Completed |
+| Data Quality Validation | ✅ Completed |
+| Pandas Data Transformation | 🚧 In Progress |
+| Analytical Dataset Generation | ⏳ Planned |
 | Visualization & Reporting | ⏳ Planned |
 
 ### SQL & Database Techniques
@@ -205,7 +251,25 @@ Visualization / Reporting
 - Transaction management
 - Exception handling
 
-**Goal:** Build practical experience connecting relational database design, advanced SQL, Python database programming, data extraction, transformation, and analytics into a structured data pipeline.
+### Python & Data Engineering Techniques
+
+- `python-oracledb`
+- SQLAlchemy
+- Pandas
+- Oracle-to-DataFrame extraction
+- Data quality validation
+- Primary key duplicate detection
+- Foreign key integrity validation
+- Business constraint validation
+- DataFrame `merge()`
+- `groupby()`
+- `transform()`
+- Calculated revenue fields
+- Date feature engineering
+- Separation of extraction, validation, and transformation logic
+- Pipeline orchestration
+
+**Goal:** Build practical experience connecting relational database design, advanced SQL, Python database programming, data extraction, validation, transformation, and analytics into a structured end-to-end data pipeline.
 
 [View the project README](./Data_Engineering_Projects/Oracle_Retail_Data_Pipeline/README.md)
 

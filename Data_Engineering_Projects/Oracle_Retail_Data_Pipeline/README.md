@@ -1,10 +1,10 @@
 # 🛒 Oracle Retail Data Pipeline
 
-An end-to-end data engineering and analytics project that integrates an Oracle relational database with Python and Pandas.
+An end-to-end data engineering and analytics project that integrates an Oracle relational database with Python, SQLAlchemy, and Pandas.
 
-The project simulates a retail data environment containing customers, products, orders, and order items. It demonstrates relational database design, SQL-based business analysis, Python/Oracle database integration, transaction management, and a Python data pipeline for extracting, transforming, analyzing, and visualizing data stored in Oracle.
+The project simulates a retail data environment containing customers, products, orders, and order items. It demonstrates relational database design, SQL-based business analysis, Python/Oracle database integration, transaction management, data extraction, data quality validation, and transformation of relational data into analysis-ready datasets.
 
-The Oracle database, SQL analysis, and Python/Oracle integration phases are complete. The next phase focuses on extracting Oracle data into Pandas DataFrames for transformation and analysis.
+The Oracle database, SQL analysis, Python/Oracle integration, Oracle-to-Pandas extraction, and data validation phases are complete. The project is currently progressing through the data transformation phase.
 
 ---
 
@@ -14,6 +14,7 @@ The Oracle database, SQL analysis, and Python/Oracle integration phases are comp
 Oracle_Retail_Data_Pipeline/
 ├── .env.example
 ├── README.md
+├── requirements.txt
 │
 ├── data/
 │
@@ -26,6 +27,10 @@ Oracle_Retail_Data_Pipeline/
 │
 └── src/
     ├── db_connection.py
+    ├── extract_data.py
+    ├── validate_data.py
+    ├── transform_data.py
+    ├── main.py
     ├── transaction_demo.py
     └── exception_handling_demo.py
 ```
@@ -34,11 +39,18 @@ Oracle_Retail_Data_Pipeline/
 
 | Directory / File | Description |
 |---|---|
-| `data/` | Exported or generated data files used during the Python analysis phase |
-| `notebooks/` | Jupyter notebooks for Pandas analysis and visualization |
+| `data/` | Exported or generated analytical datasets |
+| `notebooks/` | Jupyter notebooks for analysis and visualization |
 | `sql/` | Oracle SQL scripts for schema creation, sample data population, and business analysis |
-| `src/` | Python source code for Oracle connectivity, transaction management, and data processing |
-| `.env.example` | Example configuration for Oracle database environment variables |
+| `src/db_connection.py` | Oracle DBAPI connection and SQLAlchemy engine configuration |
+| `src/extract_data.py` | Reusable Oracle-to-Pandas data extraction |
+| `src/validate_data.py` | Data quality and relational integrity validation |
+| `src/transform_data.py` | Transformation of extracted relational data into analysis-ready datasets |
+| `src/main.py` | Main pipeline orchestration |
+| `src/transaction_demo.py` | Oracle transaction behavior demonstration |
+| `src/exception_handling_demo.py` | Database exception handling demonstration |
+| `.env.example` | Example Oracle database environment configuration |
+| `requirements.txt` | Python project dependencies |
 
 > The actual `.env` file containing database credentials is excluded from version control.
 
@@ -51,11 +63,11 @@ The project uses a simulated retail database consisting of four related tables:
 - `CUSTOMERS` — customer information and signup details
 - `PRODUCTS` — product information, categories, and listed prices
 - `ORDERS` — customer orders, order dates, and order status
-- `ORDER_ITEMS` — products included in each order, quantities, and actual selling prices
+- `ORDER_ITEMS` — products included in each order, quantities, and historical selling prices
 
 The relational structure allows customer purchasing behavior, product performance, revenue trends, discounts, and regional sales patterns to be analyzed.
 
-The project is being developed incrementally to demonstrate the progression from database design and SQL analysis to programmatic database access and Python-based data processing.
+The project is developed incrementally to demonstrate a complete workflow from relational database design and SQL analysis to programmatic extraction, validation, transformation, and analytics.
 
 ---
 
@@ -79,9 +91,18 @@ ORDER_ITEMS
 PRODUCTS
 ```
 
-Primary and foreign key constraints are used to maintain referential integrity between the tables.
+Primary and foreign key constraints maintain referential integrity between the tables.
 
-Additional constraints enforce valid values such as positive quantities and non-negative prices.
+Additional constraints enforce business rules such as:
+
+- Product prices must be non-negative
+- Order item quantities must be greater than zero
+- Order item unit prices must be non-negative
+- Order status must be one of:
+  - `PENDING`
+  - `SHIPPED`
+  - `COMPLETED`
+  - `CANCELLED`
 
 ---
 
@@ -93,36 +114,49 @@ Additional constraints enforce valid values such as positive quantities and non-
 | 02 | Sample retail data population | ✅ Completed |
 | 03 | SQL business analysis | ✅ Completed |
 | 04 | Python connection to Oracle | ✅ Completed |
-| 05 | Oracle data extraction into Pandas | 🚧 In Progress |
-| 06 | Data transformation and analysis | ⏳ Planned |
-| 07 | Data visualization and reporting | ⏳ Planned |
+| 05 | Oracle data extraction into Pandas | ✅ Completed |
+| 06 | Data quality validation | ✅ Completed |
+| 07 | Data transformation | 🚧 In Progress |
+| 08 | Analytical dataset generation | ⏳ Planned |
+| 09 | Data visualization and reporting | ⏳ Planned |
 
-The overall pipeline is designed as:
+The current pipeline architecture is:
 
 ```text
 Oracle Database
       │
-      │ SQL
       ▼
-Python / python-oracledb
-      │
-      ├── Database Connection
-      ├── Bind Variables
-      ├── Transaction Management
-      └── Exception Handling
+Data Extraction
+(extract_data.py)
       │
       ▼
 Pandas DataFrames
       │
-      ├── Data Validation
-      ├── Data Transformation
-      ├── Data Merging
-      ├── Business Analysis
-      └── Feature Creation
+      ▼
+Data Validation
+(validate_data.py)
+      │
+      ├── Primary Key Duplicate Checks
+      ├── Constraint Validation
+      └── Foreign Key Integrity Checks
       │
       ▼
-Visualization / Reporting
+Data Transformation
+(transform_data.py)
+      │
+      ├── Relational Dataset Merging
+      ├── Revenue Field Creation
+      ├── Order-Level Calculations
+      └── Date Feature Creation
+      │
+      ▼
+Analysis-Ready Datasets
+      │
+      ▼
+Analysis / Visualization / Reporting
 ```
+
+`main.py` acts as the orchestration layer that coordinates the extraction, validation, and transformation stages.
 
 ---
 
@@ -158,20 +192,18 @@ The sample dataset contains:
 - Customers from multiple U.S. states
 - Products across multiple categories
 - Customer orders across multiple months
-- Completed, cancelled, and pending orders
+- Completed, cancelled, pending, and shipped orders
 - Orders containing multiple products
 - Historical selling prices that may differ from current listed prices
 - Customers with different purchasing behaviors
 
-The dataset is intentionally structured to support realistic SQL analysis scenarios.
+The dataset is intentionally structured to support realistic SQL analysis and data engineering scenarios.
 
 ---
 
 ## 03. `03_analysis_queries.sql`
 
 Contains business-oriented SQL queries ranging from basic filtering to analytical SQL.
-
-The analysis includes:
 
 ### Basic Queries
 
@@ -242,19 +274,21 @@ The SQL analysis answers questions such as:
 - Who is the highest-spending customer in each state?
 - Which products were sold below their listed price?
 
-These questions are designed to simulate common analytical tasks performed against transactional business data.
+These questions simulate common analytical tasks performed against transactional business data.
 
 ---
 
 # 🔌 Python / Oracle Integration
 
-Python is connected directly to the Oracle database using `python-oracledb`.
+Python connects directly to Oracle using `python-oracledb`.
 
-The integration phase demonstrates programmatic database access and transaction control rather than relying exclusively on SQL Developer.
+SQLAlchemy is additionally used to provide a database engine for Pandas-based data extraction.
 
 Implemented features include:
 
 - Oracle database connections from Python
+- Reusable database connection functions
+- SQLAlchemy engine creation
 - Cursor creation and management
 - SQL execution through Python
 - Query result retrieval with:
@@ -277,8 +311,6 @@ Implemented features include:
 # 🔄 Transaction Management
 
 `transaction_demo.py` demonstrates Oracle transaction behavior from Python.
-
-The demo includes:
 
 ### Rollback Test
 
@@ -381,27 +413,179 @@ An `.env.example` file is included in the repository to document the required co
 
 ---
 
-# 🐼 Pandas Data Pipeline
+# 📥 Oracle-to-Pandas Data Extraction
 
-The next phase extracts data directly from Oracle into Pandas DataFrames.
+Oracle data is extracted into Pandas DataFrames using reusable extraction logic in `extract_data.py`.
 
-Planned tasks include:
+The pipeline currently extracts:
 
-- Extracting Oracle query results into DataFrames
-- Loading customers, products, orders, and order items
-- Inspecting DataFrame structure and data types
-- Checking missing values
-- Validating extracted data
-- Combining relational datasets with `merge()`
-- Creating calculated revenue fields
-- Performing `groupby()` and aggregation operations
-- Reproducing selected SQL analyses using Pandas
-- Comparing SQL and Pandas approaches
-- Performing additional business analysis
-- Creating visualizations
-- Exporting analytical results
+- `CUSTOMERS`
+- `PRODUCTS`
+- `ORDERS`
+- `ORDER_ITEMS`
 
-This phase will build on the existing Python/Oracle connection layer rather than creating a separate data source.
+The extraction layer includes:
+
+- SQLAlchemy-based Oracle connectivity for Pandas
+- Reusable table extraction
+- Table-name validation using an allowlist
+- Deterministic ordering by primary key
+- DataFrame structure inspection
+- Column and data type inspection
+- Missing-value inspection
+- Extraction error handling
+
+This keeps database access logic separate from validation and transformation logic.
+
+---
+
+# ✅ Data Quality Validation
+
+`validate_data.py` validates extracted DataFrames before transformation.
+
+The validation layer currently performs three categories of checks.
+
+### Primary Key Validation
+
+Checks for duplicate primary keys in:
+
+- `CUSTOMERS`
+- `PRODUCTS`
+- `ORDERS`
+- `ORDER_ITEMS`
+
+### Constraint Validation
+
+Validates business rules including:
+
+- `PRODUCTS.PRICE >= 0`
+- `ORDER_ITEMS.QUANTITY > 0`
+- `ORDER_ITEMS.UNIT_PRICE >= 0`
+- Valid `ORDERS.STATUS` values
+
+### Foreign Key Integrity
+
+Checks that:
+
+```text
+ORDERS.CUSTOMER_ID
+        → CUSTOMERS.CUSTOMER_ID
+
+ORDER_ITEMS.ORDER_ID
+        → ORDERS.ORDER_ID
+
+ORDER_ITEMS.PRODUCT_ID
+        → PRODUCTS.PRODUCT_ID
+```
+
+Validation results are collected into a structured result object and used to calculate the total number of detected violations.
+
+The pipeline reports an overall validation result:
+
+```text
+Total Violations: 0
+Overall Validation: PASS
+```
+
+or:
+
+```text
+Total Violations: N
+Overall Validation: FAIL
+```
+
+Validation logic operates on DataFrames independently from the Oracle connection layer, keeping data quality checks separate from extraction.
+
+---
+
+# 🔄 Data Transformation
+
+`transform_data.py` transforms the validated relational DataFrames into an analysis-ready order detail dataset.
+
+The current transformation combines:
+
+```text
+ORDERS
+   │
+   ├── CUSTOMER_ID
+   ▼
+CUSTOMERS
+   │
+   │
+   ├── ORDER_ID
+   ▼
+ORDER_ITEMS
+   │
+   ├── PRODUCT_ID
+   ▼
+PRODUCTS
+```
+
+The resulting `order_details_df` uses an **order-item grain**:
+
+> One row represents one product line within an order, enriched with order, customer, and product information.
+
+Current transformations include:
+
+### Revenue per Order Line
+
+```text
+line_total = quantity × unit_price
+```
+
+The historical `unit_price` stored in `ORDER_ITEMS` is used rather than the current product list price.
+
+### Order Total
+
+Order-level revenue is calculated from all line items belonging to the same order while preserving the detailed order-item rows.
+
+Conceptually:
+
+```sql
+SUM(line_total) OVER (PARTITION BY order_id)
+```
+
+### Date Features
+
+The transformation layer currently derives:
+
+- `order_year`
+- `order_month`
+- `order_year_month`
+
+These fields support later time-based aggregation and monthly revenue analysis.
+
+---
+
+# 🧱 Pipeline Design
+
+The Python code follows separation of concerns across pipeline stages:
+
+```text
+db_connection.py
+        │
+        │ Database connectivity
+        ▼
+extract_data.py
+        │
+        │ Oracle → DataFrames
+        ▼
+validate_data.py
+        │
+        │ Data quality checks
+        ▼
+transform_data.py
+        │
+        │ DataFrames → analysis-ready dataset
+        ▼
+main.py
+        │
+        │ Pipeline orchestration
+        ▼
+Analysis / Reporting
+```
+
+This structure keeps database access, validation, transformation, and pipeline control logically separated.
 
 ---
 
@@ -419,23 +603,19 @@ This phase will build on the existing Python/Oracle connection layer rather than
 
 ## Python Libraries
 
-Current:
+Current project dependencies include:
 
 - `oracledb`
-- `python-dotenv`
-
-Planned for the data analysis phase:
-
 - `pandas`
-- `NumPy`
-- `matplotlib`
+- `python-dotenv`
+- `SQLAlchemy`
 
 ## Development Tools
 
-- Jupyter Notebook
 - VS Code
 - Git
 - GitHub
+- Jupyter Notebook
 
 ---
 
@@ -471,20 +651,34 @@ Planned for the data analysis phase:
 - Connection lifecycle management
 - Environment-based configuration
 - Secure credential separation
+- SQLAlchemy database engine configuration
 
 ### Data Engineering & Analytics
 
-In Progress / Planned:
+Implemented:
 
 - Oracle-to-Pandas data extraction
-- DataFrame processing
-- Data validation
-- Data transformation
-- Dataset merging
-- Analytical pipelines
-- SQL vs. Pandas analysis
+- Reusable extraction logic
+- DataFrame inspection
+- Primary key duplicate validation
+- Business constraint validation
+- Foreign key integrity validation
+- Multi-table DataFrame merging
+- Calculated revenue fields
+- Window-style calculations with Pandas `transform()`
+- Date feature engineering
+- Modular pipeline organization
+
+In Progress / Planned:
+
+- Order-level analytical datasets
+- Customer-level analytical datasets
+- Product-level analytical datasets
+- Pandas-based business analysis
+- SQL vs. Pandas analysis comparison
+- Business KPI generation
 - Data visualization
-- Result export
+- Analytical result export
 
 ---
 
@@ -492,16 +686,16 @@ In Progress / Planned:
 
 Future phases of the project will include:
 
-- Oracle-to-Pandas data extraction
-- Reusable data extraction functions
-- Pandas-based data transformation
-- SQL vs. Pandas analysis comparisons
-- Automated data extraction
-- Data quality validation
+- Order-level summary dataset generation
+- Customer-level summary dataset generation
+- Product-level summary dataset generation
 - Business KPI generation
+- Pandas-based business analysis
+- SQL vs. Pandas analysis comparisons
 - Data visualization
-- CSV result exports
-- Improved pipeline modularization
+- CSV analytical result exports
+- Additional pipeline validation and error handling
+- Further pipeline modularization where appropriate
 
 ---
 
@@ -509,7 +703,7 @@ Future phases of the project will include:
 
 This project uses simulated retail data created specifically for learning and portfolio purposes.
 
-The project is designed to demonstrate an incremental data engineering workflow:
+The project demonstrates an incremental data engineering workflow:
 
 ```text
 Database Design
@@ -522,11 +716,17 @@ Python / Oracle Integration
       ↓
 Transaction & Error Handling
       ↓
-Pandas Data Processing
+Oracle-to-Pandas Extraction
+      ↓
+Data Quality Validation
+      ↓
+Data Transformation
+      ↓
+Analysis-Ready Datasets
       ↓
 Analysis & Visualization
 ```
 
-The Oracle SQL and Python/Oracle integration phases are complete.
+The Oracle SQL, Python/Oracle integration, Oracle-to-Pandas extraction, and data validation phases are complete.
 
-The project is currently progressing into the Oracle-to-Pandas data extraction and transformation phase.
+The project is currently progressing through the transformation of validated relational data into analysis-ready datasets.
