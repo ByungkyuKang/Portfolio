@@ -137,7 +137,7 @@ The project follows a structured analytical workflow:
 
 An end-to-end data engineering and analytics project built around a simulated Oracle retail database.
 
-The project demonstrates the progression from relational database design and advanced SQL analysis to Python-driven database integration, Oracle-to-Pandas data extraction, data quality validation, and transformation into analysis-ready datasets.
+The project demonstrates the progression from relational database design and advanced SQL analysis to Python-driven database integration, Oracle-to-Pandas data extraction, data quality validation, transformation, and generation of analysis-ready datasets at multiple levels of granularity.
 
 The simulated retail environment contains customers, products, orders, and order items and supports analysis of customer behavior, product performance, revenue trends, discounts, and regional sales.
 
@@ -175,6 +175,11 @@ The simulated retail environment contains customers, products, orders, and order
 - Order-line revenue calculation
 - Order-level revenue calculation using `groupby()` and `transform()`
 - Date feature engineering for time-based analysis
+- Order-level analytical dataset generation
+- Customer-level analytical dataset generation
+- Pandas named aggregation using `groupby()` and `agg()`
+- Customer order count, total spending, and average order value calculations
+- Multi-grain analytical dataset design
 - Modular extraction, validation, transformation, and orchestration layers
 
 ### Pipeline
@@ -205,10 +210,20 @@ Data Transformation
       ├── Relational Dataset Merging
       ├── Revenue Calculations
       ├── Order-Level Calculations
-      └── Date Feature Engineering
+      ├── Date Feature Engineering
+      └── Summary Dataset Generation
       │
       ▼
 Analysis-Ready Datasets
+      │
+      ├── order_details_df
+      │     (order-item grain)
+      │
+      ├── order_summary_df
+      │     (order grain)
+      │
+      └── customer_summary_df
+            (customer grain)
       │
       ▼
 Business Analysis
@@ -228,7 +243,7 @@ Visualization / Reporting
 | Oracle → Pandas Data Extraction | ✅ Completed |
 | Data Quality Validation | ✅ Completed |
 | Pandas Data Transformation | 🚧 In Progress |
-| Analytical Dataset Generation | ⏳ Planned |
+| Analytical Dataset Generation | 🚧 In Progress |
 | Visualization & Reporting | ⏳ Planned |
 
 ### SQL & Database Techniques
@@ -264,12 +279,16 @@ Visualization / Reporting
 - DataFrame `merge()`
 - `groupby()`
 - `transform()`
+- Named aggregation with `agg()`
 - Calculated revenue fields
 - Date feature engineering
+- Order-level dataset generation
+- Customer-level dataset generation
+- Multi-grain analytical dataset design
 - Separation of extraction, validation, and transformation logic
 - Pipeline orchestration
 
-**Goal:** Build practical experience connecting relational database design, advanced SQL, Python database programming, data extraction, validation, transformation, and analytics into a structured end-to-end data pipeline.
+**Goal:** Build practical experience connecting relational database design, advanced SQL, Python database programming, data extraction, validation, transformation, analytical dataset generation, and analytics into a structured end-to-end data pipeline.
 
 [View the project README](./Data_Engineering_Projects/Oracle_Retail_Data_Pipeline/README.md)
 
@@ -512,7 +531,7 @@ A tip distribution application that divides a total tip amount among multiple pa
 ## 🚀 Current Development Goals
 
 - Continue building portfolio-quality data analysis and data engineering projects
-- Extend the Oracle Retail Data Pipeline with Pandas-based extraction and transformation
+- Extend the Oracle Retail Data Pipeline with analytical datasets, business KPIs, and Pandas-based analysis
 - Reproduce and compare selected SQL analyses using Pandas
 - Strengthen advanced SQL and Python data-processing skills
 - Build practical ETL and data pipeline workflows

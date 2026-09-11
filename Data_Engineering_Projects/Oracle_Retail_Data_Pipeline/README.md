@@ -4,7 +4,7 @@ An end-to-end data engineering and analytics project that integrates an Oracle r
 
 The project simulates a retail data environment containing customers, products, orders, and order items. It demonstrates relational database design, SQL-based business analysis, Python/Oracle database integration, transaction management, data extraction, data quality validation, and transformation of relational data into analysis-ready datasets.
 
-The Oracle database, SQL analysis, Python/Oracle integration, Oracle-to-Pandas extraction, and data validation phases are complete. The project is currently progressing through the data transformation phase.
+The Oracle database, SQL analysis, Python/Oracle integration, Oracle-to-Pandas extraction, and data validation phases are complete. The project is currently progressing through data transformation and analytical dataset generation.
 
 ---
 
@@ -67,7 +67,7 @@ The project uses a simulated retail database consisting of four related tables:
 
 The relational structure allows customer purchasing behavior, product performance, revenue trends, discounts, and regional sales patterns to be analyzed.
 
-The project is developed incrementally to demonstrate a complete workflow from relational database design and SQL analysis to programmatic extraction, validation, transformation, and analytics.
+The project is developed incrementally to demonstrate a complete workflow from relational database design and SQL analysis to programmatic extraction, validation, transformation, analytical dataset generation, and analytics.
 
 ---
 
@@ -117,7 +117,7 @@ Additional constraints enforce business rules such as:
 | 05 | Oracle data extraction into Pandas | ✅ Completed |
 | 06 | Data quality validation | ✅ Completed |
 | 07 | Data transformation | 🚧 In Progress |
-| 08 | Analytical dataset generation | ⏳ Planned |
+| 08 | Analytical dataset generation | 🚧 In Progress |
 | 09 | Data visualization and reporting | ⏳ Planned |
 
 The current pipeline architecture is:
@@ -147,10 +147,15 @@ Data Transformation
       ├── Relational Dataset Merging
       ├── Revenue Field Creation
       ├── Order-Level Calculations
-      └── Date Feature Creation
+      ├── Date Feature Creation
+      └── Summary Dataset Generation
       │
       ▼
 Analysis-Ready Datasets
+      │
+      ├── order_details_df
+      ├── order_summary_df
+      └── customer_summary_df
       │
       ▼
 Analysis / Visualization / Reporting
@@ -373,7 +378,7 @@ try
         └── Success → else → COMMIT
                               │
                               ▼
-                           finally
+                            finally
                               │
                               ├── Close cursor
                               └── Close connection
@@ -500,9 +505,11 @@ Validation logic operates on DataFrames independently from the Oracle connection
 
 # 🔄 Data Transformation
 
-`transform_data.py` transforms the validated relational DataFrames into an analysis-ready order detail dataset.
+`transform_data.py` transforms the validated relational DataFrames into analysis-ready datasets at multiple levels of granularity.
 
-The current transformation combines:
+## Order Detail Dataset
+
+The first transformation combines:
 
 ```text
 ORDERS
@@ -545,15 +552,74 @@ Conceptually:
 SUM(line_total) OVER (PARTITION BY order_id)
 ```
 
+In Pandas, this is implemented using `groupby()` with `transform()` so that the calculated order total is preserved on every corresponding order-item row.
+
 ### Date Features
 
-The transformation layer currently derives:
+The transformation layer derives:
 
 - `order_year`
 - `order_month`
 - `order_year_month`
 
 These fields support later time-based aggregation and monthly revenue analysis.
+
+---
+
+## Order-Level Summary Dataset
+
+The transformation layer creates `order_summary_df` from `order_details_df`.
+
+The dataset uses an **order-level grain**:
+
+> One row represents one customer order.
+
+The dataset includes:
+
+- `order_id`
+- `customer_id`
+- `order_date`
+- `order_year`
+- `order_month`
+- `order_year_month`
+- `status`
+- `order_total`
+
+Order-level attributes are aggregated from the detailed order-item dataset using Pandas `groupby()` and named aggregation with `agg()`.
+
+Because `order_total` has already been calculated at the order level and repeated across the corresponding order-item rows, the order summary preserves a single order total rather than summing the repeated values again.
+
+---
+
+## Customer-Level Summary Dataset
+
+The transformation layer creates `customer_summary_df` from `order_summary_df`.
+
+The dataset uses a **customer-level grain**:
+
+> One row represents one customer with aggregated purchasing metrics.
+
+Current customer-level metrics include:
+
+- `order_count` — number of orders placed by the customer
+- `total_spent` — total value of the customer's orders
+- `avg_order_value` — average value of the customer's orders
+
+These metrics are calculated using Pandas `groupby()` and named aggregation.
+
+Conceptually, the transformation corresponds to operations such as:
+
+```sql
+SELECT
+    customer_id,
+    COUNT(order_id) AS order_count,
+    SUM(order_total) AS total_spent,
+    AVG(order_total) AS avg_order_value
+FROM order_summary
+GROUP BY customer_id;
+```
+
+The average order value is rounded to two decimal places for readability.
 
 ---
 
@@ -576,13 +642,31 @@ validate_data.py
         ▼
 transform_data.py
         │
-        │ DataFrames → analysis-ready dataset
+        │ DataFrames → analysis-ready datasets
         ▼
 main.py
         │
         │ Pipeline orchestration
         ▼
 Analysis / Reporting
+```
+
+The transformation stage currently produces:
+
+```text
+Raw Relational DataFrames
+        │
+        ▼
+order_details_df
+(order-item grain)
+        │
+        ▼
+order_summary_df
+(order grain)
+        │
+        ▼
+customer_summary_df
+(customer grain)
 ```
 
 This structure keeps database access, validation, transformation, and pipeline control logically separated.
@@ -667,12 +751,18 @@ Implemented:
 - Calculated revenue fields
 - Window-style calculations with Pandas `transform()`
 - Date feature engineering
+- Pandas `groupby()` operations
+- Pandas named aggregation with `agg()`
+- Order-level analytical dataset generation
+- Customer-level analytical dataset generation
+- Customer order-count calculation
+- Customer total-spending calculation
+- Average order value calculation
+- Multi-grain analytical dataset design
 - Modular pipeline organization
 
 In Progress / Planned:
 
-- Order-level analytical datasets
-- Customer-level analytical datasets
 - Product-level analytical datasets
 - Pandas-based business analysis
 - SQL vs. Pandas analysis comparison
@@ -686,8 +776,6 @@ In Progress / Planned:
 
 Future phases of the project will include:
 
-- Order-level summary dataset generation
-- Customer-level summary dataset generation
 - Product-level summary dataset generation
 - Business KPI generation
 - Pandas-based business analysis
@@ -722,11 +810,15 @@ Data Quality Validation
       ↓
 Data Transformation
       ↓
-Analysis-Ready Datasets
+Order Detail Dataset
+      ↓
+Order Summary Dataset
+      ↓
+Customer Summary Dataset
       ↓
 Analysis & Visualization
 ```
 
 The Oracle SQL, Python/Oracle integration, Oracle-to-Pandas extraction, and data validation phases are complete.
 
-The project is currently progressing through the transformation of validated relational data into analysis-ready datasets.
+The project is currently progressing through transformation and analytical dataset generation, with order-level and customer-level analytical datasets implemented and additional product-level and business analysis stages planned.
