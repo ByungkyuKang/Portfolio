@@ -1,4 +1,3 @@
-import oracledb
 from datetime import date
 from db_connection import connect_db
 

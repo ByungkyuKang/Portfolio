@@ -1,6 +1,6 @@
 from extract_data import extract_table, print_df_info
 from validate_data import check_pk_duplicates, check_constraints, check_fk_integrity, calculate_total_violations
-from transform_data import build_order_detail_dataset
+from transform_data import build_order_detail_dataset, build_order_summary_dataset, build_customer_summary_dataset
 
 def main():
     customers_df = extract_table('customers')
@@ -110,6 +110,13 @@ def main():
 
     print(f"\n{order_details_df.head()}")
 
+    order_summary_df = build_order_summary_dataset(order_details_df)
+
+    print(f"\n{order_summary_df}")
+
+    customer_summary_df = build_customer_summary_dataset(order_summary_df)
+
+    print(customer_summary_df)
 
 if __name__ == "__main__":
     main()
